@@ -3,11 +3,25 @@ import SplitPane, { Pane } from 'react-split-pane';
 import './editor.css';
 import { Tabs } from 'antd';
 import Pdf from "react-to-pdf";
+import { subscribeToTimer } from '../api';
 
 const { TabPane } = Tabs;
 const ref = React.createRef();
 
-const Editor = () => {
+class Editor extends React.Component {
+    
+
+    constructor(props) {
+        super(props);
+        subscribeToTimer((err, timestamp) => this.setState({ 
+          timestamp 
+        }));
+
+      }
+      state = {
+        timestamp: 'no timestamp yet'
+      };
+    render(){
     let small = 480;
     return(
         <div>
@@ -19,7 +33,9 @@ const Editor = () => {
         {window.innerWidth > small ? (
             <SplitPane split="vertical"  defaultSize={600} primary="second" >
                 <div initialSize="50%">Groff </div>
-                <div initialSize="50%" ref={ref}>Preview of Groff </div>
+                <div initialSize="50%" ref={ref}>Preview of Groff
+                    <p> Timer: {this.state.timestamp}</p>
+                </div>
             </SplitPane>
         ): (
             <Tabs type="card">
@@ -36,5 +52,6 @@ const Editor = () => {
 
         </div>
     )
+    }
 }
 export default Editor;
