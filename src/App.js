@@ -1,7 +1,6 @@
 import React from "react";
 import "antd/dist/antd.css";
 import { Route, BrowserRouter, Redirect, withRouter, Switch } from "react-router-dom";
-import "./App.css";
 import Login from "./containers/login";
 import Editor from "./containers/editor";
 
