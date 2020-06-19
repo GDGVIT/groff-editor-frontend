@@ -146,7 +146,9 @@ class loginPane extends Component {
 					>
 						Submit
 					</button>
-					<a className={formStyle.GuestLink}>or continue as guest</a>
+					<Link to="/editor" className={formStyle.GuestLink}>
+						or continue as guest
+					</Link>
 				</div>
 				<div className={classes.DSCLogoContainer}>
 					<img src={DSCLogo} className={classes.DSCLogo} />
