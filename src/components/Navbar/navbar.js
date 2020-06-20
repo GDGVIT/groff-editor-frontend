@@ -8,8 +8,23 @@ import MyContext from "../../context/MyContext";
 class Navbar extends Component {
 	static contextType = MyContext;
 	state = {
-		DarkMode: false,
 		Dropdown: true,
+	};
+	constructor(props) {
+		super(props);
+		this.ContextMenu = React.createRef();
+		this.ContextButton = React.createRef();
+	}
+	_onPageClick = (e) => {
+		e.stopPropagation();
+		if (this.ContextMenu.current !== e.target && this.ContextButton.current !== e.target) {
+			this.setState({ Dropdown: false });
+		}
+	};
+
+	componentDidMount = () => {
+		this.contextMenu = this.refs.contextMenu;
+		document.addEventListener("click", this._onPageClick);
 	};
 	render() {
 		const { ContextMutator } = this.context;
@@ -26,13 +41,23 @@ class Navbar extends Component {
 					{!this.props.home ? (
 						<button className={classes.ExportButton}>Export to pdf</button>
 					) : null}
-					<div className={!this.props.home ? classes.Settings : classes.SettingsMargin}>
-						<img src={logo} alt="Fforg Logo" className={classes.logo}></img>
+					<div
+						className={!this.props.home ? classes.Settings : classes.SettingsMargin}
+						onClick={() => {
+							this.setState({ Dropdown: !this.state.Dropdown });
+							console.log("NO DUCK YOU");
+						}}
+					>
+						<img
+							src={logo}
+							alt="Fforg Logo"
+							className={classes.logo}
+							ref={this.ContextButton}
+						></img>
 					</div>
 					{this.state.Dropdown ? (
 						<Dropdown
-							DarkMode={this.state.DarkMode}
-							ViMode={this.state.ViMode}
+							ref={this.ContextMenu}
 							onclick={(e) => ContextMutator(e.target.id)}
 						></Dropdown>
 					) : null}
