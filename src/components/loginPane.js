@@ -146,7 +146,7 @@ class loginPane extends Component {
 					>
 						Submit
 					</button>
-					<Link to="/editor" className={formStyle.GuestLink}>
+					<Link to="/home" className={formStyle.GuestLink}>
 						or continue as guest
 					</Link>
 				</div>

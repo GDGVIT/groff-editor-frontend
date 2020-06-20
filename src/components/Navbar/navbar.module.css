@@ -19,6 +19,7 @@
 }
 .Heading {
 	margin-top: 2px;
+	cursor: default;
 	font: Medium Montserrat;
 	letter-spacing: 0px;
 	color: #000000;
@@ -44,7 +45,105 @@
 	flex-direction: column;
 	justify-content: center;
 }
+.SettingsMargin {
+	width: 35px;
+	margin-left: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
 .logo {
 	max-width: 100%;
 	max-height: 100%;
+}
+.Triangle_up {
+	width: 0;
+	margin-left: auto;
+	margin-right: 9px;
+	height: 0;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-bottom: 12px solid white;
+	filter: drop-shadow(0px -2px 3px #00000029);
+}
+.DropdownContainer {
+	position: absolute;
+	right: 0;
+	top: 0;
+	margin-top: 45px;
+	margin-right: 10px;
+	filter: drop-shadow(0px 3px 8px #00000029);
+}
+.Dropdown {
+	background-color: white;
+	color: black;
+	font-size: 16px;
+	width: 160px;
+}
+.ItemContainer {
+	padding: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.ItemContainer:hover {
+	background-color: rgb(241, 241, 241);
+}
+.DropItem {
+	cursor: context-menu;
+}
+.Toggle {
+	margin-left: auto;
+	width: 35px;
+	border: 1px;
+	border-radius: 15px;
+	border-style: solid;
+	padding: 2px;
+	border-color: #ff7d4b;
+	height: 20px;
+	transition: all 0.3s linear;
+}
+.ToggleActive {
+	margin-left: auto;
+	width: 35px;
+	height: 20px;
+	border: 1px;
+	border-radius: 15px;
+	border-style: solid;
+	padding: 2px;
+	border-color: #ff7d4b;
+	background-color: #ff7d4b;
+	transition: all 0.3s linear;
+}
+.ToggleSwitch {
+	background-color: #ff7d4b;
+	border-style: solid;
+	border: 1px;
+	border-radius: 50%;
+	width: 15px;
+	height: 15px;
+	transition: all 0.3s linear;
+}
+.ToggleSwitchActive {
+	margin-left: auto;
+	background-color: white;
+	border-style: solid;
+	border: 1px;
+	border-radius: 50%;
+	width: 15px;
+	height: 15px;
+	transition: all 0.3s linear;
+}
+.LogoutContainer {
+	margin-left: auto;
+	width: 35px;
+	height: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.LogoutIcon {
+	margin: auto;
+	max-width: 65%;
+	max-height: 90%;
 }
