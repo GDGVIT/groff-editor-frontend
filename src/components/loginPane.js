@@ -151,7 +151,7 @@ class loginPane extends Component {
 					</Link>
 				</div>
 				<div className={classes.DSCLogoContainer}>
-					<img src={DSCLogo} className={classes.DSCLogo} />
+					<img src={DSCLogo} alt="DSC-Vit Logo" className={classes.DSCLogo} />
 				</div>
 			</div>
 		);
