@@ -118,18 +118,18 @@ class loginPane extends Component {
 				</div>
 				<div className="">
 					<div className={classes.Itemlist}>
-						<a
+						<div
 							className={this.state.option ? classes.active : classes.LoginLink}
 							onClick={this.LoginLinkHandler}
 						>
 							Login
-						</a>
-						<a
+						</div>
+						<div
 							className={this.state.option ? classes.SignLink : classes.activeMargin}
 							onClick={this.SignLinkHandler}
 						>
 							SignUp
-						</a>
+						</div>
 						<div className={classes.Underbar}></div>
 					</div>
 				</div>

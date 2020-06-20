@@ -3,17 +3,17 @@ import classes from "./navbar.module.css";
 import logo from "../../assets/Logo.png";
 import back from "../../assets/Back.png";
 import Dropdown from "./DropDown/dropDown";
+import MyContext from "../../context/MyContext";
 
 class Navbar extends Component {
+	static contextType = MyContext;
 	state = {
 		DarkMode: false,
-		ViMode: false,
 		Dropdown: true,
 	};
-	constructor(props) {
-		super(props);
-	}
 	render() {
+		const { ContextMutator } = this.context;
+
 		return (
 			<div>
 				<div className={classes.Navbar}>
@@ -33,6 +33,7 @@ class Navbar extends Component {
 						<Dropdown
 							DarkMode={this.state.DarkMode}
 							ViMode={this.state.ViMode}
+							onclick={(e) => ContextMutator(e.target.id)}
 						></Dropdown>
 					) : null}
 				</div>
