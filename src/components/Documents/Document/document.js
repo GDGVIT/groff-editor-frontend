@@ -3,7 +3,7 @@ import classes from "./document.module.css";
 
 const Document = (props) => {
 	return (
-		<div className={classes.DocumentContainer}>
+		<div className={classes.DocumentContainer} onClick={() => props.click(props.id)}>
 			<div className={classes.DocumentPreview}></div>
 			<div className={classes.DocumentDetails}>
 				<div className={classes.DocumentName}>{props.doc.name}</div>
