@@ -8,7 +8,7 @@ import MyContext from "../../context/MyContext";
 class Navbar extends Component {
 	static contextType = MyContext;
 	state = {
-		Dropdown: true,
+		Dropdown: false,
 	};
 	constructor(props) {
 		super(props);
@@ -17,13 +17,18 @@ class Navbar extends Component {
 	}
 	_onPageClick = (e) => {
 		e.stopPropagation();
-		if (this.ContextMenu.current !== e.target && this.ContextButton.current !== e.target) {
+		if (
+			this.ContextMenu.current !== e.target &&
+			this.ContextButton.current !== e.target &&
+			e.target.id !== "DarkMode" &&
+			e.target.id !== "ViMode" &&
+			e.target.id !== "Logout"
+		) {
 			this.setState({ Dropdown: false });
 		}
 	};
 
 	componentDidMount = () => {
-		this.contextMenu = this.refs.contextMenu;
 		document.addEventListener("click", this._onPageClick);
 	};
 	render() {

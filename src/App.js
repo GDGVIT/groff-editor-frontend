@@ -10,7 +10,7 @@ function App() {
 	return (
 		<BrowserRouter>
 			<MyProvider>
-				<div className="App">
+				<div className="App" style={{ backgroundColor: "white" }}>
 					<Switch>
 						<Route exact path="/" component={Login} />
 						<Route exact path="/home" component={Home} />

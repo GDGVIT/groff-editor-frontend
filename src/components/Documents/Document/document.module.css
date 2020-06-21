@@ -1,0 +1,87 @@
+.DocumentsContainer {
+	display: flex;
+	padding: 10px;
+	flex-direction: row;
+}
+.DocumentContainer {
+	margin: 20px;
+	/* background-color: #f8f8fa; */
+	background-color: #dddddd;
+	filter: drop-shadow(0px 3px 6px #00000029);
+	width: 200px;
+	height: 280px;
+	border-radius: 15px;
+}
+.NewDocumentContainer {
+	margin: 20px;
+	/* background-color: #f8f8fa; */
+	background-color: #dddddd;
+	filter: drop-shadow(0px 3px 6px #00000029);
+	width: 200px;
+	height: 280px;
+	border-radius: 15px;
+	display: flex;
+	justify-content: center;
+}
+.AddIcon {
+	margin: auto;
+	max-width: 80%;
+	max-height: 80%;
+}
+.DocumentPreview {
+	width: 10px;
+}
+.DocumentDetails {
+	background-color: white;
+	margin-top: 190px;
+	height: 90px;
+	border-radius: 0 0 15px 15px;
+}
+.DocumentName {
+	font-size: 18px;
+	font: Medium 26px/32px Montserrat;
+	padding: 5px;
+}
+.DocumentTime {
+	position: absolute;
+	padding: 5px;
+	bottom: 0;
+	right: 0;
+}
+@media only screen and (max-width: 460px) {
+	.DocumentsContainer {
+		justify-content: center;
+		padding: 5px;
+	}
+	.DocumentContainer {
+		margin: 15px;
+		width: 128px;
+		height: 180px;
+	}
+	.DocumentDetails {
+		background-color: white;
+		margin-top: 120px;
+		height: 60px;
+		border-radius: 0 0 15px 15px;
+	}
+	.DocumentName {
+		font-size: 16px;
+		padding: 5px;
+	}
+	.DocumentTime {
+		position: absolute;
+		padding: 5px;
+		font-size: 10px;
+		bottom: 0;
+		right: 0;
+	}
+	.NewDocumentContainer {
+		margin: 15px;
+		width: 128px;
+		height: 180px;
+	}
+	.AddIcon {
+		width: 50px;
+		height: 50px;
+	}
+}
