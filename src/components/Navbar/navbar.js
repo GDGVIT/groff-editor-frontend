@@ -12,13 +12,11 @@ class Navbar extends Component {
 	};
 	constructor(props) {
 		super(props);
-		this.ContextMenu = React.createRef();
 		this.ContextButton = React.createRef();
 	}
 	_onPageClick = (e) => {
 		e.stopPropagation();
 		if (
-			this.ContextMenu.current !== e.target &&
 			this.ContextButton.current !== e.target &&
 			e.target.id !== "DarkMode" &&
 			e.target.id !== "ViMode" &&
@@ -50,7 +48,6 @@ class Navbar extends Component {
 						className={!this.props.home ? classes.Settings : classes.SettingsMargin}
 						onClick={() => {
 							this.setState({ Dropdown: !this.state.Dropdown });
-							console.log("NO DUCK YOU");
 						}}
 					>
 						<img
@@ -61,10 +58,7 @@ class Navbar extends Component {
 						></img>
 					</div>
 					{this.state.Dropdown ? (
-						<Dropdown
-							ref={this.ContextMenu}
-							onclick={(e) => ContextMutator(e.target.id)}
-						></Dropdown>
+						<Dropdown onclick={(e) => ContextMutator(e.target.id)}></Dropdown>
 					) : null}
 				</div>
 			</div>

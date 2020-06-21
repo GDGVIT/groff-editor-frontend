@@ -2,7 +2,6 @@ import React from "react";
 import classes from "./document.module.css";
 
 const Document = (props) => {
-	console.log("Im");
 	return (
 		<div className={classes.DocumentContainer}>
 			<div className={classes.DocumentPreview}></div>

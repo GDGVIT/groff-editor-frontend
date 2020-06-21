@@ -10,6 +10,7 @@
 }
 .DropdownContainer {
 	position: absolute;
+	z-index: 15;
 	right: 0;
 	top: 0;
 	margin-top: 45px;

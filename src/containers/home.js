@@ -16,18 +16,24 @@ class Home extends Component {
 				time: "Yesterday",
 			},
 			{
-				name: "Letter of Recomendation",
+				name: "Letter of Recomendation ",
 				id: "doc3",
 				time: "A week Ago",
 			},
 		],
+	};
+	clickHandler = (id) => {
+		console.log(id);
 	};
 	render() {
 		return (
 			<div>
 				<Navbar home={true}>Documents</Navbar>
 				<div className="home">
-					<Documents documents={this.state.documents}></Documents>
+					<Documents
+						documents={this.state.documents}
+						clickEvent={(id) => this.clickHandler(id)}
+					></Documents>
 				</div>
 			</div>
 		);

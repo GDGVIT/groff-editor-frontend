@@ -1,5 +1,6 @@
 .Navbar {
 	display: flex;
+	z-index: 9;
 	padding: 8px;
 	width: 100%;
 	align-items: center;
@@ -20,7 +21,11 @@
 .Heading {
 	margin-top: 2px;
 	cursor: default;
+	max-width: 60vw;
 	font: Medium Montserrat;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 	letter-spacing: 0px;
 	color: #000000;
 }

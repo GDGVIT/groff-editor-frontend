@@ -6,7 +6,16 @@ import classes from "./Document/document.module.css";
 const Documents = (props) => {
 	const docs = Object.keys(props.documents).map((docKey) => {
 		return [...Array(props.documents[docKey])].map((_, i) => {
-			return <Document doc={props.documents[docKey]}></Document>;
+			return (
+				<Document
+					key={docKey + props.documents[docKey].id}
+					doc={props.documents[docKey]}
+					onClick={() => {
+						props.clickEvent(docKey);
+						console.log("miss me");
+					}}
+				></Document>
+			);
 		});
 	});
 	const style = {
