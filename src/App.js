@@ -14,7 +14,7 @@ function App() {
 					<Switch>
 						<Route exact path="/" component={Login} />
 						<Route exact path="/home" component={Home} />
-						<Route exact path="/editor" component={Editor} />
+						<Route exact path="/editor/:doc" component={Editor} />
 					</Switch>
 				</div>
 			</MyProvider>

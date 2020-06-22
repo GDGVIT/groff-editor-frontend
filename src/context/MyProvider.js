@@ -1,5 +1,6 @@
 import MyContext from "./MyContext";
 import React, { Component } from "react";
+import NewDocument from "../components/Documents/Document/newDocument";
 
 class MyProvider extends Component {
 	state = {
@@ -28,6 +29,16 @@ class MyProvider extends Component {
 
 		if (e === "ViMode") this.setState({ ViMode: !this.state.ViMode });
 	};
+	NewDocumentHandler = () => {
+		let newId = this.state.documents.length + 1;
+		let NewDocument = {
+			name: "New Document",
+			id: "doc" + newId,
+			time: "Just now",
+		};
+		this.setState({ documents: [...this.state.documents, NewDocument] });
+		return NewDocument.id;
+	};
 	render() {
 		return (
 			<MyContext.Provider
@@ -35,6 +46,7 @@ class MyProvider extends Component {
 					DarkMode: this.state.DarkMode,
 					ViMode: this.state.ViMode,
 					ContextMutator: this.ContextMutator,
+					NewDocumentHandler: () => this.NewDocumentHandler(),
 					documents: this.state.documents,
 				}}
 			>

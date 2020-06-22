@@ -4,11 +4,14 @@ import "./editor.css";
 import { Tabs } from "antd";
 import Pdf from "react-to-pdf";
 import { subscribeToTimer } from "../api";
+import Navbar from "../components/Navbar/navbar";
+import MyContext from "../context/MyContext";
 
 const { TabPane } = Tabs;
 const ref = React.createRef();
 
 class Editor extends React.Component {
+	static contextType = MyContext;
 	constructor(props) {
 		super(props);
 		subscribeToTimer((err, timestamp) =>
@@ -22,8 +25,15 @@ class Editor extends React.Component {
 	};
 	render() {
 		let small = 480;
+		let CurrentDoc = this.context.documents.find((doc) => {
+			return doc.id === this.props.match.params.doc;
+		});
+		console.log(CurrentDoc);
+		// console.log(this.context.documents[2]);
+		// console.log(parseInt(this.props.match.params.doc));
 		return (
 			<div>
+				<Navbar>{CurrentDoc.name}</Navbar>
 				<Pdf targetRef={ref} filename="code-example.pdf">
 					{({ toPdf }) => (
 						<button onClick={toPdf} style={{ float: "right" }}>
@@ -31,7 +41,6 @@ class Editor extends React.Component {
 						</button>
 					)}
 				</Pdf>
-				<h1> Online Groff editor </h1>
 
 				{window.innerWidth > small ? (
 					<SplitPane split="vertical" defaultSize={600} primary="second">

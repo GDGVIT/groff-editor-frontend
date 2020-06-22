@@ -10,10 +10,7 @@ class Home extends Component {
 			<div>
 				<Navbar home={true}>Documents</Navbar>
 				<div className="home">
-					<Documents
-						documents={this.context.documents}
-						clickEvent={(id) => this.clickHandler(id)}
-					></Documents>
+					<Documents documents={this.context.documents}></Documents>
 				</div>
 			</div>
 		);
