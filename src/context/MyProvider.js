@@ -1,6 +1,5 @@
 import MyContext from "./MyContext";
 import React, { Component } from "react";
-import NewDocument from "../components/Documents/Document/newDocument";
 
 class MyProvider extends Component {
 	state = {
@@ -39,6 +38,9 @@ class MyProvider extends Component {
 		this.setState({ documents: [...this.state.documents, NewDocument] });
 		return NewDocument.id;
 	};
+	LogoutHandler = () => {
+		console.log("Logged out");
+	}
 	render() {
 		return (
 			<MyContext.Provider
@@ -48,6 +50,7 @@ class MyProvider extends Component {
 					ContextMutator: this.ContextMutator,
 					NewDocumentHandler: () => this.NewDocumentHandler(),
 					documents: this.state.documents,
+					Logout: () => this.LogoutHandler(),
 				}}
 			>
 				{this.props.children}

@@ -29,6 +29,10 @@ class Editor extends React.Component {
 	handleback = () => {
 		this.props.history.goBack()
 	}
+	handleLogout = () => {
+		this.props.history.push('/')
+		this.context.Logout()
+	}
 	render() {
 		let small = 480;
 		let CurrentDoc = this.context.documents.find((doc) => {
@@ -36,7 +40,7 @@ class Editor extends React.Component {
 		});
 		return (
 			<div>
-				<Navbar back={this.handleback}>{CurrentDoc.name}</Navbar>
+				<Navbar back={this.handleback} logout={this.handleLogout} >{CurrentDoc.name}</Navbar>
 				<Pdf targetRef={ref} filename="code-example.pdf">
 					{({ toPdf }) => (
 						<button onClick={toPdf} style={{ float: "right" }}>

@@ -24,6 +24,9 @@ class Navbar extends Component {
 		) {
 			this.setState({ Dropdown: false });
 		}
+		else if (e.target.id === 'Logout') {
+			this.props.logout();
+		}
 	};
 
 	componentDidMount = () => {
