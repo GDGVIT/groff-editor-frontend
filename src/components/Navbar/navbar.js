@@ -29,6 +29,10 @@ class Navbar extends Component {
 	componentDidMount = () => {
 		document.addEventListener("click", this._onPageClick);
 	};
+
+	backButtonHandler = () => {
+		this.props.history.goBack()
+	}
 	render() {
 		const { ContextMutator } = this.context;
 
@@ -36,7 +40,7 @@ class Navbar extends Component {
 			<div>
 				<div className={classes.Navbar}>
 					{!this.props.home ? (
-						<div className={classes.BackButtonContainer}>
+						<div className={classes.BackButtonContainer} onClick={() => this.props.back()}>
 							<img className={classes.BackButton} src={back} alt="Back Button" />
 						</div>
 					) : null}

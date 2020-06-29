@@ -23,17 +23,20 @@ class Editor extends React.Component {
 	state = {
 		timestamp: "no timestamp yet",
 	};
+	pdfConvert = () => {
+
+	}
+	handleback = () => {
+		this.props.history.goBack()
+	}
 	render() {
 		let small = 480;
 		let CurrentDoc = this.context.documents.find((doc) => {
 			return doc.id === this.props.match.params.doc;
 		});
-		console.log(CurrentDoc);
-		// console.log(this.context.documents[2]);
-		// console.log(parseInt(this.props.match.params.doc));
 		return (
 			<div>
-				<Navbar>{CurrentDoc.name}</Navbar>
+				<Navbar back={this.handleback}>{CurrentDoc.name}</Navbar>
 				<Pdf targetRef={ref} filename="code-example.pdf">
 					{({ toPdf }) => (
 						<button onClick={toPdf} style={{ float: "right" }}>
