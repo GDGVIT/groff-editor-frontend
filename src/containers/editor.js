@@ -51,15 +51,15 @@ class Editor extends React.Component {
 						</div>
 					</SplitPane>
 				) : (
-					<Tabs type="card">
-						<TabPane tab="Groff" key="1">
-							Content of Tab Pane 1
+						<Tabs type="card">
+							<TabPane tab="Groff" key="1">
+								Content of Tab Pane 1
 						</TabPane>
-						<TabPane tab="Preview" key="2">
-							Content of Tab Pane 2
+							<TabPane tab="Preview" key="2">
+								Content of Tab Pane 2
 						</TabPane>
-					</Tabs>
-				)}
+						</Tabs>
+					)}
 			</div>
 		);
 	}
