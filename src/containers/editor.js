@@ -5,6 +5,7 @@ import { Tabs } from "antd";
 import Pdf from "react-to-pdf";
 import { subscribeToTimer } from "../api";
 import Navbar from "../components/Navbar/navbar";
+import CodeEditor from "../components/CodeEditor/codeEditor"
 import MyContext from "../context/MyContext";
 
 const { TabPane } = Tabs;
@@ -51,7 +52,7 @@ class Editor extends React.Component {
 
 				{window.innerWidth > small ? (
 					<SplitPane split="vertical" defaultSize={600} primary="second">
-						<div initialSize="50%">Groff </div>
+						<div initialSize="50%"><CodeEditor></CodeEditor></div>
 						<div initialSize="50%" ref={ref}>
 							Preview of Groff
 							<p> Timer: {this.state.timestamp}</p>
