@@ -11,11 +11,8 @@ class loginPane extends Component {
 	};
 	constructor(props) {
 		super(props);
-		this.SignEmail = React.createRef();
-		this.SignPassword = React.createRef();
-		this.SignUsername = React.createRef();
-		this.LoginEmail = React.createRef();
-		this.LoginPassword = React.createRef();
+		this.Email = React.createRef();
+		this.Password = React.createRef();
 	}
 	onFinish = (values) => {
 		console.log("Received values of form: ", values);
@@ -38,64 +35,28 @@ class loginPane extends Component {
 		e.target.className = formStyle.InputField;
 	}
 	SubmitHandler = () => {
-		if (this.state.option) {
-			if (this.LoginEmail.current.value === "") {
-				this.LoginEmail.current.className = formStyle.Incorrect;
-			}
-			if (this.LoginPassword.current.value === "") {
-				this.LoginPassword.current.className = formStyle.Incorrect;
-			}
-		} else {
-			if (this.SignEmail.current.value === "") {
-				this.SignEmail.current.className = formStyle.Incorrect;
-			}
-			if (this.SignPassword.current.value === "") {
-				this.SignPassword.current.className = formStyle.Incorrect;
-			}
-			if (this.SignUsername.current.value === "") {
-				this.SignUsername.current.className = formStyle.Incorrect;
-			}
+		if (this.Email.current.value === "") {
+			this.Email.current.className = formStyle.Incorrect;
+		}
+		if (this.Password.current.value === "") {
+			this.Password.current.className = formStyle.Incorrect;
 		}
 	};
-	SignForm = () => {
+	Form = (props) => {
 		return (
 			<div className={formStyle.UserForm}>
 				<input
 					type="text"
 					placeholder="Email"
-					className={formStyle.InputField}
-					onChange={this.ChangeHandler}
-					ref={this.SignEmail}
-					style={{ marginTop: "25px" }}
-					label="Email"
-				/>
-				<input
-					type="text"
-					placeholder="Password (min: 6 chars)"
-					className={formStyle.InputField}
-					onChange={this.ChangeHandler}
-					ref={this.SignPassword}
-					style={{ marginTop: "25px" }}
-					label="Password"
-				/>
-			</div>
-		);
-	};
-	LoginForm = () => {
-		return (
-			<div className={formStyle.UserForm}>
-				<input
-					type="text"
-					placeholder="Email"
-					ref={this.LoginEmail}
+					ref={this.Email}
 					onChange={this.ChangeHandler}
 					className={formStyle.InputField}
 					label="Username"
 				/>
 				<input
 					type="text"
-					placeholder="Password "
-					ref={this.LoginPassword}
+					placeholder={props.option ? "Password " : "Password (Min 6 Chars) "}
+					ref={this.Password}
 					onChange={this.ChangeHandler}
 					className={formStyle.InputField}
 					style={{ marginTop: "25px" }}
@@ -130,11 +91,7 @@ class loginPane extends Component {
 						<div className={classes.Underbar}></div>
 					</div>
 				</div>
-				{this.state.option ? (
-					<this.LoginForm></this.LoginForm>
-				) : (
-						<this.SignForm></this.SignForm>
-					)}
+				<this.Form option={this.state.option} />
 				<div className={formStyle.UserButtons}>
 					<button
 						type="submit"
