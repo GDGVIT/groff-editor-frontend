@@ -11,7 +11,10 @@ const Document = (props) => {
 		>
 			<div className={classes.DocumentPreview}></div>
 			<div className={classes.DocumentDetails}>
-				<div className={classes.DocumentName}>{props.doc.name}</div>
+				<div className={classes.tooltip}>
+					<div className={classes.DocumentName}>{props.doc.name}</div>
+					<span className={classes.tooltiptext}>{props.doc.name}</span>
+				</div>
 				<div className={classes.DocumentTime}>{props.doc.time}</div>
 			</div>
 		</div>
