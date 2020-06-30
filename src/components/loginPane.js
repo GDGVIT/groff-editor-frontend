@@ -62,18 +62,12 @@ class loginPane extends Component {
 			<div className={formStyle.UserForm}>
 				<input
 					type="text"
-					placeholder="Username"
-					onChange={this.ChangeHandler}
-					ref={this.SignUsername}
-					className={formStyle.InputField}
-				/>
-				<input
-					type="text"
 					placeholder="Email"
 					className={formStyle.InputField}
 					onChange={this.ChangeHandler}
 					ref={this.SignEmail}
 					style={{ marginTop: "25px" }}
+					label="Email"
 				/>
 				<input
 					type="text"
@@ -82,6 +76,7 @@ class loginPane extends Component {
 					onChange={this.ChangeHandler}
 					ref={this.SignPassword}
 					style={{ marginTop: "25px" }}
+					label="Password"
 				/>
 			</div>
 		);
@@ -95,6 +90,7 @@ class loginPane extends Component {
 					ref={this.LoginEmail}
 					onChange={this.ChangeHandler}
 					className={formStyle.InputField}
+					label="Username"
 				/>
 				<input
 					type="text"
@@ -103,6 +99,7 @@ class loginPane extends Component {
 					onChange={this.ChangeHandler}
 					className={formStyle.InputField}
 					style={{ marginTop: "25px" }}
+					label="Password"
 				/>
 			</div>
 		);
@@ -136,8 +133,8 @@ class loginPane extends Component {
 				{this.state.option ? (
 					<this.LoginForm></this.LoginForm>
 				) : (
-					<this.SignForm></this.SignForm>
-				)}
+						<this.SignForm></this.SignForm>
+					)}
 				<div className={formStyle.UserButtons}>
 					<button
 						type="submit"
