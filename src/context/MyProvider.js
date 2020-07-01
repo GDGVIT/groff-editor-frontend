@@ -17,7 +17,7 @@ class MyProvider extends Component {
 				time: "Yesterday",
 			},
 			{
-				name: "Letter of Recomendation ",
+				name: "Letter of Recommendation",
 				id: "doc3",
 				time: "A week Ago",
 			},
