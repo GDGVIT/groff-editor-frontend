@@ -29,6 +29,18 @@
 	letter-spacing: 0px;
 	color: #000000;
 }
+.DocumentName {
+	margin-top: 2px;
+	border: none;
+	cursor: auto;
+	max-width: 60vw;
+	font: Medium Montserrat;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	letter-spacing: 0px;
+	color: #000000;
+}
 .ExportButton {
 	border: none;
 	color: white;

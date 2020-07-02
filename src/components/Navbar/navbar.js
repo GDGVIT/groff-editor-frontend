@@ -9,6 +9,7 @@ class Navbar extends Component {
 	static contextType = MyContext;
 	state = {
 		Dropdown: false,
+		Rename: false,
 	};
 	constructor(props) {
 		super(props);
@@ -16,15 +17,16 @@ class Navbar extends Component {
 	}
 	_onPageClick = (e) => {
 		e.stopPropagation();
+		if (e.target.id !== "Rename") {
+			this.setState({ Rename: false });
+		}
 		if (
 			this.ContextButton.current !== e.target &&
 			e.target.id !== "DarkMode" &&
-			e.target.id !== "ViMode" &&
 			e.target.id !== "Logout"
 		) {
 			this.setState({ Dropdown: false });
-		}
-		else if (e.target.id === 'Logout') {
+		} else if (e.target.id === "Logout") {
 			this.props.logout();
 		}
 	};
@@ -34,40 +36,68 @@ class Navbar extends Component {
 	};
 
 	backButtonHandler = () => {
-		this.props.history.goBack()
-	}
+		this.props.history.goBack();
+	};
 	render() {
 		const { ContextMutator } = this.context;
 
 		return (
 			<div>
-				<div className={classes.Navbar}>
-					{!this.props.home ? (
-						<div className={classes.BackButtonContainer} onClick={() => this.props.back()}>
+				{!this.props.home ? (
+					<div className={classes.Navbar}>
+						<div
+							className={classes.BackButtonContainer}
+							onClick={() => this.props.back()}
+						>
 							<img className={classes.BackButton} src={back} alt="Back Button" />
 						</div>
-					) : null}
-					<div className={classes.Heading}>{this.props.children}</div>
-					{!this.props.home ? (
+						<input
+							type="text"
+							value={this.props.children}
+							className={classes.DocumentName}
+							onClick={(e) => {
+								this.setState({ Rename: true });
+							}}
+							onChange={(e) => {
+								this.props.rename(e);
+							}}
+						/>
 						<button className={classes.ExportButton}>Export to pdf</button>
-					) : null}
-					<div
-						className={!this.props.home ? classes.Settings : classes.SettingsMargin}
-						onClick={() => {
-							this.setState({ Dropdown: !this.state.Dropdown });
-						}}
-					>
-						<img
-							src={logo}
-							alt="Fforg Logo"
-							className={classes.logo}
-							ref={this.ContextButton}
-						></img>
+						<div
+							className={classes.Settings}
+							onClick={() => {
+								this.setState({ Dropdown: !this.state.Dropdown });
+							}}
+						>
+							<img
+								src={logo}
+								alt="Fforg Logo"
+								className={classes.logo}
+								ref={this.ContextButton}
+							></img>
+						</div>
 					</div>
-					{this.state.Dropdown ? (
-						<Dropdown onclick={(e) => ContextMutator(e.target.id)}></Dropdown>
-					) : null}
-				</div>
+				) : (
+					<div className={classes.Navbar}>
+						<div className={classes.Heading}>Documents</div>
+						<div
+							className={classes.SettingsMargin}
+							onClick={() => {
+								this.setState({ Dropdown: !this.state.Dropdown });
+							}}
+						>
+							<img
+								src={logo}
+								alt="Fforg Logo"
+								className={classes.logo}
+								ref={this.ContextButton}
+							></img>
+						</div>
+					</div>
+				)}
+				{this.state.Dropdown ? (
+					<Dropdown onclick={(e) => ContextMutator(e.target.id)}></Dropdown>
+				) : null}
 			</div>
 		);
 	}

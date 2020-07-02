@@ -37,30 +37,6 @@ const DropDown = (props) => {
 							</div>
 							<div
 								className={classes.ItemContainer}
-								id="ViMode"
-								onClick={(e) => props.onclick(e)}
-							>
-								<div id="ViMode" className={classes.DropItem}>
-									Vi Mode
-								</div>
-								<div
-									id="ViMode"
-									className={
-										context.ViMode ? classes.ToggleActive : classes.Toggle
-									}
-								>
-									<div
-										id="ViMode"
-										className={
-											context.ViMode
-												? classes.ToggleSwitchActive
-												: classes.ToggleSwitch
-										}
-									></div>
-								</div>
-							</div>
-							<div
-								className={classes.ItemContainer}
 								onClick={(e) => props.onclick(e)}
 								id="Logout"
 							>

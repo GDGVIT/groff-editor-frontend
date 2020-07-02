@@ -63,7 +63,7 @@
 }
 .LoginLink {
 	color: black;
-	opacity: 30%;
+	opacity: 0.3;
 	padding: 0;
 	cursor: default;
 	-webkit-transition: 0.5s ease;
@@ -90,7 +90,7 @@
 }
 .SignLink {
 	margin-left: 50px;
-	opacity: 30%;
+	opacity: 0.3;
 	border: none;
 	color: black;
 	cursor: default;
