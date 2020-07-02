@@ -1,6 +1,9 @@
 import MyContext from "./MyContext";
 import React, { Component } from "react";
 
+// Backend Integration: Add route to fetch all documents(Name , Created Time, Id)
+// Optimization: Add Fucntion to refresh database
+
 class MyProvider extends Component {
 	state = {
 		DarkMode: false,
