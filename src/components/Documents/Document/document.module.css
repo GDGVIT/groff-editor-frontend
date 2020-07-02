@@ -32,8 +32,9 @@
 .DocumentDetails {
 	background-color: white;
 	margin-top: 190px;
-	height: 90px;
+	height: 100px;
 	border-radius: 0 0 15px 15px;
+	padding: 5px;
 }
 .DocumentName {
 	font-size: 18px;
@@ -48,8 +49,8 @@
 .DocumentTime {
 	position: absolute;
 	padding: 5px;
-	bottom: 0;
-	right: 0;
+	bottom: -8px;
+	right: 14px;
 }
 @media only screen and (max-width: 760px) {
 	.DocumentsContainer {
