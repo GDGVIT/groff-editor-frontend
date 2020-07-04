@@ -42,13 +42,13 @@ class Editor extends React.Component {
 		return (
 			<div>
 				<Navbar back={this.handleback} logout={this.handleLogout} >{CurrentDoc.name}</Navbar>
-				<Pdf targetRef={ref} filename="code-example.pdf">
+				{/* <Pdf targetRef={ref} filename="code-example.pdf">
 					{({ toPdf }) => (
 						<button onClick={toPdf} style={{ float: "right" }}>
 							Generate Pdf
 						</button>
 					)}
-				</Pdf>
+				</Pdf> */}
 
 				{window.innerWidth > small ? (
 					<SplitPane split="vertical" defaultSize={600} primary="second">
