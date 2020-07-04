@@ -35,7 +35,7 @@ const DropDown = (props) => {
 									></div>
 								</div>
 							</div>
-							<div
+							{/* <div
 								className={classes.ItemContainer}
 								id="ViMode"
 								onClick={(e) => props.onclick(e)}
@@ -58,7 +58,7 @@ const DropDown = (props) => {
 										}
 									></div>
 								</div>
-							</div>
+							</div> */}
 							<div
 								className={classes.ItemContainer}
 								onClick={(e) => props.onclick(e)}
