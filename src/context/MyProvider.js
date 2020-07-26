@@ -1,10 +1,12 @@
 import MyContext from "./MyContext";
 import React, { Component } from "react";
 
+// Backend Integration: Add route to fetch all documents(Name , Created Time, Id)
+// Optimization: Add Fucntion to refresh database
+
 class MyProvider extends Component {
 	state = {
 		DarkMode: false,
-		ViMode: false,
 		documents: [
 			{
 				name: "Document1",
@@ -25,8 +27,6 @@ class MyProvider extends Component {
 	};
 	ContextMutator = (e) => {
 		if (e === "DarkMode") this.setState({ DarkMode: !this.state.DarkMode });
-
-		if (e === "ViMode") this.setState({ ViMode: !this.state.ViMode });
 	};
 	NewDocumentHandler = () => {
 		let newId = this.state.documents.length + 1;
@@ -40,7 +40,7 @@ class MyProvider extends Component {
 	};
 	LogoutHandler = () => {
 		console.log("Logged out");
-	}
+	};
 	render() {
 		return (
 			<MyContext.Provider
