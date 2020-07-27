@@ -59,7 +59,7 @@ class Navbar extends Component {
 								this.setState({ Rename: true });
 							}}
 							onChange={(e) => {
-								this.props.rename(e);
+								this.props.Rename(e);
 							}}
 						/>
 						<button className={classes.ExportButton}>Export to pdf</button>

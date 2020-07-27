@@ -49,20 +49,7 @@ class Editor extends React.Component {
 		let small = 480;
 		return (
 			<div>
-				<Navbar
-					back={this.handleback}
-					logout={this.handleLogout}
-					rename={this.handleRename}
-				>
-					{this.state.Document.name}
-				</Navbar>
-				<Pdf targetRef={ref} filename="code-example.pdf">
-					{({ toPdf }) => (
-						<button onClick={toPdf} style={{ float: "right" }}>
-							Generate Pdf
-						</button>
-					)}
-				</Pdf>
+				<Navbar back={this.handleback} logout={this.handleLogout} >{this.state.Document.name}</Navbar>
 
 				{window.innerWidth > small ? (
 					<SplitPane split="vertical" defaultSize={600} primary="second">
