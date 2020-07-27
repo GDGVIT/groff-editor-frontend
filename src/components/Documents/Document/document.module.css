@@ -52,6 +52,37 @@
 	bottom: -8px;
 	right: 14px;
 }
+.tooltip {
+	position: relative;
+	display: inline-block;
+}
+  
+.tooltip .tooltiptext {
+	visibility: hidden;
+	min-width: 120px;
+	max-width: 300px;
+	background-color: black;
+	color: #fff;
+	text-align: center;
+	padding: 5px 8px;
+	border-radius: 6px;
+	position: absolute;
+	bottom:100%;
+	z-index: 1;
+}
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 15%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+.tooltip:hover .tooltiptext {
+	visibility: visible;
+}
 @media only screen and (max-width: 760px) {
 	.DocumentsContainer {
 		justify-content: center;
