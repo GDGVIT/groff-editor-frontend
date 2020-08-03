@@ -49,29 +49,31 @@ class Editor extends React.Component {
 	render() {
 		let small = 480;
 		return (
-			<div>
+			<div className="EditorBackground">
 				<Navbar back={this.handleback} logout={this.handleLogout} Rename={this.handleRename} >{this.state.Document.name}</Navbar>
 
-				{window.innerWidth > small ? (
-					<SplitPane split="vertical" defaultSize={600} primary="second">
-						<div initialSize="50%">
-							<CodeEditor></CodeEditor>
-						</div>
-						<div initialSize="50%" ref={ref}>
-							Preview of Groff
-							<p> Timer: {this.state.timestamp}</p>
-						</div>
-					</SplitPane>
-				) : (
-						<Tabs type="card">
-							<TabPane tab="Groff" key="1">
-								Content of Tab Pane 1
+				<div className="DocumentContainer" >
+					{window.innerWidth > small ? (
+						<SplitPane split="vertical" defaultSize={600} primary="second">
+							<div initialSize="50%">
+								<CodeEditor></CodeEditor>
+							</div>
+							<div initialSize="50%" ref={ref}>
+								Preview of Groff
+						<p> Timer: {this.state.timestamp}</p>
+							</div>
+						</SplitPane>
+					) : (
+							<Tabs type="card">
+								<TabPane tab="Groff" key="1">
+									Content of Tab Pane 1
 						</TabPane>
-							<TabPane tab="Preview" key="2">
-								Content of Tab Pane 2
+								<TabPane tab="Preview" key="2">
+									Content of Tab Pane 2
 						</TabPane>
-						</Tabs>
-					)}
+							</Tabs>
+						)}
+				</div>
 			</div>
 		);
 	}
