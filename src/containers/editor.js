@@ -1,14 +1,14 @@
 import React from "react";
 import SplitPane from "react-split-pane";
 import "./editor.css";
-import { Tabs } from "antd";
+import {Tabs} from "antd";
 import Pdf from "react-to-pdf";
-import { subscribeToTimer } from "../api";
+import {subscribeToTimer} from "../api";
 import Navbar from "../components/Navbar/navbar";
 import CodeEditor from "../components/CodeEditor/codeEditor";
 import MyContext from "../context/MyContext";
 
-const { TabPane } = Tabs;
+const {TabPane} = Tabs;
 const ref = React.createRef();
 
 // Backend Integration : Route to rename document on change (Might have to introduce commit function when focus changed from input to minimize backend calls)
@@ -32,7 +32,7 @@ class Editor extends React.Component {
 		let CurrentDoc = this.context.documents.find((doc) => {
 			return doc.id === this.props.match.params.doc;
 		});
-		this.setState({ Document: CurrentDoc });
+		this.setState({Document: CurrentDoc});
 	};
 	pdfConvert = () => {};
 	handleback = () => {
@@ -43,13 +43,14 @@ class Editor extends React.Component {
 		this.context.Logout();
 	};
 	handleRename = (e) => {
-		this.setState({ Document: { name: e.target.value } });
+		this.setState({Document: {name: e.target.value}});
+		// BackendIntegration : Rename Call here
 	};
 	render() {
 		let small = 480;
 		return (
 			<div>
-				<Navbar back={this.handleback} logout={this.handleLogout} >{this.state.Document.name}</Navbar>
+				<Navbar back={this.handleback} logout={this.handleLogout} Rename={this.handleRename} >{this.state.Document.name}</Navbar>
 
 				{window.innerWidth > small ? (
 					<SplitPane split="vertical" defaultSize={600} primary="second">
@@ -62,15 +63,15 @@ class Editor extends React.Component {
 						</div>
 					</SplitPane>
 				) : (
-					<Tabs type="card">
-						<TabPane tab="Groff" key="1">
-							Content of Tab Pane 1
+						<Tabs type="card">
+							<TabPane tab="Groff" key="1">
+								Content of Tab Pane 1
 						</TabPane>
-						<TabPane tab="Preview" key="2">
-							Content of Tab Pane 2
+							<TabPane tab="Preview" key="2">
+								Content of Tab Pane 2
 						</TabPane>
-					</Tabs>
-				)}
+						</Tabs>
+					)}
 			</div>
 		);
 	}
