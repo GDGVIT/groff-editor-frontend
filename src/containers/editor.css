@@ -3,6 +3,12 @@
 	width: 100vw;
 	height: 100vh;
 }
+.docPreview{
+	background-color: white;
+	width:500px;
+	margin: 20px auto;
+	height: 707px;
+}
 .Resizer {
     background: #000;
     opacity: 0.2;

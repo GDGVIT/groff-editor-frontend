@@ -3,7 +3,7 @@ import Ace from 'react-ace'
 
 const CodeEditor = (props) => {
 	return (<div style={{"padding": "20px"}}>
-		<Ace theme="monokai"></Ace>
+		<Ace onChange={props.codeStream}></Ace>
 	</div>)
 };
 export default CodeEditor
