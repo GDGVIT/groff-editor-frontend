@@ -9,5 +9,15 @@ body {
 }
 
 code {
-	font-family: source-code-pro, menlo, monaco, consolas, "courier new", monospace;
+	font-family: source-code-pro, menlo, monaco, consolas, "courier new",
+		monospace;
+}
+.LoginPage {
+	background-color: #e79870;
+	display: flex;
+}
+@media only screen and (max-width: 768px) {
+	.LoginPage {
+		flex-direction: column;
+	}
 }

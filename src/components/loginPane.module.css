@@ -58,8 +58,8 @@
 
 .activeMargin ~ .Underbar {
 	/* a:nth-of-type(2):hover ~ .Underbar { */
-	margin-left: 120px;
-	width: 92px;
+	margin-left: 110px;
+	width: 85px;
 }
 .LoginLink {
 	color: black;
