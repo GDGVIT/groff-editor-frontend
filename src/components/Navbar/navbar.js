@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import classes from "./navbar.module.css";
 import logo from "../../assets/Logo.png";
 import back from "../../assets/Back.png";
+import search from "../../assets/Search_Icon.svg";
 import Dropdown from "./DropDown/dropDown";
 import MyContext from "../../context/MyContext";
 
@@ -44,12 +45,19 @@ class Navbar extends Component {
 		return (
 			<div>
 				{!this.props.home ? (
-					<div className={classes.Navbar}>
+					<div
+						className={classes.Navbar}
+						style={{ position: "absolute" }}
+					>
 						<div
 							className={classes.BackButtonContainer}
 							onClick={() => this.props.back()}
 						>
-							<img className={classes.BackButton} src={back} alt="Back Button" />
+							<img
+								className={classes.BackButton}
+								src={back}
+								alt="Back Button"
+							/>
 						</div>
 						<input
 							type="text"
@@ -62,11 +70,15 @@ class Navbar extends Component {
 								this.props.Rename(e);
 							}}
 						/>
-						<button className={classes.ExportButton}>Export to pdf</button>
+						<button className={classes.ExportButton}>
+							Export to pdf
+						</button>
 						<div
 							className={classes.Settings}
 							onClick={() => {
-								this.setState({ Dropdown: !this.state.Dropdown });
+								this.setState({
+									Dropdown: !this.state.Dropdown,
+								});
 							}}
 						>
 							<img
@@ -80,10 +92,27 @@ class Navbar extends Component {
 				) : (
 					<div className={classes.Navbar}>
 						<div className={classes.Heading}>Documents</div>
+						<div className={classes.searchBox}>
+							<input
+								className={classes.searchText}
+								type="text"
+								placeholder="Search Documents"
+								onChange={this.props.search}
+							/>
+							<div className={classes.searchIcon}>
+								<img
+									src={search}
+									alt="Search Icon"
+									className={classes.searchImage}
+								/>
+							</div>
+						</div>
 						<div
 							className={classes.SettingsMargin}
 							onClick={() => {
-								this.setState({ Dropdown: !this.state.Dropdown });
+								this.setState({
+									Dropdown: !this.state.Dropdown,
+								});
 							}}
 						>
 							<img
@@ -96,7 +125,9 @@ class Navbar extends Component {
 					</div>
 				)}
 				{this.state.Dropdown ? (
-					<Dropdown onclick={(e) => ContextMutator(e.target.id)}></Dropdown>
+					<Dropdown
+						onclick={(e) => ContextMutator(e.target.id)}
+					></Dropdown>
 				) : null}
 			</div>
 		);

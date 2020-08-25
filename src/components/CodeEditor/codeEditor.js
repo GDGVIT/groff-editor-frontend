@@ -1,9 +1,22 @@
-import React from 'react'
-import Ace from 'react-ace'
+import React from "react";
+import Ace from "react-ace";
+import "ace-builds/src-noconflict/theme-monokai";
+import "ace-builds/src-noconflict/theme-nord_dark";
+import "ace-builds/src-noconflict/theme-solarized_dark";
+import "ace-builds/src-noconflict/theme-github";
+import "ace-builds/src-noconflict/theme-solarized_light";
 
-const CodeEditor = (props) => {
-	return (<div style={{"padding": "20px"}}>
-		<Ace onChange={props.codeStream}></Ace>
-	</div>)
+const AceStyle = {
+	width: "100%",
+	height: "100%",
 };
-export default CodeEditor
+const CodeEditor = (props) => {
+	return (
+		<Ace
+			onChange={props.codeStream}
+			style={AceStyle}
+			theme={props.theme}
+		></Ace>
+	);
+};
+export default CodeEditor;

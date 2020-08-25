@@ -11,6 +11,11 @@
 	height: 280px;
 	border-radius: 15px;
 }
+
+.DocumentContainer:hover {
+	filter: drop-shadow(0px 3px 6px #00000030);
+}
+
 .NewDocumentContainer {
 	margin: 20px;
 	background-color: #f8f8fa;
@@ -21,6 +26,11 @@
 	display: flex;
 	justify-content: center;
 }
+
+.NewDocumentContainer:hover {
+	filter: drop-shadow(0px 3px 6px #00000030);
+}
+
 .AddIcon {
 	margin: auto;
 	max-width: 80%;
@@ -56,7 +66,7 @@
 	position: relative;
 	display: inline-block;
 }
-  
+
 .tooltip .tooltiptext {
 	visibility: hidden;
 	min-width: 120px;
@@ -67,18 +77,18 @@
 	padding: 5px 8px;
 	border-radius: 6px;
 	position: absolute;
-	bottom:100%;
+	bottom: 100%;
 	z-index: 1;
 }
 .tooltip .tooltiptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 15%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: black transparent transparent transparent;
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 15%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: black transparent transparent transparent;
 }
 .tooltip:hover .tooltiptext {
 	visibility: visible;

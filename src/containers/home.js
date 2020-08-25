@@ -11,10 +11,18 @@ class Home extends Component {
 		this.props.history.push("/");
 		this.context.Logout();
 	};
+	handleSearch = (e) => {
+		console.log(e.target.value);
+		// BackendIntegration: Add Search Route here
+	};
 	render() {
 		return (
 			<div>
-				<Navbar home={true} logout={this.handleLogout}>
+				<Navbar
+					home={true}
+					logout={this.handleLogout}
+					search={this.handleSearch}
+				>
 					Documents
 				</Navbar>
 				<div className="home">
