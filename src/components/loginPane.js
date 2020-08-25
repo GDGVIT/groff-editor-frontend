@@ -55,7 +55,9 @@ class loginPane extends Component {
 				/>
 				<input
 					type="text"
-					placeholder={props.option ? "Password " : "Password (Min 6 Chars) "}
+					placeholder={
+						props.option ? "Password " : "Password (Min 6 Chars) "
+					}
 					ref={this.Password}
 					onChange={this.ChangeHandler}
 					className={formStyle.InputField}
@@ -77,13 +79,21 @@ class loginPane extends Component {
 				<div className="">
 					<div className={classes.Itemlist}>
 						<div
-							className={this.state.option ? classes.active : classes.LoginLink}
+							className={
+								this.state.option
+									? classes.active
+									: classes.LoginLink
+							}
 							onClick={this.LoginLinkHandler}
 						>
 							Login
 						</div>
 						<div
-							className={this.state.option ? classes.SignLink : classes.activeMargin}
+							className={
+								this.state.option
+									? classes.SignLink
+									: classes.activeMargin
+							}
 							onClick={this.SignLinkHandler}
 						>
 							SignUp
@@ -105,7 +115,13 @@ class loginPane extends Component {
 					</Link>
 				</div>
 				<div className={classes.DSCLogoContainer}>
-					<img src={DSCLogo} alt="DSC-Vit Logo" className={classes.DSCLogo} />
+					<a href="https://dscvit.com">
+						<img
+							src={DSCLogo}
+							alt="DSC-Vit Logo"
+							className={classes.DSCLogo}
+						/>
+					</a>
 				</div>
 			</div>
 		);
