@@ -5,7 +5,7 @@
 	width: 100%;
 	align-items: center;
 	height: 50px;
-	background-color:white;
+	background-color: white;
 	box-shadow: 0px 3px 6px #00000029;
 }
 .BackButtonContainer {
@@ -48,6 +48,34 @@
 .DocumentName:focus {
 	border: 1px solid #ff7d4b;
 	width: 70vw;
+}
+.searchBox {
+	max-width: 1000px;
+	font: Montserrat;
+	font-size: 18px;
+	margin-left: auto;
+	height: 35px;
+	width: 40vw;
+	border: 1px #adadad solid;
+	border-radius: 10px;
+}
+.searchText {
+	border: none;
+	margin-left: 7px;
+	height: 100%;
+	width: 85%;
+}
+.searchBox:focus-within {
+	border: 1px #555 solid;
+}
+.searchIcon {
+	float: right;
+	margin-right: 10px;
+	width: 18px;
+}
+.searchImage {
+	max-width: 100%;
+	max-height: 100%;
 }
 .ExportButton {
 	border: none;
