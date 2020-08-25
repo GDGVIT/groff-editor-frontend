@@ -1,5 +1,10 @@
 import React from "react";
 import Ace from "react-ace";
+import "ace-builds/src-noconflict/theme-monokai";
+import "ace-builds/src-noconflict/theme-nord_dark";
+import "ace-builds/src-noconflict/theme-solarized_dark";
+import "ace-builds/src-noconflict/theme-github";
+import "ace-builds/src-noconflict/theme-solarized_light";
 
 const AceStyle = {
 	width: "100%",
@@ -7,9 +12,11 @@ const AceStyle = {
 };
 const CodeEditor = (props) => {
 	return (
-		<div style={{ padding: "20px", height: "100%" }}>
-			<Ace onChange={props.codeStream} style={AceStyle}></Ace>
-		</div>
+		<Ace
+			onChange={props.codeStream}
+			style={AceStyle}
+			theme={props.theme}
+		></Ace>
 	);
 };
 export default CodeEditor;

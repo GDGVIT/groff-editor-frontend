@@ -33,6 +33,7 @@ class Editor extends React.Component {
 		timestamp: "no timestamp yet",
 		Document: "",
 		Modified: false,
+		theme: "monokai",
 	};
 	componentDidMount = () => {
 		let CurrentDoc = this.context.documents.find((doc) => {
@@ -78,6 +79,9 @@ class Editor extends React.Component {
 			Output: value,
 		});
 	};
+	themeSelector = (e) => {
+		this.setState({ theme: e.target.value });
+	};
 
 	render() {
 		let small = 480;
@@ -100,9 +104,31 @@ class Editor extends React.Component {
 							minSize={540}
 							maxSize={800}
 						>
-							<CodeEditor
-								codeStream={this.handleCode}
-							></CodeEditor>
+							<div style={{ padding: "20px", height: "100%" }}>
+								<select
+									name="theme"
+									id="theme"
+									onChange={this.themeSelector}
+									placeholder="Select a theme"
+									style={{
+										float: "right",
+									}}
+								>
+									<option value="monokai">Monokai</option>
+									<option value="nord_dark">Nord</option>
+									<option value="solarized_light">
+										Solarized Light
+									</option>
+									<option value="solarized_dark">
+										Solarized Dark
+									</option>
+									<option value="github">Github</option>
+								</select>
+								<CodeEditor
+									codeStream={this.handleCode}
+									theme={this.state.theme}
+								></CodeEditor>
+							</div>
 							<DocPreview>{this.state.op}</DocPreview>
 						</SplitPane>
 					) : (
