@@ -35,8 +35,8 @@ class Editor extends React.Component {
 			theme: "monokai",
 			windowWidth: window.innerWidth,
 			windowHeight: window.innerHeight - 50,
-			preview: true,
-			op: "Hey",
+			preview: false,
+			op: "Write in Code Editor to See Output here",
 		};
 		this.preview = React.createRef();
 	}
@@ -113,6 +113,7 @@ class Editor extends React.Component {
 		this.setState({
 			preview: !this.state.preview,
 		});
+		this.handleResize();
 	};
 
 	codeEditorElement() {
@@ -204,7 +205,11 @@ class Editor extends React.Component {
 										className="DocPreview"
 										ref={this.preview}
 									>
-										<DocPreview>{this.state.op}</DocPreview>
+										<DocPreview
+											ElWidth={this.state.previewWidth}
+										>
+											{this.state.op}
+										</DocPreview>
 										<button
 											className="tabButton"
 											onClick={() => {
