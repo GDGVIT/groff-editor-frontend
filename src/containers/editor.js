@@ -144,6 +144,7 @@ class Editor extends React.Component {
 					back={this.handleback}
 					logout={this.handleLogout}
 					Rename={this.handleRename}
+					toPrint={this.preview}
 				>
 					{this.state.Document.name}
 				</Navbar>
