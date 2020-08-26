@@ -105,12 +105,6 @@ class Navbar extends Component {
 					<div className={classes.Navbar}>
 						<div className={classes.Heading}>Documents</div>
 						<div className={classes.searchBox}>
-							<input
-								className={classes.searchText}
-								type="text"
-								placeholder="Search Documents"
-								onChange={this.props.search}
-							/>
 							<div className={classes.searchIcon}>
 								<img
 									src={search}
@@ -118,6 +112,12 @@ class Navbar extends Component {
 									className={classes.searchImage}
 								/>
 							</div>
+							<input
+								className={classes.searchText}
+								type="text"
+								placeholder="Search Documents"
+								onChange={this.props.search}
+							/>
 						</div>
 						<div
 							className={classes.SettingsMargin}

@@ -63,15 +63,15 @@
 	border: none;
 	margin-left: 7px;
 	height: 100%;
-	width: 85%;
+	width: calc(100% - 50px);
 }
 .searchBox:focus-within {
 	border: 1px #555 solid;
 }
 .searchIcon {
-	float: right;
-	margin-right: 10px;
-	width: 18px;
+	float: left;
+	margin-left: 10px;
+	width: 15px;
 }
 .searchImage {
 	max-width: 100%;
