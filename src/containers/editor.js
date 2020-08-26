@@ -28,12 +28,27 @@ class Editor extends React.Component {
 				timestamp,
 			})
 		);
+		this.state = {
+			timestamp: "no timestamp yet",
+			Document: "",
+			Modified: false,
+			theme: "monokai",
+			windowWidth: window.innerWidth,
+			windowHeight: window.innerHeight - 50,
+			preview: true,
+			op: "Hey",
+		};
+		this.preview = React.createRef();
 	}
-	state = {
-		timestamp: "no timestamp yet",
-		Document: "",
-		Modified: false,
-		theme: "monokai",
+	handleResize = (e) => {
+		this.setState({
+			windowWidth: window.innerWidth,
+		});
+		if (this.preview.current) {
+			this.setState({
+				previewWidth: this.preview.current.offsetWidth,
+			});
+		}
 	};
 	componentDidMount = () => {
 		let CurrentDoc = this.context.documents.find((doc) => {
@@ -49,9 +64,20 @@ class Editor extends React.Component {
 			this.setState({ op: response });
 			console.log(response);
 		});
-		this.setState({ Document: CurrentDoc });
+		this.setState({
+			Document: CurrentDoc,
+		});
+		if (this.preview.current) {
+			this.setState({
+				previewWidth: this.preview.current.offsetWidth,
+			});
+		}
+		window.addEventListener("resize", this.handleResize);
 	};
 
+	componentDidUpdate = () => {
+		window.addEventListener("resize", this.handleResize);
+	};
 	componentWillUnmount() {
 		clearInterval(this.update);
 	}
@@ -83,8 +109,34 @@ class Editor extends React.Component {
 		this.setState({ theme: e.target.value });
 	};
 
+	TabSwitch = () => {
+		this.setState({
+			preview: !this.state.preview,
+		});
+	};
+
+	codeEditorElement() {
+		return (
+			<select
+				name="theme"
+				id="theme"
+				onChange={this.themeSelector}
+				placeholder="Select a theme"
+				style={{
+					float: "right",
+				}}
+			>
+				<option value="monokai">Monokai</option>
+				<option value="nord_dark">Nord</option>
+				<option value="solarized_light">Solarized Light</option>
+				<option value="solarized_dark">Solarized Dark</option>
+				<option value="github">Github</option>
+			</select>
+		);
+	}
+
 	render() {
-		let small = 480;
+		let small = 768;
 		return (
 			<div className="EditorBackground">
 				<Navbar
@@ -96,49 +148,74 @@ class Editor extends React.Component {
 				</Navbar>
 
 				<div className="DocumentContainer">
-					{window.innerWidth > small ? (
+					{this.state.windowWidth > small ? (
 						<SplitPane
 							split="vertical"
-							defaultSize={540}
 							primary="second"
-							minSize={540}
-							maxSize={800}
+							minSize={this.state.windowWidth / 2}
 						>
-							<div style={{ padding: "20px", height: "100%" }}>
-								<select
-									name="theme"
-									id="theme"
-									onChange={this.themeSelector}
-									placeholder="Select a theme"
-									style={{
-										float: "right",
-									}}
-								>
-									<option value="monokai">Monokai</option>
-									<option value="nord_dark">Nord</option>
-									<option value="solarized_light">
-										Solarized Light
-									</option>
-									<option value="solarized_dark">
-										Solarized Dark
-									</option>
-									<option value="github">Github</option>
-								</select>
+							<div
+								style={{
+									padding: "20px",
+									height: "100%",
+								}}
+							>
 								<CodeEditor
 									codeStream={this.handleCode}
 									theme={this.state.theme}
 								></CodeEditor>
 							</div>
-							<DocPreview>{this.state.op}</DocPreview>
+							<div
+								className="PreviewContainer"
+								ref={this.preview}
+							>
+								<DocPreview ElWidth={this.state.previewWidth}>
+									{this.state.op}
+								</DocPreview>
+							</div>
 						</SplitPane>
 					) : (
-						<Tabs type="card">
-							<TabPane tab="Groff" key="1">
-								Content of Tab Pane 1
-							</TabPane>
-							<TabPane tab="Preview" key="2">
-								Content of Tab Pane 2
-							</TabPane>
+						<Tabs>
+							{this.state.preview ? (
+								<TabPane key="1">
+									<div
+										style={{
+											height: this.state.windowHeight,
+											marginTop: "10px",
+										}}
+									>
+										<CodeEditor
+											codeStream={this.handleCode}
+											theme={this.state.theme}
+										></CodeEditor>
+										<button
+											className="tabButton"
+											onClick={() => {
+												this.TabSwitch();
+											}}
+										>
+											Preview &#10095;
+										</button>
+									</div>
+								</TabPane>
+							) : (
+								<TabPane key="2">
+									<div
+										className="DocPreview"
+										ref={this.preview}
+									>
+										<DocPreview>{this.state.op}</DocPreview>
+										<button
+											className="tabButton"
+											onClick={() => {
+												this.TabSwitch();
+											}}
+										>
+											&#10094; Code
+										</button>
+									</div>
+								</TabPane>
+							)}
 						</Tabs>
 					)}
 				</div>
