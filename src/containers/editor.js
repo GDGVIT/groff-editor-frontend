@@ -11,7 +11,7 @@ import MyContext from "../context/MyContext";
 
 import socketIOClient from "socket.io-client";
 
-const client = socketIOClient("http://localhost:3000");
+const client = socketIOClient("https://www.groff.tk");
 
 const { TabPane } = Tabs;
 // const ref = React.createRef();
