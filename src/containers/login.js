@@ -2,10 +2,10 @@ import React from "react";
 import LoginPane from "../components/loginPane";
 import ScreenshotPane from "../components/screenshotPane.js";
 
-const Login = () => {
+const Login = (props) => {
 	return (
 		<div className="LoginPage">
-			<LoginPane></LoginPane>
+			<LoginPane props={props}></LoginPane>
 			<ScreenshotPane></ScreenshotPane>
 		</div>
 	);

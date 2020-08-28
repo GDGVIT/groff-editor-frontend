@@ -117,6 +117,7 @@ class Navbar extends Component {
 								type="text"
 								placeholder="Search Documents"
 								onChange={this.props.search}
+								label="Search Documents"
 							/>
 						</div>
 						<div

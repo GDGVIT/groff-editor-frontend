@@ -93,7 +93,7 @@ class loginPane extends Component {
 					label="Username"
 				/>
 				<input
-					type="text"
+					type="password"
 					placeholder={
 						props.option ? "Password " : "Password (Min 6 Chars) "
 					}
