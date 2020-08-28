@@ -113,6 +113,8 @@ class Editor extends React.Component {
 		this.setState({
 			preview: !this.state.preview,
 		});
+		// Tabs.activeKey === 1 ? (Tabs.activeKey = 2) : (Tabs.activeKey = 1);
+		console.log(Tabs.activeKey);
 		this.handleResize();
 	};
 
@@ -120,6 +122,7 @@ class Editor extends React.Component {
 		return (
 			<select
 				name="theme"
+				label="theme select"
 				id="theme"
 				onChange={this.themeSelector}
 				placeholder="Select a theme"
@@ -178,50 +181,44 @@ class Editor extends React.Component {
 						</SplitPane>
 					) : (
 						<Tabs>
-							{this.state.preview ? (
-								<TabPane key="1">
-									<div
-										style={{
-											height: this.state.windowHeight,
-											marginTop: "10px",
+							<TabPane key="1">
+								<div
+									style={{
+										height: this.state.windowHeight,
+										marginTop: "10px",
+									}}
+								>
+									<CodeEditor
+										codeStream={this.handleCode}
+										theme={this.state.theme}
+									></CodeEditor>
+									<button
+										className="tabButton"
+										onClick={() => {
+											this.TabSwitch();
 										}}
 									>
-										<CodeEditor
-											codeStream={this.handleCode}
-											theme={this.state.theme}
-										></CodeEditor>
-										<button
-											className="tabButton"
-											onClick={() => {
-												this.TabSwitch();
-											}}
-										>
-											Preview &#10095;
-										</button>
-									</div>
-								</TabPane>
-							) : (
-								<TabPane key="2">
-									<div
-										className="DocPreview"
-										ref={this.preview}
+										Preview &#10095;
+									</button>
+								</div>
+							</TabPane>
+							<TabPane key="2">
+								<div className="DocPreview" ref={this.preview}>
+									<DocPreview
+										ElWidth={this.state.previewWidth}
 									>
-										<DocPreview
-											ElWidth={this.state.previewWidth}
-										>
-											{this.state.op}
-										</DocPreview>
-										<button
-											className="tabButton"
-											onClick={() => {
-												this.TabSwitch();
-											}}
-										>
-											&#10094; Code
-										</button>
-									</div>
-								</TabPane>
-							)}
+										{this.state.op}
+									</DocPreview>
+									<button
+										className="tabButton"
+										onClick={() => {
+											this.TabSwitch();
+										}}
+									>
+										&#10094; Code
+									</button>
+								</div>
+							</TabPane>
 						</Tabs>
 					)}
 				</div>
