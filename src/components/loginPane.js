@@ -66,7 +66,18 @@ class loginPane extends Component {
 				console.log(res)
 				return res.json()
 			})
-			.then(res => console.log(res))
+			.then(res => {
+				console.log(res)
+				if(res.userid){
+					localStorage.setItem('user-id', res.userid)
+				}
+				if(res.token){
+					localStorage.setItem('token', res.token)
+				}
+				if(res.message == "User created" || res.message == "Auth successful"){
+					this.props.props.history.push('/home')
+				}
+			})
 			.catch(err => console.log(err))	
 		}
 	};
@@ -82,7 +93,7 @@ class loginPane extends Component {
 					label="Username"
 				/>
 				<input
-					type="text"
+					type="password"
 					placeholder={props.option ? "Password " : "Password (Min 6 Chars) "}
 					ref={this.Password}
 					onChange={this.ChangeHandler}
