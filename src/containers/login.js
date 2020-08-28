@@ -1,10 +1,10 @@
 import React from "react";
 import LoginPane from "../components/loginPane";
 
-const Login = () => {
+const Login = (props) => {
 	return (
 		<div className="loginpage" style={{ backgroundColor: "#E79870" }}>
-			<LoginPane></LoginPane>
+			<LoginPane props = {props}></LoginPane>
 		</div>
 	);
 };
