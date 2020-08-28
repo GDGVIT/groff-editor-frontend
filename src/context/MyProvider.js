@@ -35,6 +35,12 @@ class MyProvider extends Component {
 			id: "doc" + newId,
 			time: "Just now",
 		};
+		let token = localStorage.getItem("AUTHTOKEN");
+		let userId = localStorage.getItem("USERID");
+		const apiUrl = "https://api.github.com/users/hacktivist123/repos";
+		fetch(apiUrl)
+			.then((response) => response.json())
+			.then((data) => console.log("This is your data", data));
 		this.setState({ documents: [...this.state.documents, NewDocument] });
 		return NewDocument.id;
 	};
