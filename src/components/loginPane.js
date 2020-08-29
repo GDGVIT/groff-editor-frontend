@@ -35,11 +35,50 @@ class loginPane extends Component {
 		e.target.className = formStyle.InputField;
 	}
 	SubmitHandler = () => {
+		console.log(this.Email.current.value, this.Password.current.value)
 		if (this.Email.current.value === "") {
 			this.Email.current.className = formStyle.Incorrect;
 		}
-		if (this.Password.current.value === "") {
+		else if (this.Password.current.value === "") {
 			this.Password.current.className = formStyle.Incorrect;
+		}
+		else{
+			var ob = {}
+			ob["email"] = this.Email.current.value
+			ob["password"] = this.Password.current.value
+			console.log(JSON.stringify(ob))
+			if(this.state.option){
+				console.log('LOGIN')
+				var BURL = "http://groff-backend.herokuapp.com/manauth/login"
+			}
+			else {
+				var BURL = "http://groff-backend.herokuapp.com/manauth/signup"
+			}
+			// Call route for Manual Login and Sign Up 
+			fetch(BURL,{
+				method:"POST",
+				headers: new Headers({
+					'Content-Type': 'application/json'
+				}),
+				body: JSON.stringify(ob)
+			})
+			.then(res => {
+				console.log(res)
+				return res.json()
+			})
+			.then(res => {
+				console.log(res)
+				if(res.userid){
+					localStorage.setItem('user-id', res.userid)
+				}
+				if(res.token){
+					localStorage.setItem('token', res.token)
+				}
+				if(res.message == "User created" || res.message == "Auth successful"){
+					this.props.props.history.push('/home')
+				}
+			})
+			.catch(err => console.log(err))	
 		}
 	};
 	Form = (props) => {

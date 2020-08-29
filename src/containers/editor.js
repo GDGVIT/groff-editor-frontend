@@ -14,7 +14,7 @@ import socketIOClient from "socket.io-client";
 const client = socketIOClient("http://localhost:3000");
 
 const { TabPane } = Tabs;
-const ref = React.createRef();
+// const ref = React.createRef();
 
 // Backend Integration : Route to rename document on change (Might have to introduce commit function when focus changed from input to minimize backend calls)
 // Backend Integration : Route to fetch Document Data directly from Backend based on url param instead of context Api to limit app re render events.
