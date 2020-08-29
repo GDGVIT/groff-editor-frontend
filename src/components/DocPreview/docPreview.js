@@ -1,9 +1,10 @@
 import React from "react";
 
 const docPreview = (props) => {
+	const base = props.ElWidth ? props.ElWidth - 40 : 0;
 	const style = {
-		width: props.ElWidth - 40,
-		height: (props.ElWidth - 40) * 1.41,
+		width: base,
+		minHeight: base * 1.41,
 	};
 
 	return (

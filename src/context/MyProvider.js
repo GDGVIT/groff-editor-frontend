@@ -37,8 +37,13 @@ class MyProvider extends Component {
 		};
 		let token = localStorage.getItem("AUTHTOKEN");
 		let userId = localStorage.getItem("USERID");
-		const apiUrl = "https://api.github.com/users/hacktivist123/repos";
-		fetch(apiUrl)
+		const apiUrl = "https://gorff.tk/" + userId;
+		fetch(apiUrl, {
+			method: "post",
+			headers: new Headers({
+				Authorization: token,
+			}),
+		})
 			.then((response) => response.json())
 			.then((data) => console.log("This is your data", data));
 		this.setState({ documents: [...this.state.documents, NewDocument] });

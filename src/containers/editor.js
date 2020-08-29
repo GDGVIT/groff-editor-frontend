@@ -11,7 +11,7 @@ import MyContext from "../context/MyContext";
 
 import socketIOClient from "socket.io-client";
 
-const client = socketIOClient("https://www.groff.tk");
+const client = socketIOClient("wss://groffapi.dscvit.com");
 
 const { TabPane } = Tabs;
 // const ref = React.createRef();
@@ -37,6 +37,13 @@ class Editor extends React.Component {
 			windowHeight: window.innerHeight - 50,
 			preview: false,
 			op: "Write in Code Editor to See Output here",
+			//Hard COded for testing
+			Output: {
+				token:
+					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphbmVkb2VAZXhhbXBsZS5jb20iLCJ1c2VySWQiOiI1ZjQ3NWIyZTBkODUwODMxOGMxY2MzNGQiLCJpYXQiOjE1OTg3MDc5NTcsImV4cCI6MTU5ODcxMTU1N30.MgkEtavHHsFkivSJ9tnFuvLriQ2L0Z72DCa9AHHPMZQ",
+				user_id: "5f474666872d6a141f53da20",
+				fileName: "sampletext.txt",
+			},
 		};
 		this.preview = React.createRef();
 	}
@@ -58,6 +65,7 @@ class Editor extends React.Component {
 			if (this.state.Modified) {
 				client.emit("cmd", this.state.Output);
 				this.setState({ Modified: false });
+				console.log(this.state.Output);
 			}
 		}, 2000);
 		client.on("cmd", (response) => {
@@ -102,7 +110,10 @@ class Editor extends React.Component {
 	handleCode = (value) => {
 		this.setState({
 			Modified: true,
-			Output: value,
+			Output: {
+				...this.state.Output,
+				data: value,
+			},
 		});
 	};
 	themeSelector = (e) => {
@@ -180,7 +191,7 @@ class Editor extends React.Component {
 							</div>
 						</SplitPane>
 					) : (
-						<Tabs>
+						<Tabs activeKey={this.state.preview ? "1" : "2"}>
 							<TabPane key="1">
 								<div
 									style={{
