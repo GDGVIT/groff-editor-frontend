@@ -7,6 +7,9 @@ import MyContext from "../context/MyContext";
 
 class Home extends Component {
 	static contextType = MyContext;
+	ComponentDidMount = () => {
+		this.context.LoadAllDocuments();
+	};
 	handleLogout = () => {
 		this.props.history.push("/");
 		this.context.Logout();
@@ -26,7 +29,11 @@ class Home extends Component {
 					Documents
 				</Navbar>
 				<div className="home">
-					<Documents documents={this.context.documents}></Documents>
+					{this.context.loaded ? (
+						<Documents
+							documents={this.context.documents}
+						></Documents>
+					) : null}
 				</div>
 			</div>
 		);
