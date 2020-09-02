@@ -3,7 +3,6 @@ import SplitPane from "react-split-pane";
 import "./editor.css";
 import { Tabs } from "antd";
 // import Pdf from "react-to-pdf";
-import { subscribeToTimer } from "../api";
 import Navbar from "../components/Navbar/navbar";
 import CodeEditor from "../components/CodeEditor/codeEditor";
 import DocPreview from "../components/DocPreview/docPreview";
@@ -23,11 +22,6 @@ class Editor extends React.Component {
 	static contextType = MyContext;
 	constructor(props) {
 		super(props);
-		subscribeToTimer((err, timestamp) =>
-			this.setState({
-				timestamp,
-			})
-		);
 		this.state = {
 			timestamp: "no timestamp yet",
 			Document: "",

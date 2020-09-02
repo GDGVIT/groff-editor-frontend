@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+test.js
 
 # testing
 /coverage
@@ -27,3 +28,6 @@ yarn-error.log*
 
 #testHtml
 test.html
+
+.env
+src/components/Documents/Document/.document.js.swp
