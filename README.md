@@ -87,9 +87,6 @@ Aditya Rathore
 </td>
 </tr>
   </table>
-  
-## License
-[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
 <p align="center">
 	Made with :heart: by <a href="https://dscvit.com">DSC VIT</a>
