@@ -1,6 +1,6 @@
 <p align="center">
 <a href="https://dscvit.com">
-	<img src="https://user-images.githubusercontent.com/30529572/72455010-fb38d400-37e7-11ea-9c1e-8cdeb5f5906e.png" alt="DSC VIT"/>
+	<img src="https://user-images.githubusercontent.com/30529572/92081025-fabe6f00-edb1-11ea-9169-4a8a61a5dd45.png" alt="DSC VIT"/>
 </a>
 	<h2 align="center"> Online Editor for Groff </h2>
 	<h4 align="center"> Groff (GNU troff) is a typesetting system that reads plain text mixed with formatting commands and produces formatted output. However, there doesnt exist an online editor for the same. This project aims to make an online editor for Groff <h4>
