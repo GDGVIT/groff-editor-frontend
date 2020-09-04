@@ -53,8 +53,9 @@ class Editor extends React.Component {
 	};
 	componentDidMount = () => {
 		let CurrentDoc = this.context.documents.find((doc) => {
-			return doc.id === this.props.match.params.doc;
+			return doc.fileName === this.props.match.params.doc;
 		});
+		console.log(CurrentDoc);
 		this.update = setInterval(() => {
 			if (this.state.Modified) {
 				client.emit("cmd", this.state.Output);

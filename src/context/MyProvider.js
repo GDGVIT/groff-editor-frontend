@@ -11,9 +11,9 @@ class MyProvider extends Component {
 		this.userId = localStorage.getItem("user-id");
 		// this.apiUrl = "https://groffapi.dscvit.com/";
 		this.apiUrl = "http://localhost:3000/";
-		this.LoadAllDocuments();
 	}
 	state = {
+		LoggedIn: false,
 		Loaded: false,
 		DarkMode: false,
 		documents: [
@@ -48,6 +48,7 @@ class MyProvider extends Component {
 				.then((data) => data.json())
 				.then((data) => {
 					const files = data.searches[0].files.filter((file) => file);
+					console.log("File,", data);
 					this.setState({
 						Loaded: true,
 						documents: [...files],

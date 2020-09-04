@@ -7,17 +7,17 @@ import MyContext from "../context/MyContext";
 
 class Home extends Component {
 	static contextType = MyContext;
-	ComponentDidMount = () => {
+	componentDidMount = () => {
 		this.context.LoadAllDocuments();
 	};
 	handleLogout = () => {
 		this.props.history.push("/");
 		this.context.Logout();
 	};
-	handleSearch = (e) => {
-		console.log(e.target.value);
-		// BackendIntegration: Add Search Route here
-	};
+	handleSearch = (e) => {};
+	componentWillUnmount() {
+		clearInterval(this.update);
+	}
 	render() {
 		return (
 			<div>
@@ -29,11 +29,10 @@ class Home extends Component {
 					Documents
 				</Navbar>
 				<div className="home">
-					{this.context.loaded ? (
-						<Documents
-							documents={this.context.documents}
-						></Documents>
-					) : null}
+					<Documents
+						documents={this.context.documents}
+						loaded={this.context.loaded}
+					></Documents>
 				</div>
 			</div>
 		);

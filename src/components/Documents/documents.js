@@ -22,7 +22,7 @@ const Documents = (props) => {
 	};
 	return (
 		<div style={style} className={classes.DocumentsContainer}>
-			{docs}
+			{props.loaded ? docs : null}
 			<NewDocument></NewDocument>
 		</div>
 	);

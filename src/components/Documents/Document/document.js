@@ -7,7 +7,7 @@ const Document = (props) => {
 	return (
 		<div
 			className={classes.DocumentContainer}
-			onClick={() => History.push("/editor/" + props.doc.id)}
+			onClick={() => History.push("/editor/" + props.doc.fileName)}
 		>
 			<div className={classes.DocumentPreview}></div>
 			<div className={classes.DocumentDetails}>
