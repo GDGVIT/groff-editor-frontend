@@ -55,6 +55,10 @@ class Editor extends React.Component {
 		let CurrentDoc = this.context.documents.find((doc) => {
 			return doc.fileName === this.props.match.params.doc;
 		});
+		let backupDoc = {
+			fileName: "not Found",
+		};
+		CurrentDoc = CurrentDoc ? CurrentDoc : backupDoc;
 		console.log(CurrentDoc);
 		this.update = setInterval(() => {
 			if (this.state.Modified) {
@@ -155,7 +159,7 @@ class Editor extends React.Component {
 					Rename={this.handleRename}
 					toPrint={this.preview}
 				>
-					{this.state.Document.name}
+					{this.state.Document.fileName}
 				</Navbar>
 
 				<div className="DocumentContainer">

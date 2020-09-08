@@ -59,7 +59,7 @@ class MyProvider extends Component {
 	NewDocumentHandler = () => {
 		let newId = this.state.documents.length + 1;
 		let NewDocument = {
-			name: "New Document",
+			fileName: "new" + newId,
 			id: "doc" + newId,
 			time: "Just now",
 		};
@@ -69,16 +69,19 @@ class MyProvider extends Component {
 		// const apiUrl =
 		// 	"https://groffapi.dscvit.com/preview/createFile/" + userID;
 		fetch(this.apiUrl + "preview/createFile/" + this.userId, {
-			method: "patch",
-			headers: new Headers({
+			method: "PATCH",
+			headers: {
 				Authorization: this.token,
-			}),
+				"Content-Type": "application/json",
+			},
 			body: JSON.stringify({
-				filename: "NewDocument.txt",
+				fileName: "new" + newId,
 			}),
-		}).then((data) => console.log("This is your data", data));
+		})
+			.then((data) => data.json())
+			.then((data) => console.log("This is your data", data));
 		this.setState({ documents: [...this.state.documents, NewDocument] });
-		return NewDocument.id;
+		return NewDocument.fileName;
 	};
 	LogoutHandler = () => {
 		console.log("Logged out");
