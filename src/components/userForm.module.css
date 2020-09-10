@@ -42,6 +42,30 @@
 	border-color: #ff7d4b;
 	color: #ff7d4b;
 }
+.GButton{
+	text-decoration: none;
+	color: white;
+	font-size: 16px;
+	padding: 12px;
+	background-color: #ff7d4b;
+	border-radius: 9px;
+	font-weight: 600;
+	-webkit-transition: 0.5s ease;
+	transition: 0.5s ease;
+}
+.GButton:hover {
+	background-color: #e79870;
+	text-decoration: none;
+	color: white;
+}
+.GButton:active {
+	text-decoration: none;
+	background-color: white;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #ff7d4b;
+	color: #ff7d4b;
+}
 .GuestLink:hover,
 .GuestLink {
 	float: right;

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Oauth from './oauth';
 import { Link } from "react-router-dom";
 import logo from "../assets/Logo.png";
 import classes from "./loginPane.module.css";
@@ -152,6 +153,9 @@ class loginPane extends Component {
 					<Link to="/home" className={formStyle.GuestLink}>
 						or continue as guest
 					</Link>
+				</div>
+				<div style={{marginTop:"100px"}}>
+					<Oauth />
 				</div>
 				<div className={classes.DSCLogoContainer}>
 					<a href="https://dscvit.com">
