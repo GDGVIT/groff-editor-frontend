@@ -10,7 +10,9 @@ import MyContext from "../context/MyContext";
 
 import socketIOClient from "socket.io-client";
 
-const client = socketIOClient("http://groffapi.dscvit.com");
+const client = socketIOClient("https://groffapi.dscvit.com", {
+	transports: ["websocket"],
+});
 
 const { TabPane } = Tabs;
 // const ref = React.createRef();
