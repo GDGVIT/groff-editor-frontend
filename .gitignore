@@ -31,3 +31,4 @@ test.html
 
 .env
 src/components/Documents/Document/.document.js.swp
+src/containers/.editor.js.swp

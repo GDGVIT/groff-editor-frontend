@@ -10,7 +10,7 @@ import MyContext from "../context/MyContext";
 
 import socketIOClient from "socket.io-client";
 
-const client = socketIOClient("wss://groffapi.dscvit.com");
+const client = socketIOClient("http://groffapi.dscvit.com");
 
 const { TabPane } = Tabs;
 // const ref = React.createRef();
@@ -37,6 +37,7 @@ class Editor extends React.Component {
 					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphbmVkb2VAZXhhbXBsZS5jb20iLCJ1c2VySWQiOiI1ZjQ3NWIyZTBkODUwODMxOGMxY2MzNGQiLCJpYXQiOjE1OTg3MDc5NTcsImV4cCI6MTU5ODcxMTU1N30.MgkEtavHHsFkivSJ9tnFuvLriQ2L0Z72DCa9AHHPMZQ",
 				user_id: "5f474666872d6a141f53da20",
 				fileName: "sampletext.txt",
+				data: "",
 			},
 		};
 		this.preview = React.createRef();
@@ -62,7 +63,7 @@ class Editor extends React.Component {
 		console.log(CurrentDoc);
 		this.update = setInterval(() => {
 			if (this.state.Modified) {
-				client.emit("cmd", this.state.Output);
+				client.emit("cmd", JSON.stringify(this.state.Output));
 				this.setState({ Modified: false });
 				console.log(this.state.Output);
 			}
