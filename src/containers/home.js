@@ -2,19 +2,25 @@ import React, { Component } from "react";
 import Navbar from "../components/Navbar/navbar";
 import Documents from "../components/Documents/documents";
 import MyContext from "../context/MyContext";
+import Loader from "../assets/Loader.svg";
 
 // Optimization: Add Function under ComponentDidMount to update Context State to latest Database Values by calling A Context Child Function
 
 class Home extends Component {
 	static contextType = MyContext;
+	componentDidMount = () => {
+		this.context.LoadAllDocuments();
+	};
 	handleLogout = () => {
 		this.props.history.push("/");
 		this.context.Logout();
 	};
 	handleSearch = (e) => {
-		console.log(e.target.value);
-		// BackendIntegration: Add Search Route here
+		this.context.SearchHandler(e.target.value);
 	};
+	componentWillUnmount() {
+		clearInterval(this.update);
+	}
 	render() {
 		return (
 			<div>
@@ -26,8 +32,22 @@ class Home extends Component {
 					Documents
 				</Navbar>
 				<div className="home">
-					<Documents documents={this.context.documents}></Documents>
+					<Documents
+						documents={this.context.documents}
+						delete={this.context.DeleteDocumentHandler}
+						loaded={this.context.loaded}
+					></Documents>
 				</div>
+				{!this.context.loaded ? (
+					<div className="loader">
+						<img
+							src={Loader}
+							alt="LoaderIcon"
+							className="LoaderIcon"
+						/>
+						<span className="LoaderText">Loading..</span>
+					</div>
+				) : null}
 			</div>
 		);
 	}

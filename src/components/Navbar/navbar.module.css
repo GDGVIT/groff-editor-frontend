@@ -44,6 +44,7 @@
 	letter-spacing: 0px;
 	color: #000000;
 	text-align: left;
+	height: 35px;
 }
 .DocumentName:focus {
 	border: 1px solid #ff7d4b;
@@ -56,22 +57,37 @@
 	margin-left: auto;
 	height: 35px;
 	width: 40vw;
-	border: 1px #adadad solid;
+	border: 2px #adadad solid;
 	border-radius: 10px;
 }
-.searchText {
+.searchBox:focus-within {
+	border: 2px solid black;
+}
+.searchBox input[type="text"] {
 	border: none;
 	margin-left: 7px;
 	height: 100%;
-	width: 85%;
+	width: calc(100% - 50px);
 }
-.searchBox:focus-within {
-	border: 1px #555 solid;
+.searchBox input[type="text"]:focus {
+	outline: none;
 }
+/* .searchText { */
+/* 	border: none; */
+/* 	margin-left: 7px; */
+/* 	height: 100%; */
+/* 	width: calc(100% - 50px); */
+/* } */
+/* .searchText:focus-within { */
+/* 	border: none; */
+/* 	margin-left: 7px; */
+/* 	height: 100%; */
+/* 	width: calc(100% - 50px); */
+/* } */
 .searchIcon {
-	float: right;
-	margin-right: 10px;
-	width: 18px;
+	float: left;
+	margin-left: 10px;
+	width: 15px;
 }
 .searchImage {
 	max-width: 100%;

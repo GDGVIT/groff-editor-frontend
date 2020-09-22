@@ -10,6 +10,7 @@ const Documents = (props) => {
 				<Document
 					key={docKey + props.documents[docKey].id}
 					doc={props.documents[docKey]}
+					delete={props.delete}
 				></Document>
 			);
 		});
@@ -22,7 +23,7 @@ const Documents = (props) => {
 	};
 	return (
 		<div style={style} className={classes.DocumentsContainer}>
-			{docs}
+			{props.loaded ? docs : null}
 			<NewDocument></NewDocument>
 		</div>
 	);

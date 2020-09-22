@@ -14,6 +14,7 @@ class loginPane extends Component {
 		super(props);
 		this.Email = React.createRef();
 		this.Password = React.createRef();
+		this.ApiURL = "http://localhost:3000";
 	}
 	onFinish = (values) => {
 		console.log("Received values of form: ", values);
@@ -36,50 +37,50 @@ class loginPane extends Component {
 		e.target.className = formStyle.InputField;
 	}
 	SubmitHandler = () => {
-		console.log(this.Email.current.value, this.Password.current.value)
+		console.log(this.Email.current.value, this.Password.current.value);
 		if (this.Email.current.value === "") {
 			this.Email.current.className = formStyle.Incorrect;
-		}
-		else if (this.Password.current.value === "") {
+		} else if (this.Password.current.value === "") {
 			this.Password.current.className = formStyle.Incorrect;
-		}
-		else{
-			var ob = {}
-			ob["email"] = this.Email.current.value
-			ob["password"] = this.Password.current.value
-			console.log(JSON.stringify(ob))
-			if(this.state.option){
-				console.log('LOGIN')
-				var BURL = "http://groff-backend.herokuapp.com/manauth/login"
+		} else {
+			var ob = {};
+			ob["email"] = this.Email.current.value;
+			ob["password"] = this.Password.current.value;
+			console.log(JSON.stringify(ob));
+			if (this.state.option) {
+				console.log("LOGIN");
+				var BURL = this.ApiURL + "/manauth/login";
+			} else {
+				BURL = this.ApiURL + "/manauth/signup";
 			}
-			else {
-				var BURL = "http://groff-backend.herokuapp.com/manauth/signup"
-			}
-			// Call route for Manual Login and Sign Up 
-			fetch(BURL,{
-				method:"POST",
+			// Call route for Manual Login and Sign Up
+			fetch(BURL, {
+				method: "POST",
 				headers: new Headers({
-					'Content-Type': 'application/json'
+					"Content-Type": "application/json",
 				}),
-				body: JSON.stringify(ob)
+				body: JSON.stringify(ob),
 			})
-			.then(res => {
-				console.log(res)
-				return res.json()
-			})
-			.then(res => {
-				console.log(res)
-				if(res.userid){
-					localStorage.setItem('user-id', res.userid)
-				}
-				if(res.token){
-					localStorage.setItem('token', res.token)
-				}
-				if(res.message == "User created" || res.message == "Auth successful"){
-					this.props.props.history.push('/home')
-				}
-			})
-			.catch(err => console.log(err))	
+				.then((res) => {
+					console.log(res);
+					return res.json();
+				})
+				.then((res) => {
+					console.log(res.userid);
+					if (res.userid) {
+						localStorage.setItem("user-id", res.userid);
+					}
+					if (res.token) {
+						localStorage.setItem("token", res.token);
+					}
+					if (
+						res.message === "User created" ||
+						res.message === "Auth successful"
+					) {
+						this.props.props.history.push("/home");
+					}
+				})
+				.catch((err) => console.log(err));
 		}
 	};
 	Form = (props) => {
@@ -94,7 +95,7 @@ class loginPane extends Component {
 					label="Username"
 				/>
 				<input
-					type="text"
+					type="password"
 					placeholder={
 						props.option ? "Password " : "Password (Min 6 Chars) "
 					}

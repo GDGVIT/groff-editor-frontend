@@ -1,16 +1,11 @@
 import React from "react";
 import LoginPane from "../components/loginPane";
 import ScreenshotPane from "../components/screenshotPane.js";
-import classes from "../components/screenshotPane.module.css";
 
-const Login = () => {
-	const style = {
-		backgroundColor: "#E79870",
-		display: "flex",
-	};
+const Login = (props) => {
 	return (
 		<div className="LoginPage">
-			<LoginPane></LoginPane>
+			<LoginPane props={props}></LoginPane>
 			<ScreenshotPane></ScreenshotPane>
 		</div>
 	);
