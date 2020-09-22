@@ -34,6 +34,7 @@ class MyProvider extends Component {
 			},
 		],
 	};
+	backup = {};
 	ContextMutator = (e) => {
 		if (e === "DarkMode") this.setState({ DarkMode: !this.state.DarkMode });
 	};
@@ -53,6 +54,7 @@ class MyProvider extends Component {
 						Loaded: true,
 						documents: [...files],
 					});
+					this.backup = [...files];
 				});
 		}
 	};
@@ -100,6 +102,23 @@ class MyProvider extends Component {
 	LogoutHandler = () => {
 		console.log("Logged out");
 	};
+	SerachHandler = (querry) => {
+		if (querry) {
+			try {
+				let filtered = this.state.documents.filter((name) =>
+					name.fileName.includes(querry)
+				);
+				console.log(querry);
+				this.setState({
+					documents: [...filtered],
+				});
+			} catch {}
+		} else {
+			this.setState({
+				documents: [...this.backup],
+			});
+		}
+	};
 	render() {
 		return (
 			<MyContext.Provider
@@ -114,6 +133,7 @@ class MyProvider extends Component {
 					DeleteDocumentHandler: (filename) =>
 						this.DeleteDocumentHandler(filename),
 					loaded: this.state.Loaded,
+					SearchHandler: (value) => this.SerachHandler(value),
 				}}
 			>
 				{this.props.children}

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Navbar from "../components/Navbar/navbar";
 import Documents from "../components/Documents/documents";
 import MyContext from "../context/MyContext";
+import Loader from "../assets/Loader.svg";
 
 // Optimization: Add Function under ComponentDidMount to update Context State to latest Database Values by calling A Context Child Function
 
@@ -14,7 +15,9 @@ class Home extends Component {
 		this.props.history.push("/");
 		this.context.Logout();
 	};
-	handleSearch = (e) => {};
+	handleSearch = (e) => {
+		this.context.SearchHandler(e.target.value);
+	};
 	componentWillUnmount() {
 		clearInterval(this.update);
 	}
