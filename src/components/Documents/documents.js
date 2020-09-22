@@ -10,6 +10,7 @@ const Documents = (props) => {
 				<Document
 					key={docKey + props.documents[docKey].id}
 					doc={props.documents[docKey]}
+					delete={props.delete}
 				></Document>
 			);
 		});

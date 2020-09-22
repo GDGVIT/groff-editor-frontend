@@ -36,6 +36,16 @@
 	max-width: 80%;
 	max-height: 80%;
 }
+.DeleteButton {
+	position: absolute;
+	top: 5%;
+	right: 5%;
+	width: 20px;
+	visibility: hidden;
+}
+.DocumentContainer:hover .DeleteButton {
+	visibility: visible;
+}
 .DocumentPreview {
 	width: 10px;
 }

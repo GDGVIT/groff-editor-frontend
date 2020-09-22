@@ -31,6 +31,7 @@ class Home extends Component {
 				<div className="home">
 					<Documents
 						documents={this.context.documents}
+						delete={this.context.DeleteDocumentHandler}
 						loaded={this.context.loaded}
 					></Documents>
 				</div>

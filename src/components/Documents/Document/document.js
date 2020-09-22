@@ -1,6 +1,7 @@
 import React from "react";
 import classes from "./document.module.css";
 import { useHistory } from "react-router-dom";
+import deleteIcon from "../../../assets/delete.png";
 
 const Document = (props) => {
 	let History = useHistory();
@@ -9,6 +10,19 @@ const Document = (props) => {
 			className={classes.DocumentContainer}
 			onClick={() => History.push("/editor/" + props.doc.fileName)}
 		>
+			<div
+				className={classes.DeleteButton}
+				onClick={(event) => {
+					event.stopPropagation();
+					props.delete(props.doc.fileName);
+				}}
+			>
+				<img
+					className={classes.DeleteButton}
+					src={deleteIcon}
+					alt="Delte Button"
+				/>
+			</div>
 			<div className={classes.DocumentPreview}></div>
 			<div className={classes.DocumentDetails}>
 				<div className={classes.tooltip}>

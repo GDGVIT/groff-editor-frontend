@@ -29,7 +29,7 @@ class MyProvider extends Component {
 			},
 			{
 				name: "Letter of Recommendation",
-				id: "doc3",
+				id: "doc",
 				time: "A week Ago",
 			},
 		],
@@ -75,13 +75,27 @@ class MyProvider extends Component {
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
-				fileName: "new" + newId,
+				fileName: "newlol" + newId,
 			}),
 		})
 			.then((data) => data.json())
 			.then((data) => console.log("This is your data", data));
 		this.setState({ documents: [...this.state.documents, NewDocument] });
 		return NewDocument.fileName;
+	};
+	DeleteDocumentHandler = (filename) => {
+		fetch(this.apiUrl + "preview/" + this.userId + "/" + filename, {
+			method: "DELETE",
+			headers: {
+				Authorization: this.token,
+			},
+		}).then((res) => {
+			this.setState({
+				Loaded: false,
+			});
+			this.LoadAllDocuments();
+			console.log("filename", filename, res.status);
+		});
 	};
 	LogoutHandler = () => {
 		console.log("Logged out");
@@ -97,6 +111,8 @@ class MyProvider extends Component {
 					documents: this.state.documents,
 					Logout: () => this.LogoutHandler(),
 					LoadAllDocuments: () => this.LoadAllDocuments(),
+					DeleteDocumentHandler: (filename) =>
+						this.DeleteDocumentHandler(filename),
 					loaded: this.state.Loaded,
 				}}
 			>
