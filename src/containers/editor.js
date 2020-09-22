@@ -10,7 +10,7 @@ import MyContext from "../context/MyContext";
 
 import socketIOClient from "socket.io-client";
 
-const client = socketIOClient("https://groffapi.dscvit.com", {
+const client = socketIOClient("http://localhost:3000", {
 	transports: ["websocket"],
 });
 
@@ -126,8 +126,6 @@ class Editor extends React.Component {
 		this.setState({
 			preview: !this.state.preview,
 		});
-		// Tabs.activeKey === 1 ? (Tabs.activeKey = 2) : (Tabs.activeKey = 1);
-		console.log(Tabs.activeKey);
 		this.handleResize();
 	};
 
