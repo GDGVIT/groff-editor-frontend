@@ -8,6 +8,25 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.loader {
+	width: 100%;
+	position: absolute;
+	top: 0%;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	height: 100vh;
+}
+
+.LoaderIcon {
+	max-width: 100%;
+}
+
+.LoaderText {
+	font-size: 20px;
+	text-align: center;
+}
+
 code {
 	font-family: source-code-pro, menlo, monaco, consolas, "courier new",
 		monospace;

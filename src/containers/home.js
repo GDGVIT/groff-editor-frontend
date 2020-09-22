@@ -35,6 +35,16 @@ class Home extends Component {
 						loaded={this.context.loaded}
 					></Documents>
 				</div>
+				{!this.context.loaded ? (
+					<div className="loader">
+						<img
+							src={Loader}
+							alt="LoaderIcon"
+							className="LoaderIcon"
+						/>
+						<span className="LoaderText">Loading..</span>
+					</div>
+				) : null}
 			</div>
 		);
 	}
