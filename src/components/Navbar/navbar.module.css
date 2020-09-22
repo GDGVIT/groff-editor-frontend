@@ -57,11 +57,11 @@
 	margin-left: auto;
 	height: 35px;
 	width: 40vw;
-	border: 1px #adadad solid;
+	border: 2px #adadad solid;
 	border-radius: 10px;
 }
 .searchBox:focus-within {
-	color: red;
+	border: 2px solid black;
 }
 .searchBox input[type="text"] {
 	border: none;
@@ -70,10 +70,7 @@
 	width: calc(100% - 50px);
 }
 .searchBox input[type="text"]:focus {
-	border: none;
-	margin-left: 7px;
-	height: 100%;
-	width: calc(100% - 50px);
+	outline: none;
 }
 /* .searchText { */
 /* 	border: none; */
@@ -81,7 +78,7 @@
 /* 	height: 100%; */
 /* 	width: calc(100% - 50px); */
 /* } */
-/* .searchText:focus { */
+/* .searchText:focus-within { */
 /* 	border: none; */
 /* 	margin-left: 7px; */
 /* 	height: 100%; */
