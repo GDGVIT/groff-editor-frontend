@@ -56,7 +56,7 @@ class Editor extends React.Component {
 	};
 	componentDidMount = () => {
 		let CurrentDoc = this.context.documents.find((doc) => {
-			return doc.fileName === this.props.match.params.doc;
+			return doc._id === this.props.match.params.doc;
 		});
 		let backupDoc = {
 			fileName: "not Found",
@@ -106,7 +106,6 @@ class Editor extends React.Component {
 	handleRename = (e) => {
 		this.setState({ Document: { name: e.target.value } });
 		// BackendIntegration : Rename Call here
-		client.emit("cmd", e.target.value);
 	};
 
 	handleCode = (value) => {
@@ -159,9 +158,8 @@ class Editor extends React.Component {
 					logout={this.handleLogout}
 					Rename={this.handleRename}
 					toPrint={this.preview}
-				>
-					{this.state.Document.fileName}
-				</Navbar>
+					filename={this.state.Document.fileName}
+				></Navbar>
 
 				<div className="DocumentContainer">
 					{this.state.windowWidth > small ? (

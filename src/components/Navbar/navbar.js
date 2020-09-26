@@ -17,10 +17,21 @@ class Navbar extends Component {
 		super(props);
 		this.ContextButton = React.createRef();
 	}
+	componentDidMount = () => {
+		document.addEventListener("click", this._onPageClick);
+	};
+	componentWillUnmount = () => {
+		document.removeEventListener("click", this._onPageClick);
+	};
+
+	renameHandler = (e) => {
+		this.props.Rename(e.target.value);
+	};
+
 	_onPageClick = (e) => {
 		e.stopPropagation();
 		if (e.target.id !== "Rename") {
-			this.setState({ Rename: false });
+			this.setState({ ...this.state, Rename: false });
 		}
 		if (
 			this.ContextButton.current !== e.target &&
@@ -32,11 +43,6 @@ class Navbar extends Component {
 			this.props.logout();
 		}
 	};
-
-	componentDidMount = () => {
-		document.addEventListener("click", this._onPageClick);
-	};
-
 	backButtonHandler = () => {
 		this.props.history.goBack();
 	};
@@ -62,13 +68,14 @@ class Navbar extends Component {
 						</div>
 						<input
 							type="text"
-							value={this.props.children}
+							value={this.props.filename}
 							className={classes.DocumentName}
-							onClick={(e) => {
+							onClick={() => {
 								this.setState({ Rename: true });
 							}}
-							onChange={(e) => {
-								this.props.Rename(e);
+							onChange={(e) => this.props.Rename(e)}
+							onKeyPress={(e) => {
+								this.renameHandler(e);
 							}}
 						/>
 						<ReactToPdf
