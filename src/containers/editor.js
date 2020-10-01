@@ -72,7 +72,6 @@ class Editor extends React.Component {
 		}, 2000);
 		client.on("cmd", (response) => {
 			this.setState({ op: response });
-			console.log(response);
 		});
 		this.setState({
 			Document: CurrentDoc,
