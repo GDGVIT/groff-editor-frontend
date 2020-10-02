@@ -7,6 +7,9 @@ import Navbar from "../components/Navbar/navbar";
 import CodeEditor from "../components/CodeEditor/codeEditor";
 import DocPreview from "../components/DocPreview/docPreview";
 import MyContext from "../context/MyContext";
+import DropDownEditor from "../components/CodeEditor/EDropdown/dropDown_editor";
+
+import SettingsIcon from "../assets/Settigns.png";
 
 import socketIOClient from "socket.io-client";
 
@@ -31,8 +34,9 @@ class Editor extends React.Component {
 			theme: "monokai",
 			windowWidth: window.innerWidth,
 			windowHeight: window.innerHeight - 50,
+			showHelp: false,
 			preview: false,
-			op: "Write in Code Editor to See Output here",
+			op: "",
 			//Hard COded for testing
 			Output: {
 				token:
@@ -55,6 +59,13 @@ class Editor extends React.Component {
 		}
 	};
 	componentDidMount = () => {
+		const showHelp = (e) => {
+			if ((e.key === "?") & (e.target.className !== "ace_text-input")) {
+				console.log("What are you dong stepWindow");
+				this.setState({ showHelp: !this.state.showHelp });
+			}
+		};
+		window.addEventListener("keypress", showHelp);
 		let CurrentDoc = this.context.documents.find((doc) => {
 			return doc._id === this.props.match.params.doc;
 		});
@@ -127,27 +138,6 @@ class Editor extends React.Component {
 		this.handleResize();
 	};
 
-	codeEditorElement() {
-		return (
-			<select
-				name="theme"
-				label="theme select"
-				id="theme"
-				onChange={this.themeSelector}
-				placeholder="Select a theme"
-				style={{
-					float: "right",
-				}}
-			>
-				<option value="monokai">Monokai</option>
-				<option value="nord_dark">Nord</option>
-				<option value="solarized_light">Solarized Light</option>
-				<option value="solarized_dark">Solarized Dark</option>
-				<option value="github">Github</option>
-			</select>
-		);
-	}
-
 	render() {
 		let small = 768;
 		return (
@@ -161,6 +151,17 @@ class Editor extends React.Component {
 				></Navbar>
 
 				<div className="DocumentContainer">
+					{this.state.showHelp ? (
+						<div className="HelpPopup">
+							<div className="HelpBG">
+								<iframe
+									title="HelpPopup"
+									src="https://github.com/L04DB4L4NC3R/groff-cheatsheet"
+									{/* src="https://www.google.co.in" */}
+								/>
+							</div>
+						</div>
+					) : null}
 					{this.state.windowWidth > small ? (
 						<SplitPane
 							split="vertical"
@@ -173,6 +174,19 @@ class Editor extends React.Component {
 									height: "100%",
 								}}
 							>
+								<div className="EditorSettings">
+									<img
+										src={SettingsIcon}
+										alt="Editor settings Icon"
+									/>
+									<div className="EditorDropdown">
+										<DropDownEditor
+											handleTheme={(e) =>
+												this.themeSelector(e)
+											}
+										></DropDownEditor>
+									</div>
+								</div>
 								<CodeEditor
 									codeStream={this.handleCode}
 									theme={this.state.theme}
