@@ -7,6 +7,8 @@ import Navbar from "../components/Navbar/navbar";
 import CodeEditor from "../components/CodeEditor/codeEditor";
 import DocPreview from "../components/DocPreview/docPreview";
 import MyContext from "../context/MyContext";
+import { useTheme } from '../context/ThemeContext';
+
 
 import socketIOClient from "socket.io-client";
 
@@ -15,6 +17,7 @@ const client = socketIOClient("https://groffapi.dscvit.com", {
 });
 
 const { TabPane } = Tabs;
+// const themeToggle = useTheme();
 // const ref = React.createRef();
 
 // Backend Integration : Route to rename document on change (Might have to introduce commit function when focus changed from input to minimize backend calls)
@@ -44,6 +47,7 @@ class Editor extends React.Component {
 		};
 		this.preview = React.createRef();
 	}
+	
 	handleResize = (e) => {
 		this.setState({
 			windowWidth: window.innerWidth,
