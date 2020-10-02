@@ -7,9 +7,14 @@ import Navbar from "../components/Navbar/navbar";
 import CodeEditor from "../components/CodeEditor/codeEditor";
 import DocPreview from "../components/DocPreview/docPreview";
 import MyContext from "../context/MyContext";
+<<<<<<< HEAD
 import DropDownEditor from "../components/CodeEditor/EDropdown/dropDown_editor";
 
 import SettingsIcon from "../assets/Settigns.png";
+=======
+import { useTheme } from '../context/ThemeContext';
+
+>>>>>>> Dark mode structure
 
 import socketIOClient from "socket.io-client";
 
@@ -18,6 +23,7 @@ const client = socketIOClient("http://localhost:3000", {
 });
 
 const { TabPane } = Tabs;
+// const themeToggle = useTheme();
 // const ref = React.createRef();
 
 // Backend Integration : Route to rename document on change (Might have to introduce commit function when focus changed from input to minimize backend calls)
@@ -48,6 +54,7 @@ class Editor extends React.Component {
 		};
 		this.preview = React.createRef();
 	}
+	
 	handleResize = (e) => {
 		this.setState({
 			windowWidth: window.innerWidth,
