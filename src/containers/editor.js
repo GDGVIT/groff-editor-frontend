@@ -157,7 +157,7 @@ class Editor extends React.Component {
 								<iframe
 									title="HelpPopup"
 									src="https://github.com/L04DB4L4NC3R/groff-cheatsheet"
-									{/* src="https://www.google.co.in" */}
+									/* src="https://www.google.co.in" */
 								/>
 							</div>
 						</div>
