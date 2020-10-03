@@ -25,6 +25,7 @@
 	cursor: default;
 	max-width: 60vw;
 	font: Medium Montserrat;
+	font-size: 25px;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;

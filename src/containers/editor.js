@@ -7,10 +7,13 @@ import Navbar from "../components/Navbar/navbar";
 import CodeEditor from "../components/CodeEditor/codeEditor";
 import DocPreview from "../components/DocPreview/docPreview";
 import MyContext from "../context/MyContext";
+import DropDownEditor from "../components/CodeEditor/EDropdown/dropDown_editor";
+
+import SettingsIcon from "../assets/Settigns.png";
 
 import socketIOClient from "socket.io-client";
 
-const client = socketIOClient("https://groffapi.dscvit.com", {
+const client = socketIOClient("http://localhost:3000", {
 	transports: ["websocket"],
 });
 
@@ -31,8 +34,9 @@ class Editor extends React.Component {
 			theme: "monokai",
 			windowWidth: window.innerWidth,
 			windowHeight: window.innerHeight - 50,
+			showHelp: false,
 			preview: false,
-			op: "Write in Code Editor to See Output here",
+			op: "",
 			//Hard COded for testing
 			Output: {
 				token:
@@ -55,8 +59,15 @@ class Editor extends React.Component {
 		}
 	};
 	componentDidMount = () => {
+		const showHelp = (e) => {
+			if ((e.key === "?") & (e.target.className !== "ace_text-input")) {
+				console.log("What are you dong stepWindow");
+				this.setState({ showHelp: !this.state.showHelp });
+			}
+		};
+		window.addEventListener("keypress", showHelp);
 		let CurrentDoc = this.context.documents.find((doc) => {
-			return doc.fileName === this.props.match.params.doc;
+			return doc._id === this.props.match.params.doc;
 		});
 		let backupDoc = {
 			fileName: "not Found",
@@ -72,7 +83,6 @@ class Editor extends React.Component {
 		}, 2000);
 		client.on("cmd", (response) => {
 			this.setState({ op: response });
-			console.log(response);
 		});
 		this.setState({
 			Document: CurrentDoc,
@@ -106,7 +116,6 @@ class Editor extends React.Component {
 	handleRename = (e) => {
 		this.setState({ Document: { name: e.target.value } });
 		// BackendIntegration : Rename Call here
-		client.emit("cmd", e.target.value);
 	};
 
 	handleCode = (value) => {
@@ -126,31 +135,8 @@ class Editor extends React.Component {
 		this.setState({
 			preview: !this.state.preview,
 		});
-		// Tabs.activeKey === 1 ? (Tabs.activeKey = 2) : (Tabs.activeKey = 1);
-		console.log(Tabs.activeKey);
 		this.handleResize();
 	};
-
-	codeEditorElement() {
-		return (
-			<select
-				name="theme"
-				label="theme select"
-				id="theme"
-				onChange={this.themeSelector}
-				placeholder="Select a theme"
-				style={{
-					float: "right",
-				}}
-			>
-				<option value="monokai">Monokai</option>
-				<option value="nord_dark">Nord</option>
-				<option value="solarized_light">Solarized Light</option>
-				<option value="solarized_dark">Solarized Dark</option>
-				<option value="github">Github</option>
-			</select>
-		);
-	}
 
 	render() {
 		let small = 768;
@@ -161,11 +147,21 @@ class Editor extends React.Component {
 					logout={this.handleLogout}
 					Rename={this.handleRename}
 					toPrint={this.preview}
-				>
-					{this.state.Document.fileName}
-				</Navbar>
+					filename={this.state.Document.fileName}
+				></Navbar>
 
 				<div className="DocumentContainer">
+					{this.state.showHelp ? (
+						<div className="HelpPopup">
+							<div className="HelpBG">
+								<iframe
+									title="HelpPopup"
+									src="https://github.com/L04DB4L4NC3R/groff-cheatsheet"
+									/* src="https://www.google.co.in" */
+								/>
+							</div>
+						</div>
+					) : null}
 					{this.state.windowWidth > small ? (
 						<SplitPane
 							split="vertical"
@@ -178,6 +174,19 @@ class Editor extends React.Component {
 									height: "100%",
 								}}
 							>
+								<div className="EditorSettings">
+									<img
+										src={SettingsIcon}
+										alt="Editor settings Icon"
+									/>
+									<div className="EditorDropdown">
+										<DropDownEditor
+											handleTheme={(e) =>
+												this.themeSelector(e)
+											}
+										></DropDownEditor>
+									</div>
+								</div>
 								<CodeEditor
 									codeStream={this.handleCode}
 									theme={this.state.theme}

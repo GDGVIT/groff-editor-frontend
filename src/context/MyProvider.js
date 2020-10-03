@@ -22,16 +22,6 @@ class MyProvider extends Component {
 				id: "doc1",
 				time: "12 Hours Ago",
 			},
-			{
-				name: "Resume for Job",
-				id: "doc2",
-				time: "Yesterday",
-			},
-			{
-				name: "Letter of Recommendation",
-				id: "doc",
-				time: "A week Ago",
-			},
 		],
 	};
 	backup = {};
@@ -41,9 +31,9 @@ class MyProvider extends Component {
 	LoadAllDocuments = () => {
 		if (!this.state.Loaded) {
 			fetch(this.apiUrl + "preview/" + this.userId, {
-				method: "get",
+				method: "GET",
 				headers: {
-					Authorization: this.token,
+					Authorization: "Bearer " + this.token,
 				},
 			})
 				.then((data) => data.json())
@@ -65,11 +55,6 @@ class MyProvider extends Component {
 			id: "doc" + newId,
 			time: "Just now",
 		};
-		// let token =
-		// 	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphbmVkb2VAZXhhbXBsZS5jb20iLCJ1c2VySWQiOiI1ZjQ3NWIyZTBkODUwODMxOGMxY2MzNGQiLCJpYXQiOjE1OTg3MDc5NTcsImV4cCI6MTU5ODcxMTU1N30.MgkEtavHHsFkivSJ9tnFuvLriQ2L0Z72DCa9AHHPMZQ";
-		// let userID = "5f474666872d6a141f53da20";
-		// const apiUrl =
-		// 	"https://groffapi.dscvit.com/preview/createFile/" + userID;
 		fetch(this.apiUrl + "preview/createFile/" + this.userId, {
 			method: "PATCH",
 			headers: {
@@ -89,7 +74,7 @@ class MyProvider extends Component {
 		fetch(this.apiUrl + "preview/" + this.userId + "/" + filename, {
 			method: "DELETE",
 			headers: {
-				Authorization: this.token,
+				Authorization: "Bearer " + this.token,
 			},
 		}).then((res) => {
 			this.setState({
