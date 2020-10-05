@@ -2,8 +2,10 @@ import classes from "./dropDown.module.css";
 import React from "react";
 import logout from "../../../assets/Logout.svg";
 import MyContext from "../../../context/MyContext";
+import { useTheme } from '../../../context/ThemeContext';
 
 const DropDown = (props) => {
+	const themeToggle = useTheme();
 	return (
 		<MyContext.Consumer>
 			{(context) => {
@@ -14,7 +16,7 @@ const DropDown = (props) => {
 							<div
 								className={classes.ItemContainer}
 								id="DarkMode"
-								onClick={(e) => props.onclick(e)}
+								onClick={() => themeToggle.toggle()}
 							>
 								<div className={classes.DropItem} id="DarkMode">
 									Dark Mode
@@ -24,6 +26,7 @@ const DropDown = (props) => {
 									className={
 										context.DarkMode ? classes.ToggleActive : classes.Toggle
 									}
+								// onClick={() => themeToggle.toggle()}
 								>
 									<div
 										id="DarkMode"
