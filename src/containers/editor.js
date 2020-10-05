@@ -7,14 +7,11 @@ import Navbar from "../components/Navbar/navbar";
 import CodeEditor from "../components/CodeEditor/codeEditor";
 import DocPreview from "../components/DocPreview/docPreview";
 import MyContext from "../context/MyContext";
-<<<<<<< HEAD
 import DropDownEditor from "../components/CodeEditor/EDropdown/dropDown_editor";
 
 import SettingsIcon from "../assets/Settigns.png";
-=======
 import { useTheme } from '../context/ThemeContext';
 
->>>>>>> Dark mode structure
 
 import socketIOClient from "socket.io-client";
 
