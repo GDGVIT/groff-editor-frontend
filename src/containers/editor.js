@@ -7,6 +7,7 @@ import Navbar from "../components/Navbar/navbar";
 import CodeEditor from "../components/CodeEditor/codeEditor";
 import DocPreview from "../components/DocPreview/docPreview";
 import MyContext from "../context/MyContext";
+import HelpMenu from "../components/HelpPopup";
 import DropDownEditor from "../components/CodeEditor/EDropdown/dropDown_editor";
 
 import SettingsIcon from "../assets/Settigns.png";
@@ -158,11 +159,7 @@ class Editor extends React.Component {
 					{this.state.showHelp ? (
 						<div className="HelpPopup">
 							<div className="HelpBG">
-								<iframe
-									title="HelpPopup"
-									src="https://github.com/L04DB4L4NC3R/groff-cheatsheet"
-									/* src="https://www.google.co.in" */
-								/>
+								<HelpMenu />
 							</div>
 						</div>
 					) : null}
