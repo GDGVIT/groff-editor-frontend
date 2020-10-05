@@ -30,10 +30,10 @@ class MyProvider extends Component {
 	};
 	LoadAllDocuments = () => {
 		if (!this.state.Loaded) {
-			fetch(this.apiUrl + "preview/" + this.userId, {
+			fetch(this.apiUrl + "preview/user/" + this.userId, {
 				method: "GET",
 				headers: {
-					Authorization: "Bearer " + this.token,
+					Authorization: this.token,
 				},
 			})
 				.then((data) => data.json())
