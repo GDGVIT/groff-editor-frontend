@@ -16,7 +16,7 @@ const DropDown = (props) => {
 							<div
 								className={classes.ItemContainer}
 								id="DarkMode"
-								// onClick={() => themeToggle.toggle()}
+								onClick={() => themeToggle.toggle()}
 							>
 								<div className={classes.DropItem} id="DarkMode">
 									Dark Mode
@@ -26,7 +26,7 @@ const DropDown = (props) => {
 									className={
 										context.DarkMode ? classes.ToggleActive : classes.Toggle
 									}
-								onClick={() => themeToggle.toggle()}
+								// onClick={() => themeToggle.toggle()}
 								>
 									<div
 										id="DarkMode"
