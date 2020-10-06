@@ -14,7 +14,7 @@ const Document = (props) => {
 				className={classes.DeleteButton}
 				onClick={(event) => {
 					event.stopPropagation();
-					props.delete(props.doc.fileName);
+					props.delete(props.doc._id);
 				}}
 			>
 				<img

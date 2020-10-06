@@ -30,10 +30,10 @@ class MyProvider extends Component {
 	};
 	LoadAllDocuments = () => {
 		if (!this.state.Loaded) {
-			fetch(this.apiUrl + "preview/" + this.userId, {
+			fetch(this.apiUrl + "preview/user", {
 				method: "GET",
 				headers: {
-					Authorization: "Bearer " + this.token,
+					Authorization: this.token,
 				},
 			})
 				.then((data) => data.json())
@@ -49,40 +49,43 @@ class MyProvider extends Component {
 		}
 	};
 	NewDocumentHandler = () => {
-		let newId = this.state.documents.length + 1;
-		let NewDocument = {
-			fileName: "new" + newId,
-			id: "doc" + newId,
-			time: "Just now",
-		};
-		fetch(this.apiUrl + "preview/createFile/" + this.userId, {
+		fetch(this.apiUrl + "preview/createFile/", {
 			method: "PATCH",
 			headers: {
 				Authorization: this.token,
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
-				fileName: "newlol" + newId,
+				fileName: "New Document",
+				userId: this.userId,
 			}),
 		})
 			.then((data) => data.json())
-			.then((data) => console.log("This is your data", data));
-		this.setState({ documents: [...this.state.documents, NewDocument] });
-		return NewDocument.fileName;
+			.then((data) => {
+				this.setState({
+					documents: [...this.state.documents, data.created],
+				});
+				return data.created._id;
+			});
 	};
-	DeleteDocumentHandler = (filename) => {
-		fetch(this.apiUrl + "preview/" + this.userId + "/" + filename, {
+	DeleteDocumentHandler = (fileId) => {
+		console.log("file:", fileId);
+		fetch(this.apiUrl + "preview/deleteFile", {
 			method: "DELETE",
 			headers: {
-				Authorization: "Bearer " + this.token,
+				Authorization: this.token,
+				FileId: fileId,
 			},
-		}).then((res) => {
-			this.setState({
-				Loaded: false,
+			body: JSON.stringify({}),
+		})
+			.then((data) => data.json())
+			.then((res) => {
+				this.setState({
+					Loaded: false,
+				});
+				this.LoadAllDocuments();
+				console.log(res);
 			});
-			this.LoadAllDocuments();
-			console.log("filename", filename, res.status);
-		});
 	};
 	LogoutHandler = () => {
 		console.log("Logged out");
@@ -93,7 +96,6 @@ class MyProvider extends Component {
 				let filtered = this.state.documents.filter((name) =>
 					name.fileName.includes(querry)
 				);
-				console.log(querry);
 				this.setState({
 					documents: [...filtered],
 				});

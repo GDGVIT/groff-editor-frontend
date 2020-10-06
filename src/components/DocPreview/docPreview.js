@@ -11,17 +11,23 @@ const DocPreview = (props) => {
 		setNumPages(numPages);
 	}
 	return (
-		<div>
-			<Document
-				file={`data:application/pdf;base64,${props.children}`}
-				onLoadSuccess={onDocumentLoadSuccess}
-			>
-				<Page pageNumber={pageNumber} />
-			</Document>
-			<p>
-				Page {pageNumber} of {numPages}
-			</p>
-		</div>
+		/* <object */
+		/* 	data={`data:application/pdf;base64,${props.children}#toolbar=0`} */
+		/* 	style={{ width: "100%", height: "100%" }} */
+		// />
+		<Document
+			file={`data:application/pdf;base64,${props.children}`}
+			onLoadSuccess={onDocumentLoadSuccess}
+		>
+			{Array.apply(null, Array(numPages))
+				.map((x, i) => i + 1)
+				.map((page) => (
+					<div>
+						<Page pageNumber={page} scale={1.0} />
+						<br />
+					</div>
+				))}
+		</Document>
 	);
 };
 

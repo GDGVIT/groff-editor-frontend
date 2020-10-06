@@ -1,7 +1,7 @@
 // import theme from 'styled-theming';
 
 // export const backgroundColor = theme('mode', {
-//   light: '#fafafa',
+//   light: '#ffffff',
 //   dark: '#222'
 // });
 
