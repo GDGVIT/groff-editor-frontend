@@ -5,7 +5,6 @@ import back from "../../assets/Back.png";
 import search from "../../assets/Search_Icon.svg";
 import Dropdown from "./DropDown/dropDown";
 import MyContext from "../../context/MyContext";
-import ReactToPdf from "react-to-pdf";
 
 class Navbar extends Component {
 	static contextType = MyContext;
@@ -78,20 +77,12 @@ class Navbar extends Component {
 								this.renameHandler(e);
 							}}
 						/>
-						<ReactToPdf
-							targetRef={this.props.toPrint}
-							filename={this.props.children + ".pdf"}
+						<button
+							className={classes.ExportButton}
+							onClick={this.props.toPdf}
 						>
-							{({ toPdf }) => (
-								<button
-									className={classes.ExportButton}
-									onClick={toPdf}
-								>
-									Export to pdf
-								</button>
-							)}
-						</ReactToPdf>
-
+							Export to pdf
+						</button>
 						<div
 							className={classes.Settings}
 							onClick={() => {

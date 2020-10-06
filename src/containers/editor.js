@@ -1,5 +1,7 @@
 import React from "react";
+import atob from "atob";
 import SplitPane from "react-split-pane";
+import jsDownloader from "js-file-download";
 import "./editor.css";
 import { Tabs } from "antd";
 // import Pdf from "react-to-pdf";
@@ -11,8 +13,7 @@ import HelpMenu from "../components/HelpPopup";
 import DropDownEditor from "../components/CodeEditor/EDropdown/dropDown_editor";
 
 import SettingsIcon from "../assets/Settigns.png";
-import { useTheme } from '../context/ThemeContext';
-
+import { useTheme } from "../context/ThemeContext";
 
 import socketIOClient from "socket.io-client";
 
@@ -45,14 +46,13 @@ class Editor extends React.Component {
 			Output: {
 				token:
 					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphbmVkb2VAZXhhbXBsZS5jb20iLCJ1c2VySWQiOiI1ZjQ3NWIyZTBkODUwODMxOGMxY2MzNGQiLCJpYXQiOjE1OTg3MDc5NTcsImV4cCI6MTU5ODcxMTU1N30.MgkEtavHHsFkivSJ9tnFuvLriQ2L0Z72DCa9AHHPMZQ",
-				user_id: "5f474666872d6a141f53da20",
 				fileName: "sampletext.txt",
 				data: "",
 			},
 		};
 		this.preview = React.createRef();
 	}
-	
+
 	handleResize = (e) => {
 		this.setState({
 			windowWidth: window.innerWidth,
@@ -64,6 +64,17 @@ class Editor extends React.Component {
 		}
 	};
 	componentDidMount = () => {
+		this.token = localStorage.getItem("token");
+		this.userId = localStorage.getItem("user-id");
+		this.fileId = this.props.match.params.doc;
+		this.setState({
+			Output: {
+				token: this.token,
+				user_id: this.userId,
+				fileId: this.fileId,
+				data: "",
+			},
+		});
 		const showHelp = (e) => {
 			if ((e.key === "?") & (e.target.className !== "ace_text-input")) {
 				console.log("What are you dong stepWindow");
@@ -72,7 +83,7 @@ class Editor extends React.Component {
 		};
 		window.addEventListener("keypress", showHelp);
 		let CurrentDoc = this.context.documents.find((doc) => {
-			return doc._id === this.props.match.params.doc;
+			return doc._id === this.fileId;
 		});
 		let backupDoc = {
 			fileName: "not Found",
@@ -107,7 +118,31 @@ class Editor extends React.Component {
 		clearInterval(this.update);
 	}
 
-	pdfConvert = () => {};
+	pdfConvert = () => {
+		fetch("http://localhost:3000/preview/download", {
+			method: "GET",
+			headers: {
+				Authorization: this.token,
+			},
+		})
+			.then((response) => response.blob())
+			.then((blob) => {
+				var url = window.URL.createObjectURL(blob);
+				var a = document.createElement("a");
+				a.href = url;
+				a.download = "filename.pdf";
+				document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
+				a.click();
+				a.remove(); //afterwards we remove the element again
+			});
+		// .then((data) => data.json())
+		// .then((data) => {
+		// 	jsDownloader(data.body, "test.pdf");
+		// 	console.log(data);
+		// });
+		// const byteArray = atob(this.state.op);
+		// const file = `data:application/pdf;base64,${this.state.op}`;
+	};
 
 	handleback = () => {
 		this.props.history.goBack();
@@ -153,6 +188,7 @@ class Editor extends React.Component {
 					Rename={this.handleRename}
 					toPrint={this.preview}
 					filename={this.state.Document.fileName}
+					toPdf={this.pdfConvert}
 				></Navbar>
 
 				<div className="DocumentContainer">
