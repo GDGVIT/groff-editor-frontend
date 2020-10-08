@@ -18,7 +18,7 @@ import { useTheme } from "../context/ThemeContext";
 
 import socketIOClient from "socket.io-client";
 
-const client = socketIOClient(`${url.url}/websocket`, {
+const client = socketIOClient(`${url.url}websocket`, {
 	transports: ["websocket"],
 });
 
