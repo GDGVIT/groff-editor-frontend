@@ -52,24 +52,26 @@ class MyProvider extends Component {
 		}
 	};
 	NewDocumentHandler = () => {
-		fetch(this.apiUrl + "preview/createFile/", {
-			method: "PATCH",
-			headers: {
-				Authorization: this.token,
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				fileName: "New Document",
-				userId: this.userId,
-			}),
-		})
-			.then((data) => data.json())
-			.then((data) => {
-				this.setState({
-					documents: [...this.state.documents, data.created],
+		return new Promise((resolve, reject) => {
+			fetch(this.apiUrl + "preview/createFile/", {
+				method: "PATCH",
+				headers: {
+					Authorization: this.token,
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					fileName: "New Document",
+					userId: this.userId,
+				}),
+			})
+				.then((data) => data.json())
+				.then((data) => {
+					this.setState({
+						documents: [...this.state.documents, data.created],
+					});
+					resolve(data.created._id);
 				});
-				return data.created._id;
-			});
+		});
 	};
 	DeleteDocumentHandler = (fileId) => {
 		console.log("file:", fileId);
