@@ -5,6 +5,8 @@ import "ace-builds/src-noconflict/theme-nord_dark";
 import "ace-builds/src-noconflict/theme-solarized_dark";
 import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/theme-solarized_light";
+import "ace-builds/src-noconflict/keybinding-vim";
+import "ace-builds/src-noconflict/keybinding-vscode";
 import CustomGroffMode from "../../ace-settings/mode-groff";
 import classes from "./dropDown_editor.module.css";
 import SettingsIcon from "../../assets/Settigns.png";
@@ -20,6 +22,9 @@ class CodeEditor extends React.Component {
 	}
 	state = {
 		theme: "monokai",
+		FontSize: 12,
+		VImode: true,
+		FontFamily: "Courier New",
 	};
 	componentDidMount = () => {
 		const customMode = new CustomGroffMode();
@@ -31,6 +36,16 @@ class CodeEditor extends React.Component {
 	};
 	themeSelector = (e) => {
 		this.setState({ theme: e.target.value });
+	};
+	fontsizeSelector = (e) => {
+		this.setState({ FontSize: parseInt(e.target.value) });
+	};
+	fontstyleSelector = (e) => {
+		this.setState({ FontFamily: e.target.value });
+	};
+	modeToggle = () => {
+		console.log("I was called");
+		this.setState({ VImode: !this.state.VImode });
 	};
 
 	render() {
@@ -67,6 +82,72 @@ class CodeEditor extends React.Component {
 									</select>
 								</div>
 							</div>
+							<div
+								className={classes.itemcontainer}
+								id="DarkMode"
+							>
+								<div className={classes.DropItem} id="DarkMode">
+									Font Size:
+									<input
+										type="text"
+										value={this.state.FontSize}
+										onChange={(e) =>
+											this.fontsizeSelector(e)
+										}
+									/>
+								</div>
+							</div>
+							<div
+								className={classes.itemcontainer}
+								id="DarkMode"
+							>
+								<div className={classes.DropItem} id="DarkMode">
+									Change Font:
+									<select
+										name="font"
+										label="font select"
+										id="font"
+										onChange={(e) =>
+											this.fontstyleSelector(e)
+										}
+										placeholder="Select a font"
+										className="EditorDropdown"
+									>
+										<option value="Courier New">
+											Courier New
+										</option>
+										<option value="Lucida Conslole">
+											Lucida Conslole
+										</option>
+									</select>
+								</div>
+							</div>
+							<div
+								className={classes.itemcontainer}
+								id="DarkMode"
+								onClick={() => this.modeToggle()}
+							>
+								<div className={classes.DropItem} id="DarkMode">
+									Vi Mode
+								</div>
+								<div
+									id="DarkMode"
+									className={
+										this.state.VImode
+											? classes.ToggleActive
+											: classes.Toggle
+									}
+								>
+									<div
+										id="DarkMode"
+										className={
+											this.state.VImode
+												? classes.ToggleSwitchActive
+												: classes.ToggleSwitch
+										}
+									></div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -74,6 +155,14 @@ class CodeEditor extends React.Component {
 					ref={this.aceEditor}
 					onChange={this.props.codeStream}
 					style={AceStyle}
+					mode="java"
+					keyboardHandler={this.state.VImode ? "vim" : "vscode"}
+					// fontSize={this.state.fontSize}
+					setOptions={{
+						fontSize:
+							this.state.FontSize > 0 ? this.state.FontSize : 1,
+						fontFamily: this.state.FontFamily,
+					}}
 					theme={this.state.theme}
 				></Ace>
 			</div>
