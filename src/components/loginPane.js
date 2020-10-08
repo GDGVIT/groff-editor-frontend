@@ -5,7 +5,7 @@ import logo from "../assets/Logo.png";
 import classes from "./loginPane.module.css";
 import formStyle from "./userForm.module.css";
 import DSCLogo from "../assets/DSC.png";
-import url from "../../config"
+import url from "../config"
 
 class loginPane extends Component {
 	state = {

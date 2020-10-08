@@ -1,6 +1,6 @@
 import MyContext from "./MyContext";
 import React, { Component } from "react";
-import url from "../../config"
+import url from "../config"
 
 // Backend Integration: Add route to fetch all documents(Name , Created Time, Id)
 // Optimization: Add Fucntion to refresh database

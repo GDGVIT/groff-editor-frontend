@@ -1,7 +1,7 @@
 import React from 'react';
 import formStyle from "./userForm.module.css";
 import * as queryString from 'query-string';
-import url from "../../config"
+import url from "../config"
 
 const stringifiedParams = queryString.stringify({
   client_id: "1077010214943-1pdf3q1jcf0r89pt1hqfkec1i93uatnf.apps.googleusercontent.com",

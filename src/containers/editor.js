@@ -11,7 +11,7 @@ import DocPreview from "../components/DocPreview/docPreview";
 import MyContext from "../context/MyContext";
 import HelpMenu from "../components/HelpPopup";
 import DropDownEditor from "../components/CodeEditor/EDropdown/dropDown_editor";
-import url from "../../config"
+import url from "../config"
 
 import SettingsIcon from "../assets/Settigns.png";
 import { useTheme } from "../context/ThemeContext";
