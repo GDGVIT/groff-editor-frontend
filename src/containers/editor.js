@@ -120,7 +120,7 @@ class Editor extends React.Component {
 	}
 
 	pdfConvert = () => {
-		fetch("http://52.237.109.213:3000/preview/download", {
+		fetch(`${url.url}preview/download`, {
 			method: "GET",
 			headers: {
 				Authorization: this.token,
