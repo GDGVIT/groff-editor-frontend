@@ -1,10 +1,11 @@
 import React from 'react';
 import formStyle from "./userForm.module.css";
 import * as queryString from 'query-string';
+import url from "../../config"
 
 const stringifiedParams = queryString.stringify({
   client_id: "1077010214943-1pdf3q1jcf0r89pt1hqfkec1i93uatnf.apps.googleusercontent.com",
-  redirect_uri: 'http://localhost:3000/auth/google',
+  redirect_uri: `${url.url}/auth/google`,
   scope: [
     'https://www.googleapis.com/auth/userinfo.email',
     'https://www.googleapis.com/auth/userinfo.profile',

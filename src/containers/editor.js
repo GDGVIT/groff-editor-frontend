@@ -11,13 +11,14 @@ import DocPreview from "../components/DocPreview/docPreview";
 import MyContext from "../context/MyContext";
 import HelpMenu from "../components/HelpPopup";
 import DropDownEditor from "../components/CodeEditor/EDropdown/dropDown_editor";
+import url from "../../config"
 
 import SettingsIcon from "../assets/Settigns.png";
 import { useTheme } from "../context/ThemeContext";
 
 import socketIOClient from "socket.io-client";
 
-const client = socketIOClient("http://localhost:3000", {
+const client = socketIOClient(url.url, {
 	transports: ["websocket"],
 });
 
@@ -119,7 +120,7 @@ class Editor extends React.Component {
 	}
 
 	pdfConvert = () => {
-		fetch("http://localhost:3000/preview/download", {
+		fetch("http://52.237.109.213:3000/preview/download", {
 			method: "GET",
 			headers: {
 				Authorization: this.token,

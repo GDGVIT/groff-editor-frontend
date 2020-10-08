@@ -5,6 +5,7 @@ import logo from "../assets/Logo.png";
 import classes from "./loginPane.module.css";
 import formStyle from "./userForm.module.css";
 import DSCLogo from "../assets/DSC.png";
+import url from "../../config"
 
 class loginPane extends Component {
 	state = {
@@ -14,7 +15,7 @@ class loginPane extends Component {
 		super(props);
 		this.Email = React.createRef();
 		this.Password = React.createRef();
-		this.ApiURL = "http://localhost:3000";
+		this.ApiURL = url.url;
 	}
 	onFinish = (values) => {
 		console.log("Received values of form: ", values);
