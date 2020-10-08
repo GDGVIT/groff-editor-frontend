@@ -1,3 +1,33 @@
+.EditorSettings {
+	display: flex;
+	padding-right: 20px;
+	flex-direction: column;
+	position: absolute;
+	top: 25px;
+	right: 10px;
+	z-index: 1;
+	opacity: 0.4;
+}
+.EditorSettings:hover {
+	opacity: 1;
+}
+.EditorSettings:active {
+	opacity: 1;
+}
+.EditorSettings img {
+	max-width: 20px;
+	margin-left: auto;
+}
+.EditorDropdown {
+	z-index: 15;
+	right: 0;
+	top: 0;
+	filter: drop-shadow(0px 3px 8px #00000029);
+	display: none;
+}
+.EditorSettings:hover .EditorDropdown {
+	display: block;
+}
 .Triangle_up {
 	width: 0;
 	margin-left: auto;
@@ -9,10 +39,6 @@
 	filter: drop-shadow(0px -2px 3px #00000029);
 }
 .DropdownContainer {
-	z-index: 15;
-	right: 0;
-	top: 0;
-	filter: drop-shadow(0px 3px 8px #00000029);
 }
 .Dropdown {
 	padding-top: 3px;

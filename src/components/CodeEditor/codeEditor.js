@@ -36,48 +36,35 @@ class CodeEditor extends React.Component {
 	render() {
 		return (
 			<div style={{ height: "100%", width: "100%" }}>
-				<div className="EditorSettings">
+				<div className={classes.EditorSettings}>
 					<img src={SettingsIcon} alt="Editor settings Icon" />
-					<div className="EditorDropdown">
-						<div className={classes.DropdownContainer}>
-							<div className={classes.Triangle_up}></div>
-							<div className={classes.Dropdown}>
-								<div
-									className={classes.itemcontainer}
-									id="DarkMode"
-								>
-									<div
-										className={classes.DropItem}
-										id="DarkMode"
+					<div className={classes.EditorDropdown}>
+						<div className={classes.Triangle_up}></div>
+						<div className={classes.Dropdown}>
+							<div
+								className={classes.itemcontainer}
+								id="DarkMode"
+							>
+								<div className={classes.DropItem} id="DarkMode">
+									Change Theme:
+									<select
+										name="theme"
+										label="theme select"
+										id="theme"
+										onChange={(e) => this.themeSelector(e)}
+										placeholder="Select a theme"
+										className="EditorDropdown"
 									>
-										Change Theme:
-										<select
-											name="theme"
-											label="theme select"
-											id="theme"
-											onChange={(e) =>
-												this.themeSelector(e)
-											}
-											placeholder="Select a theme"
-											className="EditorDropdown"
-										>
-											<option value="monokai">
-												Monokai
-											</option>
-											<option value="nord_dark">
-												Nord
-											</option>
-											<option value="solarized_light">
-												Solarized Light
-											</option>
-											<option value="solarized_dark">
-												Solarized Dark
-											</option>
-											<option value="github">
-												Github
-											</option>
-										</select>
-									</div>
+										<option value="monokai">Monokai</option>
+										<option value="nord_dark">Nord</option>
+										<option value="solarized_light">
+											Solarized Light
+										</option>
+										<option value="solarized_dark">
+											Solarized Dark
+										</option>
+										<option value="github">Github</option>
+									</select>
 								</div>
 							</div>
 						</div>

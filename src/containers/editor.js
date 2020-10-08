@@ -44,7 +44,7 @@ class Editor extends React.Component {
 			windowWidth: window.innerWidth,
 			windowHeight: window.innerHeight - 50,
 			showHelp: false,
-			preview: false,
+			preview: true,
 			op: "",
 			Output: {
 				token: this.token,
@@ -152,9 +152,6 @@ class Editor extends React.Component {
 				data: value,
 			},
 		});
-	};
-	themeSelector = (e) => {
-		this.setState({ theme: e.target.value });
 	};
 
 	TabSwitch = () => {
