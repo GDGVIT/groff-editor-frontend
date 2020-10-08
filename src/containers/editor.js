@@ -34,6 +34,9 @@ class Editor extends React.Component {
 	static contextType = MyContext;
 	constructor(props) {
 		super(props);
+		this.token = localStorage.getItem("token");
+		this.userId = localStorage.getItem("user-id");
+		this.fileId = this.props.match.params.doc;
 		this.state = {
 			timestamp: "no timestamp yet",
 			Document: "",
@@ -44,11 +47,10 @@ class Editor extends React.Component {
 			showHelp: false,
 			preview: false,
 			op: "",
-			//Hard COded for testing
 			Output: {
-				token:
-					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphbmVkb2VAZXhhbXBsZS5jb20iLCJ1c2VySWQiOiI1ZjQ3NWIyZTBkODUwODMxOGMxY2MzNGQiLCJpYXQiOjE1OTg3MDc5NTcsImV4cCI6MTU5ODcxMTU1N30.MgkEtavHHsFkivSJ9tnFuvLriQ2L0Z72DCa9AHHPMZQ",
-				fileName: "sampletext.txt",
+				token: this.token,
+				user_id: this.userId,
+				fileId: this.fileId,
 				data: "",
 			},
 		};
@@ -66,17 +68,6 @@ class Editor extends React.Component {
 		}
 	};
 	componentDidMount = () => {
-		this.token = localStorage.getItem("token");
-		this.userId = localStorage.getItem("user-id");
-		this.fileId = this.props.match.params.doc;
-		this.setState({
-			Output: {
-				token: this.token,
-				user_id: this.userId,
-				fileId: this.fileId,
-				data: "",
-			},
-		});
 		const showHelp = (e) => {
 			if ((e.key === "?") & (e.target.className !== "ace_text-input")) {
 				console.log("What are you dong stepWindow");
