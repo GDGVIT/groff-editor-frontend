@@ -31,6 +31,8 @@ class MyProvider extends Component {
 	};
 	LoadAllDocuments = () => {
 		if (!this.state.Loaded) {
+			this.token = localStorage.getItem("token");
+			this.userId = localStorage.getItem("user-id");
 			fetch(this.apiUrl + "preview/user", {
 				method: "GET",
 				headers: {
