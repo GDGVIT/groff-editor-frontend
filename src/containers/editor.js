@@ -1,7 +1,5 @@
 import React from "react";
-import atob from "atob";
 import SplitPane from "react-split-pane";
-import jsDownloader from "js-file-download";
 import "./editor.css";
 import { Tabs } from "antd";
 // import Pdf from "react-to-pdf";
@@ -10,12 +8,10 @@ import CodeEditor from "../components/CodeEditor/codeEditor";
 import DocPreview from "../components/DocPreview/docPreview";
 import MyContext from "../context/MyContext";
 import HelpMenu from "../components/HelpPopup";
-import DropDownEditor from "../components/CodeEditor/EDropdown/dropDown_editor";
-import url from "../config"
 
-import SettingsIcon from "../assets/Settigns.png";
 import { useTheme } from "../context/ThemeContext";
 
+import options from "../options";
 import socketIOClient from "socket.io-client";
 
 const client = socketIOClient(`${url.url}`, {
@@ -39,7 +35,10 @@ class Editor extends React.Component {
 		this.fileId = this.props.match.params.doc;
 		this.state = {
 			timestamp: "no timestamp yet",
-			Document: "",
+			Document: {
+				fileName: "not found",
+				fileData: "testing",
+			},
 			Modified: false,
 			theme: "monokai",
 			windowWidth: window.innerWidth,
@@ -80,9 +79,13 @@ class Editor extends React.Component {
 		});
 		let backupDoc = {
 			fileName: "not Found",
+			fileData: "bla",
 		};
 		CurrentDoc = CurrentDoc ? CurrentDoc : backupDoc;
 		console.log(CurrentDoc);
+		this.setState({
+			Document: CurrentDoc,
+		});
 		this.update = setInterval(() => {
 			if (this.state.Modified) {
 				client.emit("cmd", JSON.stringify(this.state.Output));
@@ -92,9 +95,6 @@ class Editor extends React.Component {
 		}, 2000);
 		client.on("cmd", (response) => {
 			this.setState({ op: response });
-		});
-		this.setState({
-			Document: CurrentDoc,
 		});
 		if (this.preview.current) {
 			this.setState({
@@ -112,7 +112,7 @@ class Editor extends React.Component {
 	}
 
 	pdfConvert = () => {
-		fetch(`${url.url}preview/download`, {
+		fetch(options.apiUrl + "preview/download", {
 			method: "GET",
 			headers: {
 				Authorization: this.token,
@@ -124,17 +124,10 @@ class Editor extends React.Component {
 				var a = document.createElement("a");
 				a.href = url;
 				a.download = "filename.pdf";
-				document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
+				document.body.appendChild(a);
 				a.click();
-				a.remove(); //afterwards we remove the element again
+				a.remove();
 			});
-		// .then((data) => data.json())
-		// .then((data) => {
-		// 	jsDownloader(data.body, "test.pdf");
-		// 	console.log(data);
-		// });
-		// const byteArray = atob(this.state.op);
-		// const file = `data:application/pdf;base64,${this.state.op}`;
 	};
 
 	handleback = () => {
@@ -204,22 +197,10 @@ class Editor extends React.Component {
 									height: "100%",
 								}}
 							>
-								<div className="EditorSettings">
-									<img
-										src={SettingsIcon}
-										alt="Editor settings Icon"
-									/>
-									<div className="EditorDropdown">
-										<DropDownEditor
-											handleTheme={(e) =>
-												this.themeSelector(e)
-											}
-										></DropDownEditor>
-									</div>
-								</div>
 								<CodeEditor
 									codeStream={this.handleCode}
 									theme={this.state.theme}
+									data={this.state.Document.fileData}
 								></CodeEditor>
 							</div>
 							<div
@@ -243,6 +224,7 @@ class Editor extends React.Component {
 									<CodeEditor
 										codeStream={this.handleCode}
 										theme={this.state.theme}
+										data={this.state.Document.fileData}
 									></CodeEditor>
 									<button
 										className="tabButton"
