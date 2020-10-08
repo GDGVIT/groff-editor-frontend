@@ -50,9 +50,9 @@ class loginPane extends Component {
 			console.log(JSON.stringify(ob));
 			if (this.state.option) {
 				console.log("LOGIN");
-				var BURL = this.ApiURL + "/manauth/login";
+				var BURL = this.ApiURL + "manauth/login";
 			} else {
-				BURL = this.ApiURL + "/manauth/signup";
+				BURL = this.ApiURL + "manauth/signup";
 			}
 			// Call route for Manual Login and Sign Up
 			fetch(BURL, {
