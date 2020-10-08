@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import Oauth from './oauth';
+import Oauth from "./oauth";
 import { Link } from "react-router-dom";
 import logo from "../assets/Logo.png";
 import classes from "./loginPane.module.css";
 import formStyle from "./userForm.module.css";
 import DSCLogo from "../assets/DSC.png";
-import url from "../config"
+import options from "../options";
 
 class loginPane extends Component {
 	state = {
@@ -15,7 +15,7 @@ class loginPane extends Component {
 		super(props);
 		this.Email = React.createRef();
 		this.Password = React.createRef();
-		this.ApiURL = url.url;
+		this.ApiURL = options.apiUrl;
 	}
 	onFinish = (values) => {
 		console.log("Received values of form: ", values);
@@ -156,7 +156,7 @@ class loginPane extends Component {
 						or continue as guest
 					</Link>
 				</div>
-				<div style={{marginTop:"100px"}}>
+				<div style={{ marginTop: "100px" }}>
 					<Oauth />
 				</div>
 				<div className={classes.DSCLogoContainer}>

@@ -1,6 +1,6 @@
 import MyContext from "./MyContext";
 import React, { Component } from "react";
-import url from "../config"
+import options from "../options";
 
 // Backend Integration: Add route to fetch all documents(Name , Created Time, Id)
 // Optimization: Add Fucntion to refresh database
@@ -11,7 +11,7 @@ class MyProvider extends Component {
 		this.token = localStorage.getItem("token");
 		this.userId = localStorage.getItem("user-id");
 		// this.apiUrl = "https://groffapi.dscvit.com/";
-		this.apiUrl = url.url;
+		this.apiUrl = options.apiUrl;
 	}
 	state = {
 		LoggedIn: false,
