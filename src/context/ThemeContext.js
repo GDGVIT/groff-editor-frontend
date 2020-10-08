@@ -23,14 +23,14 @@ export const MyThemeProvider = ({ children }) => {
 	const GlobalStyle = createGlobalStyle`
   .EditorBackground{
     background-color: ${(props) =>
-		props.theme.mode === "dark" ? "#111" : "#fff"};
-    color: ${(props) => (props.theme.mode === "dark" ? "#fff" : "#111")};
+		props.theme.mode === "dark" ? "#111" : "#eee"};
+    color: ${(props) => (props.theme.mode === "dark" ? "#eee" : "#111")};
   }
   .EditorBackground > div> div, input{
     background-color: ${(props) =>
-		props.theme.mode === "dark" ? "#111" : "#fff"};
+		props.theme.mode === "dark" ? "#111" : "#eee"};
     color: ${(props) =>
-		props.theme.mode === "dark" ? "#fff !important" : "#111"};
+		props.theme.mode === "dark" ? "#eee !important" : "#111"};
   }
   `;
 
@@ -57,4 +57,3 @@ export const MyThemeProvider = ({ children }) => {
 };
 
 export default ThemeProvider;
-
