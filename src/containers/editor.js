@@ -14,7 +14,7 @@ import { useTheme } from "../context/ThemeContext";
 import options from "../options";
 import socketIOClient from "socket.io-client";
 
-const client = socketIOClient(`${url.url}`, {
+const client = socketIOClient("http://groff.dscvit.com/api", {
 	transports: ["websocket"],
 	path: "/api/socket.io"
 });
@@ -82,25 +82,19 @@ class Editor extends React.Component {
 			fileData: "bla",
 		};
 		CurrentDoc = CurrentDoc ? CurrentDoc : backupDoc;
-		console.log(CurrentDoc);
 		this.setState({
 			Document: CurrentDoc,
 		});
 		this.update = setInterval(() => {
 			if (this.state.Modified) {
+				console.log(JSON.stringify(this.state.Output));
 				client.emit("cmd", JSON.stringify(this.state.Output));
 				this.setState({ Modified: false });
-				console.log(this.state.Output);
 			}
 		}, 2000);
 		client.on("cmd", (response) => {
 			this.setState({ op: response });
 		});
-		if (this.preview.current) {
-			this.setState({
-				previewWidth: this.preview.current.offsetWidth,
-			});
-		}
 		window.addEventListener("resize", this.handleResize);
 	};
 
@@ -145,11 +139,13 @@ class Editor extends React.Component {
 	};
 
 	handleCode = (value) => {
+		this.docData = value;
+		this.docData = this.docData.replace(/"/g, '\\"');
 		this.setState({
 			Modified: true,
 			Output: {
 				...this.state.Output,
-				data: value,
+				data: this.docData,
 			},
 		});
 	};

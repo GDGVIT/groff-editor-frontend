@@ -29,7 +29,7 @@ class CodeEditor extends React.Component {
 	componentDidMount = () => {
 		const customMode = new CustomGroffMode();
 		this.aceEditor.current.editor.getSession().setMode(customMode);
-		console.log("Hey");
+		console.log(this.aceEditor.current.value);
 		if (this.props.data.length !== 0) {
 			// aceEditor.current.editor.setValue(props.data, -1);
 		}
@@ -116,8 +116,8 @@ class CodeEditor extends React.Component {
 										<option value="Courier New">
 											Courier New
 										</option>
-										<option value="Lucida Conslole">
-											Lucida Conslole
+										<option value="Lucida Console">
+											Lucida Console
 										</option>
 									</select>
 								</div>
