@@ -14,7 +14,7 @@ import { useTheme } from "../context/ThemeContext";
 import options from "../options";
 import socketIOClient from "socket.io-client";
 
-const client = socketIOClient("http://groff.dscvit.com/api", {
+const client = socketIOClient("https://groff.dscvit.com/api", {
 	transports: ["websocket"],
 	path: "/api/socket.io"
 });
