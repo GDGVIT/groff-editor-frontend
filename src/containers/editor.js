@@ -14,9 +14,9 @@ import { useTheme } from "../context/ThemeContext";
 import options from "../options";
 import socketIOClient from "socket.io-client";
 
-const client = socketIOClient("https://groff.dscvit.com/api", {
+const client = socketIOClient("https://groff.dscvit.com", {
 	transports: ["websocket"],
-	path: "/api/socket.io"
+	path: "/api/socket.io",
 });
 
 const { TabPane } = Tabs;
