@@ -1,5 +1,5 @@
 const options = {
-	apiUrl: "http://localhost:3000/",
+	apiUrl: "https://groff.dscvit.com/api/",
 };
 
 export default options;
