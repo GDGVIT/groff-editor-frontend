@@ -12,18 +12,15 @@ const NewDocument = (props) => {
 				return (
 					<div
 						className={classes.NewDocumentContainer}
-						onClick={() => {
-							context.NewDocumentHandler();
-							// .then((newId) => {
-							// console.log(newId);
-							// History.push("/editor/" + newId);
-							// });
+						onClick={async () => {
+							const newId = await context.NewDocumentHandler();
+							History.push("/editor/" + newId);
 						}}
 					>
 						<img
 							className={classes.AddIcon}
 							src={AddIcon}
-							alt="Add	Document Icon"
+							alt="Add Document Icon"
 						></img>
 					</div>
 				);
