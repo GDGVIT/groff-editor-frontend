@@ -118,6 +118,13 @@
 	padding-right: 30px;
 	padding-bottom: 20px;
 }
+.message{
+	color: #ff7d4b;
+	text-align: center;
+	font-weight: 600;
+	margin-top: 15px;
+	/* display: none; */
+}
 @media only screen and (min-width: 768px) {
 	.LoginPane {
 		min-width: 280px;

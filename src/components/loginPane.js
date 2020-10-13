@@ -7,6 +7,7 @@ import formStyle from "./userForm.module.css";
 import DSCLogo from "../assets/DSC.png";
 import options from "../options";
 
+
 class loginPane extends Component {
 	state = {
 		option: true,
@@ -17,6 +18,12 @@ class loginPane extends Component {
 		this.Password = React.createRef();
 		this.ApiURL = options.apiUrl;
 	}
+	componentDidMount(){
+		if(localStorage.getItem('token')){
+			this.props.props.history.push("/home");
+		}
+	}
+		
 	onFinish = (values) => {
 		console.log("Received values of form: ", values);
 	};
@@ -37,11 +44,18 @@ class loginPane extends Component {
 	ChangeHandler(e) {
 		e.target.className = formStyle.InputField;
 	}
+	handleGuest = () =>{
+		localStorage.setItem('Guest', true)
+	}
+	validateEmail(email) {
+		const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		return re.test(email);
+	}	  
 	SubmitHandler = () => {
 		console.log(this.Email.current.value, this.Password.current.value);
-		if (this.Email.current.value === "") {
+		if (this.Email.current.value === "" || this.validateEmail(this.Email.current.value) === false) {
 			this.Email.current.className = formStyle.Incorrect;
-		} else if (this.Password.current.value === "") {
+		} else if (this.Password.current.value === "" || this.Password.current.value.length < 6) {
 			this.Password.current.className = formStyle.Incorrect;
 		} else {
 			var ob = {};
@@ -64,6 +78,22 @@ class loginPane extends Component {
 			})
 				.then((res) => {
 					console.log(res);
+					// Handling status cases
+					let stat = document.getElementById('msg')
+					switch(res.status){
+						case 401:
+							stat.innerHTML = 'Please Sign Up first!'
+							break;
+						case 200:
+							stat.innerHTML = 'Redirecting...'
+							break;
+						case 409:
+							stat.innerHTML = 'Email already exists'
+							break;
+						default:
+							stat.innerHTML = 'Try again in sometime'
+							
+					}
 					return res.json();
 				})
 				.then((res) => {
@@ -73,6 +103,7 @@ class loginPane extends Component {
 					}
 					if (res.token) {
 						localStorage.setItem("token", res.token);
+						localStorage.setItem('Guest', false)
 					}
 					if (
 						res.message === "User created" ||
@@ -144,6 +175,7 @@ class loginPane extends Component {
 					</div>
 				</div>
 				<this.Form option={this.state.option} />
+				<p className={classes.message} id="msg"></p>
 				<div className={formStyle.UserButtons}>
 					<button
 						type="submit"
@@ -152,7 +184,7 @@ class loginPane extends Component {
 					>
 						Submit
 					</button>
-					<Link to="/home" className={formStyle.GuestLink}>
+					<Link to="/home" className={formStyle.GuestLink} onClick={this.handleGuest}>
 						or continue as guest
 					</Link>
 				</div>

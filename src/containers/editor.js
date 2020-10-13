@@ -67,6 +67,9 @@ class Editor extends React.Component {
 		}
 	};
 	componentDidMount = () => {
+		if(!localStorage.getItem('token') && localStorage.getItem('Guest') == false){
+			this.props.history.push("/");
+		}
 		const showHelp = (e) => {
 			if ((e.key === "?") & (e.target.className !== "ace_text-input")) {
 				console.log("What are you dong stepWindow");
@@ -130,6 +133,7 @@ class Editor extends React.Component {
 
 	handleLogout = () => {
 		this.props.history.push("/");
+		localStorage.clear();
 		this.context.Logout();
 	};
 
