@@ -8,7 +8,6 @@
 		"@testing-library/user-event": "^7.2.1",
 		"ace-builds": "^1.4.12",
 		"antd": "^4.3.3",
-		"js-file-download": "^0.4.12",
 		"local-storage-fallback": "^4.1.1",
 		"react": "^16.13.1",
 		"react-ace": "^9.1.1",
@@ -25,7 +24,7 @@
 		"websocket": "^1.0.31"
 	},
 	"scripts": {
-		"start": "export PORT=3001 ;react-scripts start",
+		"start": "react-scripts start",
 		"build": "CI= react-scripts build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject"

@@ -8,6 +8,7 @@ import CodeEditor from "../components/CodeEditor/codeEditor";
 import DocPreview from "../components/DocPreview/docPreview";
 import MyContext from "../context/MyContext";
 import HelpMenu from "../components/HelpPopup";
+import Loader from "../assets/Loader.svg";
 
 import { useTheme } from "../context/ThemeContext";
 
@@ -40,6 +41,7 @@ class Editor extends React.Component {
 				fileData: "testing",
 			},
 			Modified: false,
+			Loaded: false,
 			theme: "monokai",
 			windowWidth: window.innerWidth,
 			windowHeight: window.innerHeight - 50,
@@ -82,11 +84,12 @@ class Editor extends React.Component {
 		});
 		let backupDoc = {
 			fileName: "not Found",
-			fileData: "bla",
+			fileData: "The file was not found 404",
 		};
 		CurrentDoc = CurrentDoc ? CurrentDoc : backupDoc;
 		this.setState({
 			Document: CurrentDoc,
+			Loaded: true,
 		});
 		this.update = setInterval(() => {
 			if (this.state.Modified) {
@@ -114,9 +117,9 @@ class Editor extends React.Component {
 			headers: {
 				Authorization: this.token,
 			},
-		})
-			.then((response) => response.blob())
-			.then((blob) => {
+		}).then((response) => {
+			if (response.status === 200) {
+				let blob = response.blob();
 				var url = window.URL.createObjectURL(blob);
 				var a = document.createElement("a");
 				a.href = url;
@@ -124,7 +127,10 @@ class Editor extends React.Component {
 				document.body.appendChild(a);
 				a.click();
 				a.remove();
-			});
+			} else {
+				console.log(response);
+			}
+		});
 	};
 
 	handleback = () => {
@@ -143,6 +149,7 @@ class Editor extends React.Component {
 	};
 
 	handleCode = (value) => {
+		console.log("Handle Code Called");
 		this.docData = value;
 		this.docData = this.docData.replace(/"/g, '\\"');
 		this.setState({
@@ -204,9 +211,29 @@ class Editor extends React.Component {
 								className="PreviewContainer"
 								ref={this.preview}
 							>
-								<DocPreview ElWidth={this.state.previewWidth}>
-									{this.state.op}
-								</DocPreview>
+								{this.state.Modified ? (
+									<div className="loader">
+										<img
+											src={Loader}
+											alt="LoaderIcon"
+											className="LoaderIcon"
+										/>
+										<span className="LoaderText">
+											Loading..
+										</span>
+									</div>
+								) : (
+									<div
+										className="DocPreview"
+										ref={this.preview}
+									>
+										<DocPreview
+											ElWidth={this.state.previewWidth}
+										>
+											{this.state.op}
+										</DocPreview>
+									</div>
+								)}
 							</div>
 						</SplitPane>
 					) : (
@@ -234,21 +261,37 @@ class Editor extends React.Component {
 								</div>
 							</TabPane>
 							<TabPane key="2">
-								<div className="DocPreview" ref={this.preview}>
-									<DocPreview
-										ElWidth={this.state.previewWidth}
+								{this.state.Modified ? (
+									<div className="loader">
+										<img
+											src={Loader}
+											alt="LoaderIcon"
+											className="LoaderIcon"
+										/>
+										<span className="LoaderText">
+											Loading..
+										</span>
+									</div>
+								) : (
+									<div
+										className="DocPreview"
+										ref={this.preview}
 									>
-										{this.state.op}
-									</DocPreview>
-									<button
-										className="tabButton"
-										onClick={() => {
-											this.TabSwitch();
-										}}
-									>
-										&#10094; Code
-									</button>
-								</div>
+										<DocPreview
+											ElWidth={this.state.previewWidth}
+										>
+											{this.state.op}
+										</DocPreview>
+										<button
+											className="tabButton"
+											onClick={() => {
+												this.TabSwitch();
+											}}
+										>
+											&#10094; Code
+										</button>
+									</div>
+								)}
 							</TabPane>
 						</Tabs>
 					)}

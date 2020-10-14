@@ -29,9 +29,9 @@ class CodeEditor extends React.Component {
 	componentDidMount = () => {
 		const customMode = new CustomGroffMode();
 		this.aceEditor.current.editor.getSession().setMode(customMode);
-		console.log(this.aceEditor.current.value);
+		console.log("I am mounted");
 		if (this.props.data.length !== 0) {
-			// aceEditor.current.editor.setValue(props.data, -1);
+			this.aceEditor.current.editor.setValue(this.props.data, -1);
 		}
 	};
 	themeSelector = (e) => {
