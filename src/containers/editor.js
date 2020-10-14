@@ -69,7 +69,10 @@ class Editor extends React.Component {
 		}
 	};
 	componentDidMount = () => {
-		if(!localStorage.getItem('token') && localStorage.getItem('Guest') == false){
+		if (
+			!localStorage.getItem("token") &&
+			localStorage.getItem("Guest") == false
+		) {
 			this.props.history.push("/");
 		}
 		const showHelp = (e) => {
@@ -138,9 +141,9 @@ class Editor extends React.Component {
 	};
 
 	handleLogout = () => {
-		this.props.history.push("/");
 		localStorage.clear();
 		this.context.Logout();
+		this.props.history.push("/");
 	};
 
 	handleRename = (e) => {

@@ -10,6 +10,7 @@ class MyProvider extends Component {
 		super(props);
 		this.token = localStorage.getItem("token");
 		this.userId = localStorage.getItem("user-id");
+		this.guest = localStorage.getItem("guest");
 		// this.apiUrl = "https://groffapi.dscvit.com/";
 		this.apiUrl = options.apiUrl;
 	}
@@ -30,6 +31,7 @@ class MyProvider extends Component {
 		if (e === "DarkMode") this.setState({ DarkMode: !this.state.DarkMode });
 	};
 	LoadAllDocuments = () => {
+		if (this.guest) this.setState({ Loaded: true });
 		if (!this.state.Loaded) {
 			this.token = localStorage.getItem("token");
 			this.userId = localStorage.getItem("user-id");
@@ -94,6 +96,7 @@ class MyProvider extends Component {
 	};
 	LogoutHandler = () => {
 		console.log("Logged out");
+		this.setState({ documents: [], Loaded: false });
 	};
 	SerachHandler = (querry) => {
 		if (querry) {
