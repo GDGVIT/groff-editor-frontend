@@ -11,7 +11,7 @@ class Home extends Component {
 	componentDidMount = () => {
 		if (
 			!localStorage.getItem("token") &&
-			localStorage.getItem("Guest") == false
+			localStorage.getItem("Guest") === false
 		) {
 			this.props.history.push("/");
 		}

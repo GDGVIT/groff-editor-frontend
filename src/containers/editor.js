@@ -38,8 +38,9 @@ class Editor extends React.Component {
 			timestamp: "no timestamp yet",
 			Document: {
 				fileName: "not found",
-				fileData: "testing",
+				fileData: "",
 			},
+			InitData: "Im actually just testing",
 			Modified: false,
 			Loaded: false,
 			theme: "monokai",
@@ -71,17 +72,11 @@ class Editor extends React.Component {
 	componentDidMount = () => {
 		if (
 			!localStorage.getItem("token") &&
-			localStorage.getItem("Guest") == false
+			localStorage.getItem("Guest") === false
 		) {
 			this.props.history.push("/");
 		}
-		const showHelp = (e) => {
-			if ((e.key === "?") & (e.target.className !== "ace_text-input")) {
-				console.log("What are you dong stepWindow");
-				this.setState({ showHelp: !this.state.showHelp });
-			}
-		};
-		window.addEventListener("keypress", showHelp);
+		window.addEventListener("keypress", this.showHelp);
 		let CurrentDoc = this.context.documents.find((doc) => {
 			return doc._id === this.fileId;
 		});
@@ -93,6 +88,7 @@ class Editor extends React.Component {
 		this.setState({
 			Document: CurrentDoc,
 			Loaded: true,
+			InitData: CurrentDoc.fileData,
 		});
 		this.update = setInterval(() => {
 			if (this.state.Modified) {
@@ -102,6 +98,7 @@ class Editor extends React.Component {
 			}
 		}, 2000);
 		client.on("cmd", (response) => {
+			console.log(response);
 			this.setState({ op: response });
 		});
 		window.addEventListener("resize", this.handleResize);
@@ -114,6 +111,12 @@ class Editor extends React.Component {
 		clearInterval(this.update);
 	}
 
+	showHelp = (e) => {
+		if ((e.key === "?") & (e.target.className !== "ace_text-input")) {
+			console.log("What are you dong stepWindow");
+			this.setState({ showHelp: !this.state.showHelp });
+		}
+	};
 	pdfConvert = () => {
 		fetch(options.apiUrl + "preview/download", {
 			method: "GET",
@@ -153,13 +156,13 @@ class Editor extends React.Component {
 
 	handleCode = (value) => {
 		console.log("Handle Code Called");
-		this.docData = value;
-		this.docData = this.docData.replace(/"/g, '\\"');
+		// this.docData = value;
+		// this.docData = this.docData.replace(/"/g, '\\"');
 		this.setState({
 			Modified: true,
 			Output: {
 				...this.state.Output,
-				data: this.docData,
+				data: value,
 			},
 		});
 	};
@@ -207,7 +210,7 @@ class Editor extends React.Component {
 								<CodeEditor
 									codeStream={this.handleCode}
 									theme={this.state.theme}
-									data={this.state.Document.fileData}
+									data={this.state.InitData}
 								></CodeEditor>
 							</div>
 							<div

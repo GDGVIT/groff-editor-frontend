@@ -31,9 +31,16 @@ class CodeEditor extends React.Component {
 		this.aceEditor.current.editor.getSession().setMode(customMode);
 		console.log("I am mounted");
 		if (this.props.data.length !== 0) {
-			this.aceEditor.current.editor.setValue(this.props.data, -1);
 		}
 	};
+
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.data !== this.props.data) {
+			console.log("I am calle");
+			this.aceEditor.current.editor.setValue(nextProps.data, -1);
+		}
+	}
+
 	themeSelector = (e) => {
 		this.setState({ theme: e.target.value });
 	};
@@ -155,6 +162,7 @@ class CodeEditor extends React.Component {
 					ref={this.aceEditor}
 					onChange={this.props.codeStream}
 					style={AceStyle}
+					wrapEnabled="true"
 					mode="java"
 					keyboardHandler={this.state.VImode ? "vim" : "vscode"}
 					// fontSize={this.state.fontSize}
