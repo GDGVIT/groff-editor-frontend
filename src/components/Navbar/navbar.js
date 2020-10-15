@@ -59,11 +59,12 @@ class Navbar extends Component {
 							className={classes.BackButtonContainer}
 							onClick={() => this.props.back()}
 						>
-							<img
+							<i className = "fa fa-chevron-left"></i>
+							{/* <img
 								className={classes.BackButton}
 								src={back}
 								alt="Back Button"
-							/>
+							/> */}
 						</div>
 						<input
 							type="text"

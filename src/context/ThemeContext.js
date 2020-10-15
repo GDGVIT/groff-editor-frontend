@@ -49,6 +49,10 @@ export const MyThemeProvider = ({ children }) => {
     color: ${(props) =>
 		props.theme.mode === "dark" ? "#fff !important" : "#000"};
   }
+  .fa-chevron-left{
+	color: ${(props) =>
+		props.theme.mode === "dark" ? "#fff !important" : "#000"};
+  }
   `;
 
 	const toggle = () => {
