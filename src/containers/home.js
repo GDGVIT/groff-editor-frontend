@@ -35,7 +35,7 @@ class Home extends Component {
 				>
 					Documents
 				</Navbar>
-				<div className="home">
+				<div className="home" id="home">
 					<Documents
 						documents={this.context.documents}
 						delete={this.context.DeleteDocumentHandler}

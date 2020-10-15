@@ -23,14 +23,31 @@ export const MyThemeProvider = ({ children }) => {
 	const GlobalStyle = createGlobalStyle`
   .EditorBackground{
     background-color: ${(props) =>
-		props.theme.mode === "dark" ? "#111" : "#fff"};
-    color: ${(props) => (props.theme.mode === "dark" ? "#fff" : "#111")};
+		props.theme.mode === "dark" ? "#3A3A3A" : "#DBDBDB"};
+    color: ${(props) => (props.theme.mode === "dark" ? "#fff" : "#000")};
   }
-  .EditorBackground > div> div, input{
+  #nav> div, #nav>div> input, #navheading,#navsearch{
     background-color: ${(props) =>
-		props.theme.mode === "dark" ? "#111" : "#fff"};
+		props.theme.mode === "dark" ? "#000" : "#fff"};
     color: ${(props) =>
-		props.theme.mode === "dark" ? "#fff !important" : "#111"};
+		props.theme.mode === "dark" ? "#fff !important" : "#000"};
+  }
+  #home{
+	background-color: ${(props) =>
+		props.theme.mode === "dark" ? "#343434" : "#fff"};
+    color: ${(props) =>
+		props.theme.mode === "dark" ? "#fff !important" : "#000"};
+	height:100vh;
+  }
+  .LoaderText{
+	color: ${(props) =>
+		props.theme.mode === "dark" ? "#fff !important" : "#000"};
+  }
+  #document{
+	background-color: ${(props) =>
+		props.theme.mode === "dark" ? "#4d4d4d" : "#fff"};
+    color: ${(props) =>
+		props.theme.mode === "dark" ? "#fff !important" : "#000"};
   }
   `;
 
