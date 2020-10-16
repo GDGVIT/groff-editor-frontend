@@ -9,6 +9,7 @@ const Document = (props) => {
 		<div
 			className={classes.DocumentContainer}
 			onClick={() => History.push("/editor/" + props.doc._id)}
+			id="document"
 		>
 			<div
 				className={classes.DeleteButton}

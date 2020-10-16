@@ -49,7 +49,7 @@ class Navbar extends Component {
 		const { ContextMutator } = this.context;
 
 		return (
-			<div>
+			<div id="nav"> 
 				{!this.props.home ? (
 					<div
 						className={classes.Navbar}
@@ -59,11 +59,12 @@ class Navbar extends Component {
 							className={classes.BackButtonContainer}
 							onClick={() => this.props.back()}
 						>
-							<img
+							<i className = "fa fa-chevron-left"></i>
+							{/* <img
 								className={classes.BackButton}
 								src={back}
 								alt="Back Button"
-							/>
+							/> */}
 						</div>
 						<input
 							type="text"
@@ -101,7 +102,7 @@ class Navbar extends Component {
 					</div>
 				) : (
 					<div className={classes.Navbar}>
-						<div className={classes.Heading}>Documents</div>
+						<div className={classes.Heading} id="navheading">Documents</div>
 						<div className={classes.searchBox}>
 							<div className={classes.searchIcon}>
 								<img
@@ -116,6 +117,7 @@ class Navbar extends Component {
 								placeholder="Search Documents"
 								onChange={this.props.search}
 								label="Search Documents"
+								id = "navsearch"
 							/>
 						</div>
 						<div

@@ -16,6 +16,7 @@ const NewDocument = (props) => {
 							const newId = await context.NewDocumentHandler();
 							History.push("/editor/" + newId);
 						}}
+						id="document"
 					>
 						<img
 							className={classes.AddIcon}
