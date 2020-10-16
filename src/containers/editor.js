@@ -17,7 +17,7 @@ import socketIOClient from "socket.io-client";
 
 const client = socketIOClient(options.wssUrl, {
 	transports: ["websocket"],
-	// path: "/api/socket.io",
+	path: "/api/socket.io",
 });
 
 const { TabPane } = Tabs;
