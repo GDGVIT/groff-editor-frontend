@@ -10,6 +10,7 @@ class MyProvider extends Component {
 		super(props);
 		this.token = localStorage.getItem("token");
 		this.userId = localStorage.getItem("user-id");
+		this.guest = localStorage.getItem("guest");
 		// this.apiUrl = "https://groffapi.dscvit.com/";
 		this.apiUrl = options.apiUrl;
 	}
@@ -30,6 +31,7 @@ class MyProvider extends Component {
 		if (e === "DarkMode") this.setState({ DarkMode: !this.state.DarkMode });
 	};
 	LoadAllDocuments = () => {
+		if (this.guest) this.setState({ Loaded: true });
 		if (!this.state.Loaded) {
 			this.token = localStorage.getItem("token");
 			this.userId = localStorage.getItem("user-id");
@@ -69,9 +71,47 @@ class MyProvider extends Component {
 					this.setState({
 						documents: [...this.state.documents, data.created],
 					});
-					resolve(data.created._id);
+					resolve(data.created.fileId);
 				});
 		});
+	};
+	RenameHanlder = (fileId, fileName) => {
+		fetch(this.apiUrl + "preview/rename", {
+			method: "PATCH",
+			headers: {
+				Authorization: this.token,
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				newFileName: fileName,
+				fileId: fileId,
+			}),
+		}).then((data) => {
+			if (data.status === 200) {
+				let documents = this.state.documents;
+				documents.forEach((doc, index) => {
+					if (doc.fileId === fileId) {
+						doc.fileName = fileName;
+					}
+				});
+				this.setState({
+					documents: [...documents],
+				});
+				// let newData = data.json();
+				// this.setState({
+				// 	documents: [...newData.],
+				// });
+			}
+		});
+		// let documents = this.state.documents;
+		// documents.forEach((doc, index) => {
+		// 	if (doc.fileId === fileId) {
+		// 		doc.fileName = fileName;
+		// 	}
+		// });
+		// this.setState({
+		// 	documents: [...documents],
+		// });
 	};
 	DeleteDocumentHandler = (fileId) => {
 		console.log("file:", fileId);
@@ -79,9 +119,11 @@ class MyProvider extends Component {
 			method: "DELETE",
 			headers: {
 				Authorization: this.token,
-				FileId: fileId,
+				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({}),
+			body: JSON.stringify({
+				fileId: fileId,
+			}),
 		})
 			.then((data) => data.json())
 			.then((res) => {
@@ -94,6 +136,7 @@ class MyProvider extends Component {
 	};
 	LogoutHandler = () => {
 		console.log("Logged out");
+		this.setState({ documents: [], Loaded: false });
 	};
 	SerachHandler = (querry) => {
 		if (querry) {
@@ -126,6 +169,8 @@ class MyProvider extends Component {
 						this.DeleteDocumentHandler(filename),
 					loaded: this.state.Loaded,
 					SearchHandler: (value) => this.SerachHandler(value),
+					RenameHandler: (fileId, fileName) =>
+						this.RenameHanlder(fileId, fileName),
 				}}
 			>
 				{this.props.children}

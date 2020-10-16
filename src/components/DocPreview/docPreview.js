@@ -5,10 +5,11 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 
 const DocPreview = (props) => {
 	const [numPages, setNumPages] = useState(null);
-	const [pageNumber, setPageNumber] = useState(1);
+	// const [pageNumber, setPageNumber] = useState(1);
 
 	function onDocumentLoadSuccess({ numPages }) {
 		setNumPages(numPages);
+		// props.loadingAnimStop();
 	}
 	return (
 		/* <object */
@@ -17,13 +18,18 @@ const DocPreview = (props) => {
 		// />
 		<Document
 			file={`data:application/pdf;base64,${props.children}`}
-			onLoadSuccess={onDocumentLoadSuccess}
+			// onLoadSuccess={onDocumentLoadSuccess}
+			onRender={props.loadingAnimStop}
 		>
 			{Array.apply(null, Array(numPages))
 				.map((x, i) => i + 1)
 				.map((page) => (
 					<div>
-						<Page pageNumber={page} scale={1.0} />
+						<Page
+							key={"PageNo. " + page}
+							pageNumber={page}
+							scale={1}
+						/>
 						<br />
 					</div>
 				))}

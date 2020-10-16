@@ -16,7 +16,7 @@
 }
 
 .tabButton {
-	position: absolute;
+	position: fixed;
 	bottom: 3%;
 	right: 1%;
 	border: none;

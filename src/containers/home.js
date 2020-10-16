@@ -9,15 +9,18 @@ import Loader from "../assets/Loader.svg";
 class Home extends Component {
 	static contextType = MyContext;
 	componentDidMount = () => {
-		if(!localStorage.getItem('token') && localStorage.getItem('Guest') == false){
+		if (
+			!localStorage.getItem("token") &&
+			localStorage.getItem("Guest") === false
+		) {
 			this.props.history.push("/");
 		}
 		this.context.LoadAllDocuments();
 	};
 	handleLogout = () => {
-		this.props.history.push("/");
-		localStorage.clear();
 		this.context.Logout();
+		localStorage.clear();
+		this.props.history.push("/");
 	};
 	handleSearch = (e) => {
 		this.context.SearchHandler(e.target.value);

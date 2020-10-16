@@ -8,6 +8,7 @@ import CodeEditor from "../components/CodeEditor/codeEditor";
 import DocPreview from "../components/DocPreview/docPreview";
 import MyContext from "../context/MyContext";
 import HelpMenu from "../components/HelpPopup";
+import Loader from "../assets/Loader.svg";
 
 import { useTheme } from "../context/ThemeContext";
 
@@ -30,6 +31,7 @@ class Editor extends React.Component {
 	static contextType = MyContext;
 	constructor(props) {
 		super(props);
+		this.apiUrl = options.apiUrl;
 		this.token = localStorage.getItem("token");
 		this.userId = localStorage.getItem("user-id");
 		this.fileId = this.props.match.params.doc;
@@ -37,9 +39,11 @@ class Editor extends React.Component {
 			timestamp: "no timestamp yet",
 			Document: {
 				fileName: "not found",
-				fileData: "testing",
+				fileData: "fasd",
 			},
+			InitData: "Im actually just testing",
 			Modified: false,
+			Loaded: false,
 			theme: "monokai",
 			windowWidth: window.innerWidth,
 			windowHeight: window.innerHeight - 50,
@@ -54,6 +58,12 @@ class Editor extends React.Component {
 			},
 		};
 		this.preview = React.createRef();
+		if (
+			!localStorage.getItem("token") &&
+			localStorage.getItem("Guest") === false
+		) {
+			this.props.history.push("/");
+		}
 	}
 
 	handleResize = (e) => {
@@ -67,27 +77,51 @@ class Editor extends React.Component {
 		}
 	};
 	componentDidMount = () => {
-		if(!localStorage.getItem('token') && localStorage.getItem('Guest') == false){
-			this.props.history.push("/");
-		}
-		const showHelp = (e) => {
-			if ((e.key === "?") & (e.target.className !== "ace_text-input")) {
-				console.log("What are you dong stepWindow");
-				this.setState({ showHelp: !this.state.showHelp });
-			}
-		};
-		window.addEventListener("keypress", showHelp);
-		let CurrentDoc = this.context.documents.find((doc) => {
-			return doc._id === this.fileId;
-		});
-		let backupDoc = {
-			fileName: "not Found",
-			fileData: "bla",
-		};
-		CurrentDoc = CurrentDoc ? CurrentDoc : backupDoc;
-		this.setState({
-			Document: CurrentDoc,
-		});
+		fetch(this.apiUrl + "preview/getFile?fileId=" + this.fileId, {
+			method: "get",
+			headers: {
+				Authorization: this.token,
+				"Content-Type": "application/json",
+			},
+		})
+			.then((data) => {
+				if (data.status === 200) {
+					return data.json();
+				} else {
+					let data = [
+						{
+							fileName: "File was not found",
+							fileData: "File was not found",
+							_id: "NAN",
+							fileId: "NAN",
+						},
+					];
+					return data;
+				}
+			})
+			.then((data) => {
+				let newdata = data;
+				const file = newdata[0];
+				console.log("File from editor,", file);
+				this.setState({
+					Loaded: true,
+					Document: file,
+					InitData: file.fileData,
+				});
+			});
+		window.addEventListener("keypress", this.showHelp);
+		// let CurrentDoc = this.context.documents.find((doc) => {
+		// 	return doc.fileId === this.fileId;
+		// });
+		// let backupDoc = {
+		// 	fileName: "not Found",
+		// 	fileData: "The file was not found 404",
+		// };
+		// CurrentDoc = CurrentDoc ? CurrentDoc : backupDoc;
+		// this.setState({
+		// 	Document: CurrentDoc,
+		// 	InitData: CurrentDoc.fileData,
+		// });
 		this.update = setInterval(() => {
 			if (this.state.Modified) {
 				console.log(JSON.stringify(this.state.Output));
@@ -108,23 +142,32 @@ class Editor extends React.Component {
 		clearInterval(this.update);
 	}
 
+	showHelp = (e) => {
+		if ((e.key === "?") & (e.target.className !== "ace_text-input")) {
+			console.log("What are you dong stepWindow");
+			this.setState({ showHelp: !this.state.showHelp });
+		}
+	};
 	pdfConvert = () => {
 		fetch(options.apiUrl + "preview/download", {
 			method: "GET",
 			headers: {
 				Authorization: this.token,
 			},
-		})
-			.then((response) => response.blob())
-			.then((blob) => {
+		}).then((response) => {
+			if (response.status === 200) {
+				let blob = response.blob();
 				var url = window.URL.createObjectURL(blob);
 				var a = document.createElement("a");
-				a.href = url;
+				a.href = blob;
 				a.download = "filename.pdf";
 				document.body.appendChild(a);
 				a.click();
 				a.remove();
-			});
+			} else {
+				console.log(response);
+			}
+		});
 	};
 
 	handleback = () => {
@@ -132,25 +175,35 @@ class Editor extends React.Component {
 	};
 
 	handleLogout = () => {
-		this.props.history.push("/");
 		localStorage.clear();
 		this.context.Logout();
+		this.props.history.push("/");
 	};
 
 	handleRename = (e) => {
+		// e.persist();
+		console.log(e);
 		this.setState({ Document: { name: e.target.value } });
+		this.context.RenameHandler(this.fileId, e.target.value);
 		// BackendIntegration : Rename Call here
 	};
 
 	handleCode = (value) => {
-		this.docData = value;
-		this.docData = this.docData.replace(/"/g, '\\"');
+		// this.docData = value;
+		// this.docData = this.docData.replace(/"/g, '\\"');
 		this.setState({
 			Modified: true,
+			Loaded: false,
 			Output: {
 				...this.state.Output,
-				data: this.docData,
+				data: value,
 			},
+		});
+	};
+
+	loadingAnimStop = () => {
+		this.setState({
+			Loaded: true,
 		});
 	};
 
@@ -197,16 +250,39 @@ class Editor extends React.Component {
 								<CodeEditor
 									codeStream={this.handleCode}
 									theme={this.state.theme}
-									data={this.state.Document.fileData}
+									data={this.state.InitData}
 								></CodeEditor>
 							</div>
 							<div
 								className="PreviewContainer"
 								ref={this.preview}
 							>
-								<DocPreview ElWidth={this.state.previewWidth}>
-									{this.state.op}
-								</DocPreview>
+								{this.state.Modified ? (
+									<div className="loader">
+										<img
+											src={Loader}
+											alt="LoaderIcon"
+											className="LoaderIcon"
+										/>
+										<span className="LoaderText">
+											Loading..
+										</span>
+									</div>
+								) : (
+									<div
+										className="DocPreview"
+										ref={this.preview}
+									>
+										<DocPreview
+											ElWidth={this.state.previewWidth}
+											loadingAnimStop={
+												this.loadingAnimStop
+											}
+										>
+											{this.state.op}
+										</DocPreview>
+									</div>
+								)}
 							</div>
 						</SplitPane>
 					) : (
@@ -234,21 +310,40 @@ class Editor extends React.Component {
 								</div>
 							</TabPane>
 							<TabPane key="2">
-								<div className="DocPreview" ref={this.preview}>
-									<DocPreview
-										ElWidth={this.state.previewWidth}
+								{this.state.Modified ? (
+									<div className="loader">
+										<img
+											src={Loader}
+											alt="LoaderIcon"
+											className="LoaderIcon"
+										/>
+										<span className="LoaderText">
+											Loading..
+										</span>
+									</div>
+								) : (
+									<div
+										className="DocPreview"
+										ref={this.preview}
 									>
-										{this.state.op}
-									</DocPreview>
-									<button
-										className="tabButton"
-										onClick={() => {
-											this.TabSwitch();
-										}}
-									>
-										&#10094; Code
-									</button>
-								</div>
+										<DocPreview
+											ElWidth={this.state.previewWidth}
+											loadingAnimStop={
+												this.loadingAnimStop
+											}
+										>
+											{this.state.op}
+										</DocPreview>
+										<button
+											className="tabButton"
+											onClick={() => {
+												this.TabSwitch();
+											}}
+										>
+											&#10094; Code
+										</button>
+									</div>
+								)}
 							</TabPane>
 						</Tabs>
 					)}
