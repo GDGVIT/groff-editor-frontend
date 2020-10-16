@@ -8,14 +8,13 @@ const Document = (props) => {
 	return (
 		<div
 			className={classes.DocumentContainer}
-			onClick={() => History.push("/editor/" + props.doc._id)}
-			id="document"
+			onClick={() => History.push("/editor/" + props.doc.fileId)}
 		>
 			<div
 				className={classes.DeleteButton}
 				onClick={(event) => {
 					event.stopPropagation();
-					props.delete(props.doc._id);
+					props.delete(props.doc.fileId);
 				}}
 			>
 				<img

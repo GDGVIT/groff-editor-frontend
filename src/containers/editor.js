@@ -17,7 +17,7 @@ import socketIOClient from "socket.io-client";
 
 const client = socketIOClient(options.wssUrl, {
 	transports: ["websocket"],
-	path: "/api/socket.io",
+	// path: "/api/socket.io",
 });
 
 const { TabPane } = Tabs;
@@ -31,6 +31,7 @@ class Editor extends React.Component {
 	static contextType = MyContext;
 	constructor(props) {
 		super(props);
+		this.apiUrl = options.apiUrl;
 		this.token = localStorage.getItem("token");
 		this.userId = localStorage.getItem("user-id");
 		this.fileId = this.props.match.params.doc;
@@ -38,7 +39,7 @@ class Editor extends React.Component {
 			timestamp: "no timestamp yet",
 			Document: {
 				fileName: "not found",
-				fileData: "",
+				fileData: "fasd",
 			},
 			InitData: "Im actually just testing",
 			Modified: false,
@@ -57,6 +58,12 @@ class Editor extends React.Component {
 			},
 		};
 		this.preview = React.createRef();
+		if (
+			!localStorage.getItem("token") &&
+			localStorage.getItem("Guest") === false
+		) {
+			this.props.history.push("/");
+		}
 	}
 
 	handleResize = (e) => {
@@ -70,26 +77,51 @@ class Editor extends React.Component {
 		}
 	};
 	componentDidMount = () => {
-		if (
-			!localStorage.getItem("token") &&
-			localStorage.getItem("Guest") === false
-		) {
-			this.props.history.push("/");
-		}
+		fetch(this.apiUrl + "preview/getFile?fileId=" + this.fileId, {
+			method: "get",
+			headers: {
+				Authorization: this.token,
+				"Content-Type": "application/json",
+			},
+		})
+			.then((data) => {
+				if (data.status === 200) {
+					return data.json();
+				} else {
+					let data = [
+						{
+							fileName: "File was not found",
+							fileData: "File was not found",
+							_id: "NAN",
+							fileId: "NAN",
+						},
+					];
+					return data;
+				}
+			})
+			.then((data) => {
+				let newdata = data;
+				const file = newdata[0];
+				console.log("File from editor,", file);
+				this.setState({
+					Loaded: true,
+					Document: file,
+					InitData: file.fileData,
+				});
+			});
 		window.addEventListener("keypress", this.showHelp);
-		let CurrentDoc = this.context.documents.find((doc) => {
-			return doc._id === this.fileId;
-		});
-		let backupDoc = {
-			fileName: "not Found",
-			fileData: "The file was not found 404",
-		};
-		CurrentDoc = CurrentDoc ? CurrentDoc : backupDoc;
-		this.setState({
-			Document: CurrentDoc,
-			Loaded: true,
-			InitData: CurrentDoc.fileData,
-		});
+		// let CurrentDoc = this.context.documents.find((doc) => {
+		// 	return doc.fileId === this.fileId;
+		// });
+		// let backupDoc = {
+		// 	fileName: "not Found",
+		// 	fileData: "The file was not found 404",
+		// };
+		// CurrentDoc = CurrentDoc ? CurrentDoc : backupDoc;
+		// this.setState({
+		// 	Document: CurrentDoc,
+		// 	InitData: CurrentDoc.fileData,
+		// });
 		this.update = setInterval(() => {
 			if (this.state.Modified) {
 				console.log(JSON.stringify(this.state.Output));
@@ -98,7 +130,6 @@ class Editor extends React.Component {
 			}
 		}, 2000);
 		client.on("cmd", (response) => {
-			console.log(response);
 			this.setState({ op: response });
 		});
 		window.addEventListener("resize", this.handleResize);
@@ -128,7 +159,7 @@ class Editor extends React.Component {
 				let blob = response.blob();
 				var url = window.URL.createObjectURL(blob);
 				var a = document.createElement("a");
-				a.href = url;
+				a.href = blob;
 				a.download = "filename.pdf";
 				document.body.appendChild(a);
 				a.click();
@@ -150,20 +181,29 @@ class Editor extends React.Component {
 	};
 
 	handleRename = (e) => {
+		// e.persist();
+		console.log(e);
 		this.setState({ Document: { name: e.target.value } });
+		this.context.RenameHandler(this.fileId, e.target.value);
 		// BackendIntegration : Rename Call here
 	};
 
 	handleCode = (value) => {
-		console.log("Handle Code Called");
 		// this.docData = value;
 		// this.docData = this.docData.replace(/"/g, '\\"');
 		this.setState({
 			Modified: true,
+			Loaded: false,
 			Output: {
 				...this.state.Output,
 				data: value,
 			},
+		});
+	};
+
+	loadingAnimStop = () => {
+		this.setState({
+			Loaded: true,
 		});
 	};
 
@@ -235,6 +275,9 @@ class Editor extends React.Component {
 									>
 										<DocPreview
 											ElWidth={this.state.previewWidth}
+											loadingAnimStop={
+												this.loadingAnimStop
+											}
 										>
 											{this.state.op}
 										</DocPreview>
@@ -285,6 +328,9 @@ class Editor extends React.Component {
 									>
 										<DocPreview
 											ElWidth={this.state.previewWidth}
+											loadingAnimStop={
+												this.loadingAnimStop
+											}
 										>
 											{this.state.op}
 										</DocPreview>

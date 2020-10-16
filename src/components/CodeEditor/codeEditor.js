@@ -4,6 +4,7 @@ import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/theme-nord_dark";
 import "ace-builds/src-noconflict/theme-solarized_dark";
 import "ace-builds/src-noconflict/theme-github";
+import "ace-builds/src-noconflict/theme-gruvbox";
 import "ace-builds/src-noconflict/theme-solarized_light";
 import "ace-builds/src-noconflict/keybinding-vim";
 import "ace-builds/src-noconflict/keybinding-vscode";
@@ -24,7 +25,7 @@ class CodeEditor extends React.Component {
 		theme: "monokai",
 		FontSize: 12,
 		VImode: true,
-		FontFamily: "Courier New",
+		FontFamily: "Lucida Console",
 	};
 	componentDidMount = () => {
 		const customMode = new CustomGroffMode();
@@ -86,6 +87,7 @@ class CodeEditor extends React.Component {
 											Solarized Dark
 										</option>
 										<option value="github">Github</option>
+										<option value="gruvbox">Gruvbox</option>
 									</select>
 								</div>
 							</div>
@@ -120,11 +122,11 @@ class CodeEditor extends React.Component {
 										placeholder="Select a font"
 										className="EditorDropdown"
 									>
-										<option value="Courier New">
-											Courier New
-										</option>
 										<option value="Lucida Console">
 											Lucida Console
+										</option>
+										<option value="Courier New">
+											Courier New
 										</option>
 									</select>
 								</div>

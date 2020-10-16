@@ -9,6 +9,7 @@ const DocPreview = (props) => {
 
 	function onDocumentLoadSuccess({ numPages }) {
 		setNumPages(numPages);
+		// props.loadingAnimStop();
 	}
 	return (
 		/* <object */
@@ -17,7 +18,8 @@ const DocPreview = (props) => {
 		// />
 		<Document
 			file={`data:application/pdf;base64,${props.children}`}
-			onLoadSuccess={onDocumentLoadSuccess}
+			// onLoadSuccess={onDocumentLoadSuccess}
+			onRender={props.loadingAnimStop}
 		>
 			{Array.apply(null, Array(numPages))
 				.map((x, i) => i + 1)
@@ -26,7 +28,7 @@ const DocPreview = (props) => {
 						<Page
 							key={"PageNo. " + page}
 							pageNumber={page}
-							scale={1.0}
+							scale={1}
 						/>
 						<br />
 					</div>

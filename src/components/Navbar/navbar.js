@@ -73,10 +73,13 @@ class Navbar extends Component {
 							onClick={() => {
 								this.setState({ Rename: true });
 							}}
-							onChange={(e) => this.props.Rename(e)}
-							onKeyPress={(e) => {
-								this.renameHandler(e);
+							onChange={(e) => {
+								console.log(e);
+								this.props.Rename(e);
 							}}
+							/* onKeyPress={(e) => { */
+							/* 	this.renameHandler(e); */
+							/* }} */
 						/>
 						<button
 							className={classes.ExportButton}
