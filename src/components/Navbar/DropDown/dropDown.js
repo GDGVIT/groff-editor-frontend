@@ -6,8 +6,14 @@ import { useTheme } from '../../../context/ThemeContext';
 
 const DropDown = (props) => {
 	const themeToggle = useTheme();
-	const [theme, setTheme] = useState(localStorage.getItem("theme"));
-	console.log(theme)
+	// const [theme, setTheme] = useState(localStorage.getItem("theme"));
+	let themeset = JSON.parse(localStorage.getItem("theme")).mode
+	console.log(themeset)
+	if (themeset === "dark"){
+		themeset = true
+	} else {
+		themeset = false
+	}
 	return (
 		<MyContext.Consumer>
 			{(context) => {
@@ -18,7 +24,7 @@ const DropDown = (props) => {
 							<div
 								className={classes.ItemContainer}
 								id="DarkMode"
-								onClick={() => setTheme(themeToggle.toggle())}
+								onClick={() => themeToggle.toggle()}
 							>
 								<div className={classes.DropItem} id="DarkMode">
 									Dark Mode
@@ -26,14 +32,14 @@ const DropDown = (props) => {
 								<div
 									id="DarkMode"
 									className={
-										theme ? classes.ToggleActive : classes.Toggle
+										themeset ? classes.ToggleActive : classes.Toggle
 									}
 								// onClick={() => themeToggle.toggle()}
 								>
 									<div
 										id="DarkMode"
 										className={
-											theme
+											themeset
 												? classes.ToggleSwitchActive
 												: classes.ToggleSwitch
 										}
