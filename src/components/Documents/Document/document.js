@@ -9,6 +9,7 @@ const Document = (props) => {
 		<div
 			className={classes.DocumentContainer}
 			onClick={() => History.push("/editor/" + props.doc.fileId)}
+			id="document"
 		>
 			<div
 				className={classes.DeleteButton}
@@ -24,7 +25,7 @@ const Document = (props) => {
 				/>
 			</div>
 			<div className={classes.DocumentPreview}></div>
-			<div className={classes.DocumentDetails}>
+			<div className={classes.DocumentDetails} id="docdeets">
 				<div className={classes.tooltip}>
 					<div className={classes.DocumentName}>
 						{props.doc.fileName}

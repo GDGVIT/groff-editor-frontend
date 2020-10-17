@@ -11,8 +11,8 @@ const DropDown = (props) => {
 			{(context) => {
 				return (
 					<div className={classes.DropdownContainer}>
-						<div className={classes.Triangle_up}></div>
-						<div className={classes.Dropdown}>
+						<div className={classes.Triangle_up} id="dropdownTriangle"></div>
+						<div className={classes.Dropdown} id="dropdown">
 							<div
 								className={classes.ItemContainer}
 								id="DarkMode"

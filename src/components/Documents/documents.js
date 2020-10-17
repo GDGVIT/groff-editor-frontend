@@ -16,7 +16,7 @@ const Documents = (props) => {
 		});
 	});
 	const style = {
-		padding: "10px 0 0 10px",
+		padding: "90px 0 0 10px",
 		display: "flex",
 		flexWrap: "wrap",
 		flexDirection: "row",

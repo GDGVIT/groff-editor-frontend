@@ -26,11 +26,15 @@ export const MyThemeProvider = ({ children }) => {
 		props.theme.mode === "dark" ? "#3A3A3A" : "#DBDBDB"};
     color: ${(props) => (props.theme.mode === "dark" ? "#fff" : "#000")};
   }
-  #nav> div, #nav>div> input, #navheading,#navsearch{
+  #nav> div:first-child, #nav>div> input, #navheading,#navsearch{
     background-color: ${(props) =>
 		props.theme.mode === "dark" ? "#000" : "#fff"};
     color: ${(props) =>
 		props.theme.mode === "dark" ? "#fff !important" : "#000"};
+  }
+  #nav>div{
+	box-shadow:0px 3px 6px #00000029;
+	position:absolute;
   }
   #home{
 	background-color: ${(props) =>
@@ -43,7 +47,19 @@ export const MyThemeProvider = ({ children }) => {
 	color: ${(props) =>
 		props.theme.mode === "dark" ? "#fff !important" : "#000"};
   }
+  #newdocument{
+	background-color: ${(props) =>
+		props.theme.mode === "dark" ? "#4d4d4d" : "#f8f8f8"};
+    color: ${(props) =>
+		props.theme.mode === "dark" ? "#fff !important" : "#000"};
+  }
   #document{
+	background-color: ${(props) =>
+		props.theme.mode === "dark" ? "#3a3a3a" : "#f8f8f8"};
+    color: ${(props) =>
+		props.theme.mode === "dark" ? "#fff !important" : "#000"};
+  }
+  #docdeets{
 	background-color: ${(props) =>
 		props.theme.mode === "dark" ? "#4d4d4d" : "#fff"};
     color: ${(props) =>
@@ -52,6 +68,23 @@ export const MyThemeProvider = ({ children }) => {
   .fa-chevron-left{
 	color: ${(props) =>
 		props.theme.mode === "dark" ? "#fff !important" : "#000"};
+  }
+  #dropdown{
+	background-color: ${(props) =>
+		props.theme.mode === "dark" ? "#000" : "#fff"};
+    color: ${(props) =>
+		props.theme.mode === "dark" ? "#fff !important" : "#000"};
+  }
+  #dropdownTriangle{
+	  border-bottom: ${(props) =>
+		props.theme.mode === "dark" ? "12px solid #000" : "12px solid #fff"};
+  }
+  #dropdown>div:hover{
+	  background-color: ${(props) =>
+		props.theme.mode === "dark" ? "rgb(92,92,92)" : "rgb(241,241,241)"};
+  }
+  select{
+	  color:black;
   }
   `;
 
