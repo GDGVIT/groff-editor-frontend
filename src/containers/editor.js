@@ -153,6 +153,7 @@ class Editor extends React.Component {
 			method: "GET",
 			headers: {
 				Authorization: this.token,
+				"Content-Type": "application/pdf",
 			},
 		}).then((response) => {
 			if (response.status === 200) {
