@@ -11,6 +11,12 @@ const DocPreview = (props) => {
 		setNumPages(numPages);
 		// props.loadingAnimStop();
 	}
+	let scale; 
+	if (props.ElWidth < 420){
+		scale = 0.7
+	} else{
+		scale = 1
+	}
 	return (
 		/* <object */
 		/* 	data={`data:application/pdf;base64,${props.children}#toolbar=0`} */
@@ -28,7 +34,7 @@ const DocPreview = (props) => {
 						<Page
 							key={"PageNo. " + page}
 							pageNumber={page}
-							scale={1}
+							scale={scale}
 						/>
 						<br />
 					</div>

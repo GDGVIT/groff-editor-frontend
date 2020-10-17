@@ -8,6 +8,7 @@
 	height: 100%;
 	overflow-x: auto;
 	overflow-y: auto;
+	margin-top: 20px;
 }
 .docPreview {
 	width: 100%;
@@ -95,4 +96,10 @@
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.3);
 	padding: 20px;
+}
+/* Small devices */
+@media(max-width:600px){
+	.EditorBackground{
+		height: auto;
+	}
 }
