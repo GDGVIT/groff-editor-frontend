@@ -10,7 +10,7 @@ class MyProvider extends Component {
 		super(props);
 		this.token = localStorage.getItem("token");
 		this.userId = localStorage.getItem("user-id");
-		this.guest = localStorage.getItem("guest");
+		this.guest = localStorage.getItem("Guest");
 		// this.apiUrl = "https://groffapi.dscvit.com/";
 		this.apiUrl = options.apiUrl;
 	}
@@ -20,9 +20,10 @@ class MyProvider extends Component {
 		DarkMode: false,
 		documents: [
 			{
-				name: "Document1",
-				id: "doc1",
+				fileName: "Example Document",
+				fileId: "doc1",
 				time: "12 Hours Ago",
+				fileData: "This is an example file",
 			},
 		],
 	};
@@ -31,6 +32,7 @@ class MyProvider extends Component {
 		if (e === "DarkMode") this.setState({ DarkMode: !this.state.DarkMode });
 	};
 	LoadAllDocuments = () => {
+		this.guest = localStorage.getItem("Guest");
 		if (this.guest) this.setState({ Loaded: true });
 		if (!this.state.Loaded) {
 			this.token = localStorage.getItem("token");
