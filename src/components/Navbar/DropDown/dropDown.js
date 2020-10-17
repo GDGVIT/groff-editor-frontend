@@ -7,8 +7,7 @@ import { useTheme } from '../../../context/ThemeContext';
 const DropDown = (props) => {
 	const themeToggle = useTheme();
 	// const [theme, setTheme] = useState(localStorage.getItem("theme"));
-	let themeset = JSON.parse(localStorage.getItem("theme")).mode
-	console.log(themeset)
+	let themeset = JSON.parse(localStorage.getItem("theme")).mode;
 	if (themeset === "dark"){
 		themeset = true
 	} else {
