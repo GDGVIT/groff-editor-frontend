@@ -18,7 +18,7 @@ const DocPreview = (props) => {
 		// />
 		<Document
 			file={`data:application/pdf;base64,${props.children}`}
-			// onLoadSuccess={onDocumentLoadSuccess}
+			onLoadSuccess={onDocumentLoadSuccess}
 			onRender={props.loadingAnimStop}
 		>
 			{Array.apply(null, Array(numPages))
