@@ -42,6 +42,7 @@
 	right: 5%;
 	width: 20px;
 	visibility: hidden;
+	cursor: pointer;
 }
 .DocumentContainer:hover .DeleteButton {
 	visibility: visible;

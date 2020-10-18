@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import logo from "../assets/Logo.png";
 import classes from "./loginPane.module.css";
 import formStyle from "./userForm.module.css";
-import DSCLogo from "../assets/DSC.png";
+import DSCLogo from "../assets/DSClogo.png";
 import options from "../options";
 
 

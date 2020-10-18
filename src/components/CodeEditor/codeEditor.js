@@ -62,8 +62,8 @@ class CodeEditor extends React.Component {
 				<div className={classes.EditorSettings}>
 					<img src={SettingsIcon} alt="Editor settings Icon" />
 					<div className={classes.EditorDropdown}>
-						<div className={classes.Triangle_up}></div>
-						<div className={classes.Dropdown}>
+						<div className={classes.Triangle_up} id="dropdownTriangle"></div>
+						<div className={classes.Dropdown} id="dropdown">
 							<div
 								className={classes.itemcontainer}
 								id="DarkMode"
