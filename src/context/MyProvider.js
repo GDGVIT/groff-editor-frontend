@@ -72,7 +72,6 @@ class MyProvider extends Component {
 				.then((data) => {
 					const files = data.searches[0].files.filter((file) => {
 						file.time = this.ConvertDate(file.timestamps.updatedAt);
-						file.time = "10 Mar 2020";
 						console.log(file);
 						return file;
 					});
