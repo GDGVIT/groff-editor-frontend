@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Navbar from "../components/Navbar/navbar";
 import Documents from "../components/Documents/documents";
+import TemplateDocuments from "../components/Documents/templateDocuments";
 import MyContext from "../context/MyContext";
 import Loader from "../assets/Loader.svg";
 
@@ -39,6 +40,7 @@ class Home extends Component {
 					Documents
 				</Navbar>
 				<div className="home" id="home">
+					<TemplateDocuments />
 					<Documents
 						documents={this.context.documents}
 						delete={this.context.DeleteDocumentHandler}

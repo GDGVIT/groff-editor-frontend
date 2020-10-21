@@ -1,6 +1,5 @@
 import React from "react";
 import Document from "./Document/document";
-import NewDocument from "./Document/newDocument";
 import classes from "./Document/document.module.css";
 
 const Documents = (props) => {
@@ -19,12 +18,18 @@ const Documents = (props) => {
 		padding: "90px 0 0 10px",
 		display: "flex",
 		flexWrap: "wrap",
-		flexDirection: "row",
+		flexDirection: "column",
+		justifyContent: "center",
+		alignItems: "center",
+		width: "100%",
 	};
 	return (
 		<div style={style} className={classes.DocumentsContainer}>
+			<div className={classes.TableHeadings}>
+				<div className={classes.HeadingName}>Name</div>
+				<div className={classes.HeadingDate}>Date</div>
+			</div>
 			{props.loaded ? docs : null}
-			<NewDocument></NewDocument>
 		</div>
 	);
 };

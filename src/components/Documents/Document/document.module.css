@@ -1,3 +1,18 @@
+.TableHeadings {
+	margin-top: 10px;
+	margin-bottom: 5px;
+	width: 1000px;
+	font-size: 18px;
+	font-weight: bold;
+}
+.HeadingDate {
+	float: left;
+	margin-left: 650px;
+}
+.HeadingName {
+	float: left;
+	margin-left: 12px;
+}
 .DocumentsContainer {
 	display: flex;
 	padding: 10px;
@@ -5,23 +20,29 @@
 }
 .DocumentContainer {
 	margin: 20px;
-	background-color: #f8f8fa;
-	filter: drop-shadow(0px 3px 6px #00000018);
-	width: 200px;
-	height: 280px;
-	border-radius: 15px;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	background-color: #fff;
+	border-bottom: 2px solid #ddd;
+	/* filter: drop-shadow(0px 3px 6px #00000018); */
+	padding: 5px;
+	width: 1000px;
+	height: 50px;
 }
 
 .DocumentContainer:hover {
-	filter: drop-shadow(0px 3px 6px #00000030);
+	/* filter: drop-shadow(0px 3px 6px #00000030); */
+	border-bottom: none;
+	border-radius: 5px;
+	background-color: rgba(255, 125, 75, 0.2);
 }
 
 .NewDocumentContainer {
 	margin: 20px;
 	background-color: #f8f8fa;
 	filter: drop-shadow(0px 3px 6px #00000018);
-	width: 200px;
-	height: 280px;
+	width: 160px;
+	height: 220px;
 	border-radius: 15px;
 	display: flex;
 	justify-content: center;
@@ -33,19 +54,15 @@
 
 .AddIcon {
 	margin: auto;
-	max-width: 80%;
-	max-height: 80%;
+	max-width: 70%;
+	max-height: 70%;
 }
 .DeleteButton {
-	position: absolute;
-	top: 5%;
-	right: 5%;
+	margin-top: 3px;
+	margin-right: 5px;
+	float: right;
 	width: 20px;
-	visibility: hidden;
-	cursor: pointer;
-}
-.DocumentContainer:hover .DeleteButton {
-	visibility: visible;
+	opacity: 0.8;
 }
 .DocumentPreview {
 	width: 10px;
@@ -68,10 +85,11 @@
 	padding: 5px;
 }
 .DocumentTime {
-	position: absolute;
-	padding: 5px;
-	bottom: -8px;
-	right: 14px;
+	float: right;
+	margin-right: 185px;
+	margin-top: 5px;
+	font-size: 18px;
+	font-weight: 100;
 }
 .tooltip {
 	position: relative;

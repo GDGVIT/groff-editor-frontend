@@ -24,18 +24,13 @@ const Document = (props) => {
 					alt="Delte Button"
 				/>
 			</div>
-			<div className={classes.DocumentPreview}></div>
-			<div className={classes.DocumentDetails} id="docdeets">
-				<div className={classes.tooltip}>
-					<div className={classes.DocumentName}>
-						{props.doc.fileName}
-					</div>
-					<span className={classes.tooltiptext}>
-						{props.doc.fileName}
-					</span>
-				</div>
-				<div className={classes.DocumentTime}>{props.doc.time}</div>
+			<div className={classes.tooltip}>
+				<div className={classes.DocumentName}>{props.doc.fileName}</div>
+				{/* <span className={classes.tooltiptext}> */}
+				{/* 	{props.doc.fileName} */}
+				{/* </span> */}
 			</div>
+			<div className={classes.DocumentTime}>{props.doc.time}</div>
 		</div>
 	);
 };

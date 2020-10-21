@@ -10,7 +10,7 @@ class MyProvider extends Component {
 		super(props);
 		this.token = localStorage.getItem("token");
 		this.userId = localStorage.getItem("user-id");
-		this.guest = localStorage.getItem("guest");
+		this.guest = localStorage.getItem("Guest");
 		// this.apiUrl = "https://groffapi.dscvit.com/";
 		this.apiUrl = options.apiUrl;
 	}
@@ -20,9 +20,10 @@ class MyProvider extends Component {
 		DarkMode: false,
 		documents: [
 			{
-				name: "Document1",
-				id: "doc1",
+				fileName: "Example Document",
+				fileId: "doc1",
 				time: "12 Hours Ago",
+				fileData: "This is an example file",
 			},
 		],
 	};
@@ -30,8 +31,34 @@ class MyProvider extends Component {
 	ContextMutator = (e) => {
 		if (e === "DarkMode") this.setState({ DarkMode: !this.state.DarkMode });
 	};
+
+	ConvertDate = (epoch) => {
+		var created_date = new Date(epoch);
+
+		var months = [
+			"Jan",
+			"Feb",
+			"Mar",
+			"Apr",
+			"May",
+			"Jun",
+			"Jul",
+			"Aug",
+			"Sep",
+			"Oct",
+			"Nov",
+			"Dec",
+		];
+		var year = created_date.getFullYear();
+		var month = months[created_date.getMonth()];
+		var date = created_date.getDate();
+		var time = date + " " + month + " " + year;
+		return time;
+	};
+
 	LoadAllDocuments = () => {
-		if (this.guest) this.setState({ Loaded: true });
+		this.guest = localStorage.getItem("Guest");
+		if (this.guest === true) this.setState({ Loaded: true });
 		if (!this.state.Loaded) {
 			this.token = localStorage.getItem("token");
 			this.userId = localStorage.getItem("user-id");
@@ -43,7 +70,11 @@ class MyProvider extends Component {
 			})
 				.then((data) => data.json())
 				.then((data) => {
-					const files = data.searches[0].files.filter((file) => file);
+					const files = data.searches[0].files.filter((file) => {
+						file.time = this.ConvertDate(file.timestamps.updatedAt);
+						console.log(file);
+						return file;
+					});
 					console.log("File,", data);
 					this.setState({
 						Loaded: true,
@@ -68,6 +99,9 @@ class MyProvider extends Component {
 			})
 				.then((data) => data.json())
 				.then((data) => {
+					data.created.time = this.ConvertDate(
+						data.created.timestamps.updatedAt
+					);
 					this.setState({
 						documents: [...this.state.documents, data.created],
 					});
@@ -130,8 +164,9 @@ class MyProvider extends Component {
 				this.setState({
 					Loaded: false,
 				});
+				console.log("state updated", this.state.Loaded);
 				this.LoadAllDocuments();
-				console.log(res);
+				console.log("state updated", this.state.Loaded);
 			});
 	};
 	LogoutHandler = () => {
