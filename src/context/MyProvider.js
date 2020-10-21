@@ -58,7 +58,7 @@ class MyProvider extends Component {
 
 	LoadAllDocuments = () => {
 		this.guest = localStorage.getItem("Guest");
-		if (this.guest) this.setState({ Loaded: true });
+		if (this.guest === true) this.setState({ Loaded: true });
 		if (!this.state.Loaded) {
 			this.token = localStorage.getItem("token");
 			this.userId = localStorage.getItem("user-id");
@@ -100,6 +100,9 @@ class MyProvider extends Component {
 			})
 				.then((data) => data.json())
 				.then((data) => {
+					data.created.time = this.ConvertDate(
+						data.created.timestamps.updatedAt
+					);
 					this.setState({
 						documents: [...this.state.documents, data.created],
 					});
@@ -162,8 +165,9 @@ class MyProvider extends Component {
 				this.setState({
 					Loaded: false,
 				});
+				console.log("state updated", this.state.Loaded);
 				this.LoadAllDocuments();
-				console.log(res);
+				console.log("state updated", this.state.Loaded);
 			});
 	};
 	LogoutHandler = () => {
