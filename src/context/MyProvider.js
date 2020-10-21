@@ -31,6 +31,31 @@ class MyProvider extends Component {
 	ContextMutator = (e) => {
 		if (e === "DarkMode") this.setState({ DarkMode: !this.state.DarkMode });
 	};
+
+	ConvertDate = (epoch) => {
+		var created_date = new Date(epoch);
+
+		var months = [
+			"Jan",
+			"Feb",
+			"Mar",
+			"Apr",
+			"May",
+			"Jun",
+			"Jul",
+			"Aug",
+			"Sep",
+			"Oct",
+			"Nov",
+			"Dec",
+		];
+		var year = created_date.getFullYear();
+		var month = months[created_date.getMonth()];
+		var date = created_date.getDate();
+		var time = date + " " + month + " " + year;
+		return time;
+	};
+
 	LoadAllDocuments = () => {
 		this.guest = localStorage.getItem("Guest");
 		if (this.guest) this.setState({ Loaded: true });
@@ -45,7 +70,12 @@ class MyProvider extends Component {
 			})
 				.then((data) => data.json())
 				.then((data) => {
-					const files = data.searches[0].files.filter((file) => file);
+					const files = data.searches[0].files.filter((file) => {
+						file.time = this.ConvertDate(file.timestamps.updatedAt);
+						file.time = "10 Mar 2020";
+						console.log(file);
+						return file;
+					});
 					console.log("File,", data);
 					this.setState({
 						Loaded: true,
