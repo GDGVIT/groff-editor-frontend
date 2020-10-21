@@ -41,11 +41,9 @@ export const MyThemeProvider = ({ children }) => {
 		props.theme.mode === "dark" ? "#343434" : "#fff"};
     color: ${(props) =>
 		props.theme.mode === "dark" ? "#fff !important" : "#000"};
-	height:100vh;
   }
   .LoaderText{
-	color: ${(props) =>
-		props.theme.mode === "dark" ? "#fff !important" : "#000"};
+	color: ${(props) => (props.theme.mode === "dark" ? "#fff !important" : "#000")};
   }
   #newdocument{
 	background-color: ${(props) =>
@@ -66,8 +64,7 @@ export const MyThemeProvider = ({ children }) => {
 		props.theme.mode === "dark" ? "#fff !important" : "#000"};
   }
   .fa-chevron-left{
-	color: ${(props) =>
-		props.theme.mode === "dark" ? "#fff !important" : "#000"};
+	color: ${(props) => (props.theme.mode === "dark" ? "#fff !important" : "#000")};
   }
   #dropdown{
 	background-color: ${(props) =>
