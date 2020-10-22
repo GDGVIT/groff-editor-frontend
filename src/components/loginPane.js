@@ -45,7 +45,8 @@ class loginPane extends Component {
 		e.target.className = formStyle.InputField;
 	}
 	handleGuest = () =>{
-		localStorage.setItem('Guest', true)
+		localStorage.setItem('Guest', true);
+		localStorage.setItem("theme",JSON.stringify({mode:'light'}));
 	}
 	validateEmail(email) {
 		const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -100,10 +101,13 @@ class loginPane extends Component {
 					console.log(res.userid);
 					if (res.userid) {
 						localStorage.setItem("user-id", res.userid);
+						localStorage.setItem("theme", JSON.stringify({mode:'light'}));
 					}
 					if (res.token) {
 						localStorage.setItem("token", res.token);
-						localStorage.setItem('Guest', false)
+						localStorage.setItem('Guest', false);
+						localStorage.setItem("theme", JSON.stringify({mode:'light'}));
+
 					}
 					if (
 						res.message === "User created" ||
