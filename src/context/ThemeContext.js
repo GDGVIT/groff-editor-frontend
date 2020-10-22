@@ -23,12 +23,12 @@ export const MyThemeProvider = ({ children }) => {
 	const GlobalStyle = createGlobalStyle`
   .EditorBackground{
     background-color: ${(props) =>
-		props.theme.mode === "dark" ? "#3A3A3A" : "#DBDBDB"};
+		props.theme.mode === "dark" ? "#1c1c1c" : "#DBDBDB"};
     color: ${(props) => (props.theme.mode === "dark" ? "#fff" : "#000")};
   }
   #nav> div:first-child, #nav>div> input, #navheading,#navsearch{
     background-color: ${(props) =>
-		props.theme.mode === "dark" ? "#000" : "#fff"};
+		props.theme.mode === "dark" ? "#161616" : "#fff"};
     color: ${(props) =>
 		props.theme.mode === "dark" ? "#fff !important" : "#000"};
   }
@@ -36,9 +36,15 @@ export const MyThemeProvider = ({ children }) => {
 	box-shadow:0px 3px 6px #00000029;
 	position:absolute;
   }
-  #home{
+  #home {
 	background-color: ${(props) =>
-		props.theme.mode === "dark" ? "#343434" : "#fff"};
+		props.theme.mode === "dark" ? "#1c1c1c !important" : "#fff"};
+    color: ${(props) =>
+		props.theme.mode === "dark" ? "#fff !important" : "#000"};
+  }
+  #documentcontainer{
+	background-color: ${(props) =>
+		props.theme.mode === "dark" ? "#222 !important" : "#fff"};
     color: ${(props) =>
 		props.theme.mode === "dark" ? "#fff !important" : "#000"};
   }
@@ -68,13 +74,13 @@ export const MyThemeProvider = ({ children }) => {
   }
   #dropdown{
 	background-color: ${(props) =>
-		props.theme.mode === "dark" ? "#000" : "#fff"};
+		props.theme.mode === "dark" ? "#161616" : "#fff"};
     color: ${(props) =>
 		props.theme.mode === "dark" ? "#fff !important" : "#000"};
   }
   #dropdownTriangle{
 	  border-bottom: ${(props) =>
-		props.theme.mode === "dark" ? "12px solid #000" : "12px solid #fff"};
+		props.theme.mode === "dark" ? "12px solid #161616" : "12px solid #fff"};
   }
   #dropdown>div:hover{
 	  background-color: ${(props) =>
