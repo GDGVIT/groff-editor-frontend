@@ -77,6 +77,8 @@ class Editor extends React.Component {
 		}
 	};
 	componentDidMount = () => {
+	this.guest = localStorage.getItem("Guest");
+	if(!this.guest){
 		fetch(this.apiUrl + "preview/getFile?fileId=" + this.fileId, {
 			method: "get",
 			headers: {
@@ -109,6 +111,21 @@ class Editor extends React.Component {
 					InitData: file.fileData,
 				});
 			});
+		} else{
+			console.log("GuestDoc")
+					let file = {
+							fileName: "NewDoc",
+							fileData: "NewDoc",
+							_id: "newDoc",
+							fileId: "newDoc",
+						};
+				this.setState({
+					Loaded: true,
+					Document: file,
+					InitData: file.fileData,
+				});
+
+		}
 		window.addEventListener("keypress", this.showHelp);
 		// let CurrentDoc = this.context.documents.find((doc) => {
 		// 	return doc.fileId === this.fileId;
@@ -241,6 +258,7 @@ class Editor extends React.Component {
 							split="vertical"
 							primary="second"
 							minSize={this.state.windowWidth / 2}
+							style={{overflowX:"hidden",overflowY:"hidden"}}
 						>
 							<div
 								style={{
@@ -257,6 +275,7 @@ class Editor extends React.Component {
 							<div
 								className="PreviewContainer"
 								ref={this.preview}
+								style={{overflowX:"hidden",overflowY:"scroll"}}
 							>
 								{this.state.Modified ? (
 									<div className="loader">

@@ -37,7 +37,7 @@ class CodeEditor extends React.Component {
 
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.data !== this.props.data) {
-			console.log("I am calle");
+			console.log("I am calle",nextProps.data);
 			this.aceEditor.current.editor.setValue(nextProps.data, -1);
 		}
 	}
@@ -52,7 +52,6 @@ class CodeEditor extends React.Component {
 		this.setState({ FontFamily: e.target.value });
 	};
 	modeToggle = () => {
-		console.log("I was called");
 		this.setState({ VImode: !this.state.VImode });
 	};
 

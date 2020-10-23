@@ -87,6 +87,7 @@ class MyProvider extends Component {
     }
   };
   NewDocumentHandler = () => {
+	  if(!this.guest){
     return new Promise((resolve, reject) => {
       fetch(this.apiUrl + "preview/createFile/", {
         method: "PATCH",
@@ -109,7 +110,19 @@ class MyProvider extends Component {
           });
           resolve(data.created.fileId);
         });
-    });
+	});
+	} else{
+		let newDoc = {
+			fileName: "NewDocument",
+			time: "Today",
+			fileData: "hello",
+			fileId: "newDoc",
+			_id: "newDoc"
+		}
+          this.setState({
+            documents: [...this.state.documents, newDoc],
+          });
+	}
   };
   RenameHanlder = (fileId, fileName) => {
     fetch(this.apiUrl + "preview/rename", {

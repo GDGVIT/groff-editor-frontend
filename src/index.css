@@ -39,6 +39,14 @@ code {
 	background-color: #e79870;
 	display: flex;
 }
+
+.DocPreview{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	min-height: calc(100vh - 65px);
+}
+
 @media only screen and (max-width: 768px) {
 	.LoginPage {
 		flex-direction: column;
