@@ -24,7 +24,7 @@ class CodeEditor extends React.Component {
 	state = {
 		theme: "monokai",
 		FontSize: 12,
-		VImode: true,
+		VImode: false,
 		FontFamily: "Lucida Console",
 	};
 	componentDidMount = () => {
@@ -85,6 +85,7 @@ class CodeEditor extends React.Component {
 										onChange={(e) => this.themeSelector(e)}
 										placeholder="Select a theme"
 										className="EditorDropdown"
+										style={{width:"130px"}}
 									>
 										<option value="monokai">Monokai</option>
 										<option value="nord_dark">Nord</option>
@@ -131,12 +132,25 @@ class CodeEditor extends React.Component {
 										}
 										placeholder="Select a font"
 										className="EditorDropdown"
+										style={{width:"130px"}}
 									>
 										<option value="Lucida Console">
 											Lucida Console
 										</option>
 										<option value="Courier New">
 											Courier New
+										</option>
+										<option value="IBM3270">
+											IBM 3270
+										</option>
+										<option value="FiraMono">
+											Fira Mono
+										</option>
+										<option value="Ubuntu">
+											Ubuntu Mono
+										</option>
+										<option value="JetBrains">
+											Jet Brains
 										</option>
 									</select>
 								</div>

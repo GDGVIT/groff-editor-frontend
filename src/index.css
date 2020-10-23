@@ -1,3 +1,7 @@
+@font-face {   font-family: 'IBM3270';   src: local('IBM3270'), url(./fonts/3270.ttf) format('truetype');}
+@font-face {   font-family: 'FiraMono';   src: local('FiraMono'), url(./fonts/FiraMono-Regular.ttf) format('truetype');}
+@font-face {   font-family: 'Ubuntu';   src: local('Ubuntu'), url(./fonts/UbuntuMono-Regular.ttf) format('truetype');}
+@font-face {   font-family: 'JetBrains';   src: local('JetBrains'), url(./fonts/JetBrainsMono-Regular.woff) format('truetype');}
 html {
 	overflow-x: hidden;
 }
