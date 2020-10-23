@@ -58,10 +58,10 @@ class MyProvider extends Component {
 
   LoadAllDocuments = () => {
     this.guest = localStorage.getItem("Guest");
-    if (this.guest) {
+	if (this.guest === "Yes") {
       this.setState({ Loaded: true });
     }
-    if (!this.state.Loaded && !this.guest) {
+    if (!this.state.Loaded) {
       this.token = localStorage.getItem("token");
       this.userId = localStorage.getItem("user-id");
       fetch(this.apiUrl + "preview/user", {
@@ -87,7 +87,7 @@ class MyProvider extends Component {
     }
   };
   NewDocumentHandler = () => {
-	  if(!this.guest){
+	  if(this.guest!=="Yes"){
     return new Promise((resolve, reject) => {
       fetch(this.apiUrl + "preview/createFile/", {
         method: "PATCH",

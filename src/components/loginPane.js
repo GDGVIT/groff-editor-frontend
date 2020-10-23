@@ -45,7 +45,7 @@ class loginPane extends Component {
 		e.target.className = formStyle.InputField;
 	}
 	handleGuest = () =>{
-		localStorage.setItem('Guest', true);
+		localStorage.setItem('Guest', "Yes");
 		localStorage.setItem("theme",JSON.stringify({mode:'light'}));
 	}
 	validateEmail(email) {

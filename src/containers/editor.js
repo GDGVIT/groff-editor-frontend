@@ -78,7 +78,7 @@ class Editor extends React.Component {
 	};
 	componentDidMount = () => {
 	this.guest = localStorage.getItem("Guest");
-	if(!this.guest){
+	if(this.guest !== "Yes"){
 		fetch(this.apiUrl + "preview/getFile?fileId=" + this.fileId, {
 			method: "get",
 			headers: {
