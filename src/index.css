@@ -23,7 +23,7 @@ body {
 }
 
 #home {
-	height: calc(100vh);
+	min-height: calc(100vh);
 }
 
 .LoaderText {
