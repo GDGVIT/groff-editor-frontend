@@ -51,7 +51,7 @@ class screenshotPane extends React.Component {
 					</div>
 					<div className={classes.slideshowContainer}>
 						<div className={classes.mySlides}>
-							<div className={classes.numbertext}>1 / 3</div>
+							{/* <div className={classes.numbertext}>1 / 3</div> */}
 							<img
 								src={
 									this.state.DisplayArray[

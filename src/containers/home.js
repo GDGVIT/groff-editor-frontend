@@ -20,7 +20,9 @@ class Home extends Component {
 	};
 	handleLogout = () => {
 		this.context.Logout();
-		localStorage.clear();
+		localStorage.removeItem("user-id");
+		localStorage.removeItem("token");
+		localStorage.removeItem("Guest");
 		this.props.history.push("/");
 	};
 	handleSearch = (e) => {
