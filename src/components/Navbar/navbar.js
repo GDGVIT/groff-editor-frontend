@@ -15,6 +15,7 @@ class Navbar extends Component {
 	constructor(props) {
 		super(props);
 		this.ContextButton = React.createRef();
+		this.docName = React.createRef();
 	}
 	componentDidMount = () => {
 		document.addEventListener("click", this._onPageClick);
@@ -69,12 +70,12 @@ class Navbar extends Component {
 						<input
 							type="text"
 							value={this.props.filename}
+							ref={this.docName}
 							className={classes.DocumentName}
 							onClick={() => {
 								this.setState({ Rename: true });
 							}}
 							onChange={(e) => {
-								console.log(e);
 								this.props.Rename(e);
 							}}
 							/* onKeyPress={(e) => { */

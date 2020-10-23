@@ -77,6 +77,7 @@ class Editor extends React.Component {
 		}
 	};
 	componentDidMount = () => {
+		console.log("why")
 	this.guest = localStorage.getItem("Guest");
 	if(this.guest !== "Yes"){
 		fetch(this.apiUrl + "preview/getFile?fileId=" + this.fileId, {
@@ -202,7 +203,7 @@ class Editor extends React.Component {
 	handleRename = (e) => {
 		// e.persist();
 		console.log(e);
-		this.setState({ Document: { name: e.target.value } });
+		this.setState({ Document: { FileName: e.target.value } });
 		this.context.RenameHandler(this.fileId, e.target.value);
 		// BackendIntegration : Rename Call here
 	};
@@ -318,7 +319,7 @@ class Editor extends React.Component {
 									<CodeEditor
 										codeStream={this.handleCode}
 										theme={this.state.theme}
-										data={this.state.Document.fileData}
+										data={this.state.InitData}
 									></CodeEditor>
 									<button
 										className="tabButton"
