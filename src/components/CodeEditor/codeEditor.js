@@ -46,7 +46,16 @@ class CodeEditor extends React.Component {
 		this.setState({ theme: e.target.value });
 	};
 	fontsizeSelector = (e) => {
+		// if(!isNaN(e.target.value)){
+		// this.setState({ FontSize: parseInt(e.target.value) });
+		// }
+		// else{
+		// this.setState({ FontSize: parseInt(12) });
+		// e.target.value= 12
+		// }
+		if(e.target.value<=30){
 		this.setState({ FontSize: parseInt(e.target.value) });
+		}
 	};
 	fontstyleSelector = (e) => {
 		this.setState({ FontFamily: e.target.value });
@@ -97,11 +106,13 @@ class CodeEditor extends React.Component {
 								<div className={classes.DropItem} id="DarkMode">
 									Font Size:
 									<input
-										type="text"
+										type="number"
 										value={this.state.FontSize}
 										onChange={(e) =>
 											this.fontsizeSelector(e)
 										}
+										max="30"
+										min="1"
 									/>
 								</div>
 							</div>
@@ -169,7 +180,7 @@ class CodeEditor extends React.Component {
 					// fontSize={this.state.fontSize}
 					setOptions={{
 						fontSize:
-							this.state.FontSize > 0 ? this.state.FontSize : 1,
+							this.state.FontSize > 1 ? this.state.FontSize : 10,
 						fontFamily: this.state.FontFamily,
 					}}
 					theme={this.state.theme}
