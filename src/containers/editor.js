@@ -174,14 +174,15 @@ class Editor extends React.Component {
 			},
 		}).then((response) => {
 			if (response.status === 200) {
-				let blob = response.blob();
-				var url = window.URL.createObjectURL(blob);
+				response.blob().then((result)=> {
+				var url = URL.createObjectURL(result);
 				var a = document.createElement("a");
-				a.href = blob;
+				a.href = url;
 				a.download = "filename.pdf";
 				document.body.appendChild(a);
 				a.click();
 				a.remove();
+				});
 			} else {
 				console.log(response);
 			}
