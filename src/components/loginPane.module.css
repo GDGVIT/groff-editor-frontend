@@ -135,6 +135,13 @@
 	.DSCLogo{
 		margin-top: 20px;
 	}
+	.DSCLogoContainer{
+		position: relative;
+		margin-top: 50px;
+	}
+	.DSCLogo{
+		margin-top: 20px;
+	}
 }
 
 @media only screen and (min-width: 768px) {
@@ -169,13 +176,6 @@
 		color: black;
 		font-size: 4vw;
 		font-family: "Architects Daughter", cursive;
-	}
-	.DSCLogoContainer{
-		position: relative;
-		margin-top: 50px;
-	}
-	.DSCLogo{
-		margin-top: 20px;
 	}
 
 	@media only screen and (max-width: 1120px) {
