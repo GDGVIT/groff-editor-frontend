@@ -77,6 +77,9 @@ class Editor extends React.Component {
 		}
 	};
 	componentDidMount = () => {
+		console.log("why")
+	this.guest = localStorage.getItem("Guest");
+	if(this.guest !== "Yes"){
 		fetch(this.apiUrl + "preview/getFile?fileId=" + this.fileId, {
 			method: "get",
 			headers: {
@@ -109,6 +112,21 @@ class Editor extends React.Component {
 					InitData: file.fileData,
 				});
 			});
+		} else{
+			console.log("GuestDoc")
+					let file = {
+							fileName: "NewDoc",
+							fileData: "NewDoc",
+							_id: "newDoc",
+							fileId: "newDoc",
+						};
+				this.setState({
+					Loaded: true,
+					Document: file,
+					InitData: file.fileData,
+				});
+
+		}
 		window.addEventListener("keypress", this.showHelp);
 		// let CurrentDoc = this.context.documents.find((doc) => {
 		// 	return doc.fileId === this.fileId;
@@ -157,14 +175,15 @@ class Editor extends React.Component {
 			},
 		}).then((response) => {
 			if (response.status === 200) {
-				let blob = response.blob();
-				var url = window.URL.createObjectURL(blob);
+				response.blob().then((result)=> {
+				var url = URL.createObjectURL(result);
 				var a = document.createElement("a");
-				a.href = blob;
+				a.href = url;
 				a.download = "filename.pdf";
 				document.body.appendChild(a);
 				a.click();
 				a.remove();
+				});
 			} else {
 				console.log(response);
 			}
@@ -184,7 +203,7 @@ class Editor extends React.Component {
 	handleRename = (e) => {
 		// e.persist();
 		console.log(e);
-		this.setState({ Document: { name: e.target.value } });
+		this.setState({ Document: { FileName: e.target.value } });
 		this.context.RenameHandler(this.fileId, e.target.value);
 		// BackendIntegration : Rename Call here
 	};
@@ -241,6 +260,7 @@ class Editor extends React.Component {
 							split="vertical"
 							primary="second"
 							minSize={this.state.windowWidth / 2}
+							style={{overflowX:"hidden",overflowY:"hidden"}}
 						>
 							<div
 								style={{
@@ -257,6 +277,7 @@ class Editor extends React.Component {
 							<div
 								className="PreviewContainer"
 								ref={this.preview}
+								style={{overflowX:"hidden",overflowY:"scroll"}}
 							>
 								{this.state.Modified ? (
 									<div className="loader">
@@ -298,7 +319,7 @@ class Editor extends React.Component {
 									<CodeEditor
 										codeStream={this.handleCode}
 										theme={this.state.theme}
-										data={this.state.Document.fileData}
+										data={this.state.InitData}
 									></CodeEditor>
 									<button
 										className="tabButton"

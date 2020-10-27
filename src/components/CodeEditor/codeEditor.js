@@ -24,7 +24,7 @@ class CodeEditor extends React.Component {
 	state = {
 		theme: "monokai",
 		FontSize: 12,
-		VImode: true,
+		VImode: false,
 		FontFamily: "Lucida Console",
 	};
 	componentDidMount = () => {
@@ -37,7 +37,7 @@ class CodeEditor extends React.Component {
 
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.data !== this.props.data) {
-			console.log("I am calle");
+			console.log("I am calle",nextProps.data);
 			this.aceEditor.current.editor.setValue(nextProps.data, -1);
 		}
 	}
@@ -46,13 +46,21 @@ class CodeEditor extends React.Component {
 		this.setState({ theme: e.target.value });
 	};
 	fontsizeSelector = (e) => {
+		// if(!isNaN(e.target.value)){
+		// this.setState({ FontSize: parseInt(e.target.value) });
+		// }
+		// else{
+		// this.setState({ FontSize: parseInt(12) });
+		// e.target.value= 12
+		// }
+		if(e.target.value<=30){
 		this.setState({ FontSize: parseInt(e.target.value) });
+		}
 	};
 	fontstyleSelector = (e) => {
 		this.setState({ FontFamily: e.target.value });
 	};
 	modeToggle = () => {
-		console.log("I was called");
 		this.setState({ VImode: !this.state.VImode });
 	};
 
@@ -77,6 +85,7 @@ class CodeEditor extends React.Component {
 										onChange={(e) => this.themeSelector(e)}
 										placeholder="Select a theme"
 										className="EditorDropdown"
+										style={{width:"130px"}}
 									>
 										<option value="monokai">Monokai</option>
 										<option value="nord_dark">Nord</option>
@@ -98,11 +107,13 @@ class CodeEditor extends React.Component {
 								<div className={classes.DropItem} id="DarkMode">
 									Font Size:
 									<input
-										type="text"
+										type="number"
 										value={this.state.FontSize}
 										onChange={(e) =>
 											this.fontsizeSelector(e)
 										}
+										max="30"
+										min="1"
 									/>
 								</div>
 							</div>
@@ -121,12 +132,25 @@ class CodeEditor extends React.Component {
 										}
 										placeholder="Select a font"
 										className="EditorDropdown"
+										style={{width:"130px"}}
 									>
 										<option value="Lucida Console">
 											Lucida Console
 										</option>
 										<option value="Courier New">
 											Courier New
+										</option>
+										<option value="IBM3270">
+											IBM 3270
+										</option>
+										<option value="FiraMono">
+											Fira Mono
+										</option>
+										<option value="Ubuntu">
+											Ubuntu Mono
+										</option>
+										<option value="JetBrains">
+											Jet Brains
 										</option>
 									</select>
 								</div>
@@ -170,7 +194,7 @@ class CodeEditor extends React.Component {
 					// fontSize={this.state.fontSize}
 					setOptions={{
 						fontSize:
-							this.state.FontSize > 0 ? this.state.FontSize : 1,
+							this.state.FontSize > 1 ? this.state.FontSize : 10,
 						fontFamily: this.state.FontFamily,
 					}}
 					theme={this.state.theme}

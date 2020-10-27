@@ -1,139 +1,180 @@
 .TableHeadings {
-	margin-top: 10px;
-	margin-bottom: 5px;
-	width: 1000px;
-	font-size: 18px;
-	font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  width: 1000px;
+  font-size: 18px;
+  font-weight: bold;
 }
 .HeadingDate {
-	float: left;
-	margin-left: 650px;
+  float: left;
+  margin-left: 650px;
 }
 .HeadingName {
-	float: left;
-	margin-left: 12px;
+  float: left;
+  margin-left: 12px;
 }
 .DocumentsContainer {
-	display: flex;
-	padding: 10px;
-	flex-direction: row;
+  display: flex;
+    justify-content: center;
+    align-items: center;
+  padding: 10px;
+  flex-direction: row;
 }
 .DocumentContainer {
-	margin: 20px;
-	margin-top: 2px;
-	margin-bottom: 2px;
-	background-color: #fff;
-	border-bottom: 2px solid #ddd;
-	/* filter: drop-shadow(0px 3px 6px #00000018); */
-	padding: 5px;
-	width: 1000px;
-	height: 50px;
-	cursor: pointer;
+  margin: 20px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  background-color: #fff;
+  border-bottom: 2px solid #ddd;
+  /* filter: drop-shadow(0px 3px 6px #00000018); */
+  padding: 5px;
+  width: 1000px;
+  height: 50px;
+  cursor: pointer;
 }
 
 .DocumentContainer:hover {
-	/* filter: drop-shadow(0px 3px 6px #00000030); */
-	border-bottom: none;
-	border-radius: 5px;
-	background-color: rgba(255, 125, 75, 0.2);
+  /* filter: drop-shadow(0px 3px 6px #00000030); */
+  border-bottom: none;
+  border-radius: 5px;
+  background-color: rgba(255, 125, 75, 0.2);
 }
 
 .NewDocumentContainer {
-	margin: 20px;
-	background-color: #f8f8fa;
-	filter: drop-shadow(0px 3px 6px #00000018);
-	width: 160px;
-	height: 220px;
-	border-radius: 15px;
-	display: flex;
-	justify-content: center;
-	cursor: pointer;
+  margin: 20px;
+  background-color: #f8f8fa;
+  filter: drop-shadow(0px 3px 6px #00000018);
+  width: 160px;
+  height: 220px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
 }
 
 .NewDocumentContainer:hover {
-	filter: drop-shadow(0px 3px 6px #00000030);
+  filter: drop-shadow(0px 3px 6px #00000030);
 }
 
 .AddIcon {
-	margin: auto;
-	max-width: 70%;
-	max-height: 70%;
+  margin: auto;
+  max-width: 70%;
+  max-height: 70%;
 }
 .DeleteButton {
-	margin-top: 3px;
-	margin-right: 5px;
-	float: right;
-	width: 20px;
-	opacity: 0.8;
+  margin-top: 3px;
+  margin-right: 5px;
+  float: right;
+  width: 20px;
+  opacity: 0.8;
 }
 .DocumentPreview {
-	width: 10px;
+  width: 10px;
 }
 .DocumentDetails {
-	background-color: white;
-	margin-top: 180px;
-	height: 100px;
-	border-radius: 0 0 15px 15px;
-	padding: 5px;
+  background-color: white;
+  margin-top: 180px;
+  height: 100px;
+  border-radius: 0 0 15px 15px;
+  padding: 5px;
 }
 .DocumentName {
-	font-size: 18px;
-	font-weight: 600;
-	height: 3em;
-	display: -webkit-box;
-	-webkit-box-orient: vertical;
-	-webkit-line-clamp: 2;
-	overflow: hidden;
-	padding: 5px;
+  font-size: 18px;
+  font-weight: 600;
+  height: 3em;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  padding: 5px;
 }
 .DocumentTime {
-	float: right;
-	margin-right: 185px;
-	margin-top: 5px;
-	font-size: 18px;
-	font-weight: 100;
+  float: right;
+  margin-right: 185px;
+  margin-top: 5px;
+  font-size: 18px;
+  font-weight: 100;
 }
 .tooltip {
-	position: relative;
-	display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 
 .tooltip .tooltiptext {
-	visibility: hidden;
-	min-width: 120px;
-	max-width: 300px;
-	background-color: black;
-	color: #fff;
-	text-align: center;
-	padding: 5px 8px;
-	border-radius: 6px;
-	position: absolute;
-	bottom: 100%;
-	z-index: 1;
+  visibility: hidden;
+  min-width: 120px;
+  max-width: 300px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 8px;
+  border-radius: 6px;
+  position: absolute;
+  bottom: 100%;
+  z-index: 1;
 }
 .tooltip .tooltiptext::after {
-	content: "";
-	position: absolute;
-	top: 100%;
-	left: 15%;
-	margin-left: -5px;
-	border-width: 5px;
-	border-style: solid;
-	border-color: black transparent transparent transparent;
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 15%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
 }
 .tooltip:hover .tooltiptext {
-	visibility: visible;
+  visibility: visible;
 }
-@media only screen and (max-width: 760px) {
-	.DocumentsContainer {
-		justify-content: center;
-	}
-	@media only screen and (max-width: 490px) {
-		.DocumentsContainer {
-			justify-content: center;
-			padding: 5px;
-		}
-		.DocumentContainer {
+@media only screen and (max-width: 1000px) {
+.TableHeadings {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  width: 90vw;
+    margin-left: 10px;
+    margin-right: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+.HeadingDate {
+  float: right;
+  margin-left: 0px;
+  margin-right: 277px;
+}
+  .DocumentsContainer {
+    align-items: flex-start;
+  }
+  .DocumentContainer {
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 90vw;
+  }
+  @media only screen and (max-width: 490px) {
+.TableHeadings {
+  font-size: 15px;
+}
+.HeadingDate {
+  float: right;
+  margin-left: 0px;
+  margin-right: 100px;
+}
+  .DocumentName{
+	  font-size: 15px;
+  }	
+  .DocumentTime{
+	  font-size: 15px;
+	  margin-right: 20px;
+  }
+  .DocumentContainer {
+    margin-left: 10px;
+    margin-right: 10px;
+	width: 90vw;
+	height: 45px;
+  }
+.DeleteButton {
+	width: 15px;
+}
+    /* .DocumentContainer {
 			margin: 15px;
 			width: 128px;
 			height: 180px;
@@ -157,15 +198,15 @@
 			font-size: 10px;
 			bottom: 0;
 			right: 0;
-		}
-		.NewDocumentContainer {
-			margin: 15px;
-			width: 128px;
-			height: 180px;
-		}
-		.AddIcon {
-			width: 50px;
-			height: 50px;
-		}
-	}
+		} */
+    .NewDocumentContainer {
+      margin: 15px;
+      width: 128px;
+      height: 180px;
+    }
+    .AddIcon {
+      width: 50px;
+      height: 50px;
+    }
+  }
 }
