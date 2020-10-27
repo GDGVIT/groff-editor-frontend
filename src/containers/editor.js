@@ -195,7 +195,10 @@ class Editor extends React.Component {
 	};
 
 	handleLogout = () => {
-		localStorage.clear();
+		localStorage.removeItem("user-id");
+		localStorage.removeItem("token");
+		localStorage.removeItem("Guest");
+
 		this.context.Logout();
 		this.props.history.push("/");
 	};

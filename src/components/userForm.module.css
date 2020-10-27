@@ -87,3 +87,9 @@
 		float: left;
 	}
 }
+@media only screen and (max-width: 1120px){
+	.GuestLink:hover,
+	.GuestLink {
+		float: right;
+	}
+}

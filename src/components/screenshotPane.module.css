@@ -70,4 +70,16 @@
 	.slideshowContainer {
 		width: 50%;
 	}
+	.text{
+		font-size: 14px;
+		margin-top: 16px;
+	}
+	.screenshotPane{
+		padding-bottom: 60px;
+	}
+	.prev,.next{
+		margin-top: -84px;
+	}
+
 }
+
