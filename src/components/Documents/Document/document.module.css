@@ -79,14 +79,14 @@
   padding: 5px;
 }
 .DocumentName {
-  font-size: 18px;
-  font-weight: 600;
-  height: 3em;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
-  padding: 5px;
+	font-size: 18px;
+	font-weight: 500;
+	height: 3em;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+	padding: 5px;
 }
 .DocumentTime {
   float: right;
