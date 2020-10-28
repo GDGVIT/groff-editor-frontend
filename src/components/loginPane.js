@@ -192,7 +192,7 @@ class loginPane extends Component {
 						or continue as guest
 					</Link>
 				</div>
-				<div style={{ marginTop: "100px" }}>
+				<div style={{ marginTop: "105px" }}>
 					<Oauth />
 				</div>
 				<div className={classes.DSCLogoContainer}>

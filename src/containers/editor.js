@@ -161,7 +161,7 @@ class Editor extends React.Component {
 				var url = window.URL.createObjectURL(blob);
 				var a = document.createElement("a");
 				a.href = blob;
-				a.download = "filename.pdf";
+				a.download = this.state.Document.fileName + ".pdf";
 				document.body.appendChild(a);
 				a.click();
 				a.remove();

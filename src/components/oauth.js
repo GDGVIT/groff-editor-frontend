@@ -15,10 +15,19 @@ const stringifiedParams = queryString.stringify({
   prompt: 'consent',
 });
 
+const urlParams = queryString.parse(window.location.search);
+console.log(urlParams)
+
+if (urlParams.error) {
+  console.log(`An error occurred: ${urlParams.error}`);
+} else {
+  console.log(`The code is: ${urlParams.code}`);
+}
+
 const googleLoginUrl = `https://accounts.google.com/o/oauth2/v2/auth?${stringifiedParams}`;
 
 function oauth() {
-  return (
+  return (    
       <div>
         <a href={googleLoginUrl}
             className={formStyle.GButton}>
