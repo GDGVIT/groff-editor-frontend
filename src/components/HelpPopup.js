@@ -1,12 +1,27 @@
 import React from "react";
 import "./Navbar/markdown.css";
 
-const HelpPopup = (props) => {
-	return (
-		<div className="markdown-body">
+
+class HelpPopup extends React.Component{
+	constructor(props) {
+		super(props);
+	}
+	
+	// closePopup = () => {
+	// 	this.props.closesignal(true);
+	// }
+	render(){
+		console.log(this.props.close)
+		return(
+			<div className="markdown-body">
+			{this.props.close ? <p id="leftfloater">
+				<i class="fa fa-window-close" aria-hidden="true"></i>
+			</p> : 
 			<p id="leftfloater">
-				Press <strong>"?"</strong> again to clost the popup
-			</p>
+				Press <strong>"?"</strong> again to close the popup
+			</p>  
+			} 
+			
 			<h2 id="groff-cheatsheet">Groff Cheatsheet</h2>
 			<p>The helpful GNU troff cheatsheet along with examples.</p>
 			<hr />
@@ -267,7 +282,7 @@ const HelpPopup = (props) => {
 			</table>
 			<hr />
 		</div>
-	);
-};
-
+	)
+	}
+}
 export default HelpPopup;

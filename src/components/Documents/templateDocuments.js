@@ -13,7 +13,8 @@ const TemplateDocuments = () => {
 	};
 	return (
 		<div style={style} className={classes.DocumentsContainer}  id="documentcontainer">
-			<NewDocument></NewDocument>
+			<NewDocument content = ""></NewDocument>
+			<NewDocument content = "I am doing a test"></NewDocument>
 		</div>
 	);
 };

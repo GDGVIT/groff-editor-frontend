@@ -85,7 +85,8 @@ class MyProvider extends Component {
         });
     }
   };
-  NewDocumentHandler = () => {
+  NewDocumentHandler = (content) => {
+    console.log('Handled', content)
 	  if(this.guest!=="Yes"){
     return new Promise((resolve, reject) => {
       fetch(this.apiUrl + "preview/createFile/", {
