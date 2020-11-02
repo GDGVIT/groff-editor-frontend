@@ -5,7 +5,7 @@ import url from "../config"
 
 const stringifiedParams = queryString.stringify({
   client_id: "1077010214943-1pdf3q1jcf0r89pt1hqfkec1i93uatnf.apps.googleusercontent.com",
-  redirect_uri: `https://editor.dscvit.com/auth/google`,
+  redirect_uri: `https://groff.dscvit.com/api/auth/google`,
   scope: [
     'https://www.googleapis.com/auth/userinfo.email',
     'https://www.googleapis.com/auth/userinfo.profile',
@@ -23,6 +23,10 @@ if (urlParams.error) {
 } else {
   console.log(`The code is: ${urlParams.code}`);
 }
+fetch(url+'auth/google/', { 
+})
+.then(res => res.json())
+.then(data => console.log(data))
 
 const googleLoginUrl = `https://accounts.google.com/o/oauth2/v2/auth?${stringifiedParams}`;
 

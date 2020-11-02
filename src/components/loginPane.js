@@ -62,7 +62,7 @@ class loginPane extends Component {
 			var ob = {};
 			ob["email"] = this.Email.current.value;
 			ob["password"] = this.Password.current.value;
-			console.log(JSON.stringify(ob));
+			// console.log(JSON.stringify(ob));
 			if (this.state.option) {
 				console.log("LOGIN");
 				var BURL = this.ApiURL + "manauth/login";

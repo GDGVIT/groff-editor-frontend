@@ -21,7 +21,7 @@ const Document = (props) => {
 				<img
 					className={classes.DeleteButton}
 					src={deleteIcon}
-					alt="Delte Button"
+					alt="Delete Button"
 				/>
 			</div>
 			<div className={classes.tooltip}>

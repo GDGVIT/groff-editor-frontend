@@ -6,7 +6,6 @@ import { useHistory } from "react-router-dom";
 
 const NewDocument = (props) => {
 	let History = useHistory();
-	console.log('CONTENTTT', props.content)
 	return (
 		<MyContext.Consumer>
 			{(context) => {
@@ -14,7 +13,7 @@ const NewDocument = (props) => {
 					<div
 						className={classes.NewDocumentContainer}
 						onClick={async () => {
-							const newId = await context.NewDocumentHandler(props.content);
+							const newId = await context.NewDocumentHandler();
 							History.push("/editor/" + newId);
 						}}
 						id="newdocument"
