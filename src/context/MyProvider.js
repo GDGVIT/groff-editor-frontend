@@ -127,7 +127,7 @@ class MyProvider extends Component {
     console.log('TEMPLATE', content,title);
 	  if(this.guest!=="Yes"){
     return new Promise((resolve, reject) => {
-      fetch('http://localhost:3000/api/' + "preview/createFile/", {
+      fetch(this.apiUrl + "preview/createFile/", {
         method: "PATCH",
         headers: {
           Authorization: this.token,
