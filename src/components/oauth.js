@@ -23,13 +23,11 @@ if (urlParams.error) {
 } else {
   console.log(`The code is: ${urlParams.code}`);
 }
-<<<<<<< HEAD
+
 fetch(url+'auth/google/', { 
 })
 .then(res => res.json())
 .then(data => console.log(data))
-=======
->>>>>>> 725eed17f69cd5084a036e4a8e79803f2e572f48
 
 const googleLoginUrl = `https://accounts.google.com/o/oauth2/v2/auth?${stringifiedParams}`;
 
