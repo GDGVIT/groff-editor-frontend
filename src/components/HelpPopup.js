@@ -14,9 +14,9 @@ class HelpPopup extends React.Component{
 		console.log(this.props.close)
 		return(
 			<div className="markdown-body">
-			{this.props.close ? <p id="leftfloater">
+			{this.props.close ? <div onClick={this.props.closePopup}> <p id="leftfloater">
 				<i class="fa fa-window-close" aria-hidden="true"></i>
-			</p> : 
+			</p> </div> : 
 			<p id="leftfloater">
 				Press <strong>"?"</strong> again to close the popup
 			</p>  

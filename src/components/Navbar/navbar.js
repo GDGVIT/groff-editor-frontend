@@ -18,6 +18,7 @@ class Navbar extends Component {
 		super(props);
 		this.ContextButton = React.createRef();
 		this.docName = React.createRef();
+		this.closePopup = this.closePopup.bind(this);
 	}
 	componentDidMount = () => {
 		document.addEventListener("click", this._onPageClick);
@@ -63,7 +64,7 @@ class Navbar extends Component {
 				{this.state.showHelp ? (
 					<div className="HelpPopup">
 						<div className="HelpBG">
-							<HelpMenu close="true"/>
+							<HelpMenu close="true" closePopup = {this.closePopup}/>
 						</div>
 					</div>) 
 				: null}
