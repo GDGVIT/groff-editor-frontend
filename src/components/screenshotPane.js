@@ -7,6 +7,7 @@ import Screenshot4 from "../assets/Darkmode.gif";
 import MobileScreenshot1 from "../assets/Mobile Screenshot 1.png";
 import MobileScreenshot2 from "../assets/Mobile Screenshot 2.png";
 import MobileScreenshot3 from "../assets/Mobile Screenshot 3.png";
+import MobileScreenshot4 from "../assets/Mobile Screenshot 4.png";
 
 class screenshotPane extends React.Component {
 	state = {
@@ -35,14 +36,13 @@ class screenshotPane extends React.Component {
 		setInterval(() => {
 			this.NextImg();
 		}, 5000);
-		console.log("THis widht", window.innerWidth);
 		if (window.innerWidth < 769) {
 			this.setState({
-				curImgIndex: 2,
+				curImgIndex: 0,
 				DisplayArray: [
 					{
 						curImg: MobileScreenshot1,
-						curText: "See Live Groff Preview as you type your code",
+						curText: "Cloud storage for all your documents",
 					},
 					{
 						curImg: MobileScreenshot2,
@@ -53,8 +53,8 @@ class screenshotPane extends React.Component {
 						curText: "See Live Groff Preview as you type your code",
 					},
 					{
-						curImg: MobileScreenshot2,
-						curText: "See Live Groff Preview as you type your code",
+						curImg: MobileScreenshot4,
+						curText: "Dark Mode for easy night viewing",
 					},
 				],
 			});
