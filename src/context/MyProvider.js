@@ -123,6 +123,54 @@ class MyProvider extends Component {
           });
 	}
   };
+  TDocumentHandler = (content, title) => {
+    console.log('TEMPLATE', content,title);
+	  if(this.guest!=="Yes"){
+    return new Promise((resolve, reject) => {
+      fetch(this.apiUrl + "preview/createFile/", {
+        method: "PATCH",
+        headers: {
+          Authorization: this.token,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fileName: title,
+          userId: this.userId,
+          fileData: content
+        }),
+      })
+        .then((data) => data.json())
+        .then((data) => {
+          data.created.time = this.ConvertDate(
+            data.created.timestamps.updatedAt
+          );
+          console.log(data)
+          // let tdata = {
+          //   fileData: content, 
+          //   fileId: data.created.fileId,
+          //   fileName : "Title",
+          //   time: data.created.time,
+          //   timestamps: data.created.timestamps
+          // }
+          this.setState({
+            documents: [...this.state.documents, data.created],
+          });
+          resolve(data.created.fileId);
+        });
+	});
+	} else{
+		let newDoc = {
+			fileName: "NewDocument",
+			time: "Today",
+			fileData: content,
+			fileId: "newDoc",
+			_id: "newDoc"
+		}
+          this.setState({
+            documents: [...this.state.documents, newDoc],
+          });
+	}
+  };
   RenameHanlder = (fileId, fileName) => {
     fetch(this.apiUrl + "preview/rename", {
       method: "PATCH",
@@ -211,6 +259,7 @@ class MyProvider extends Component {
           ViMode: this.state.ViMode,
           ContextMutator: this.ContextMutator,
           NewDocumentHandler: () => this.NewDocumentHandler(),
+          TDocumentHandler: (content, title) => this.TDocumentHandler(content,title),
           documents: this.state.documents,
           Logout: () => this.LogoutHandler(),
           LoadAllDocuments: () => this.LoadAllDocuments(),

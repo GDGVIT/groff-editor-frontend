@@ -179,7 +179,7 @@ class Editor extends React.Component {
 				var url = URL.createObjectURL(result);
 				var a = document.createElement("a");
 				a.href = url;
-				a.download = "filename.pdf";
+				a.download = this.state.Document.fileName + ".pdf";
 				document.body.appendChild(a);
 				a.click();
 				a.remove();
@@ -195,7 +195,10 @@ class Editor extends React.Component {
 	};
 
 	handleLogout = () => {
-		localStorage.clear();
+		localStorage.removeItem("user-id");
+		localStorage.removeItem("token");
+		localStorage.removeItem("Guest");
+
 		this.context.Logout();
 		this.props.history.push("/");
 	};
