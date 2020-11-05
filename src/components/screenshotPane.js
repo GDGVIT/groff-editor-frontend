@@ -1,11 +1,17 @@
 import React from "react";
 import classes from "./screenshotPane.module.css";
-import Screenshot1 from "../assets/ScreenShot -3.png";
-import Screenshot2 from "../assets/Screenshot.png";
+import Screenshot1 from "../assets/ScreenShot 1.png";
+import Screenshot2 from "../assets/Screenshot 2.png";
+import Screenshot3 from "../assets/Screenshot 3.png";
+import Screenshot4 from "../assets/Darkmode.gif";
+import MobileScreenshot1 from "../assets/Mobile Screenshot 1.png";
+import MobileScreenshot2 from "../assets/Mobile Screenshot 2.png";
+import MobileScreenshot3 from "../assets/Mobile Screenshot 3.png";
+import MobileScreenshot4 from "../assets/Mobile Screenshot 4.png";
 
 class screenshotPane extends React.Component {
 	state = {
-		curImgIndex: 0,
+		curImgIndex: 2,
 		DisplayArray: [
 			{
 				curImg: Screenshot1,
@@ -15,10 +21,48 @@ class screenshotPane extends React.Component {
 				curImg: Screenshot2,
 				curText: "Cloud storage for all your documents",
 			},
+			{
+				curImg: Screenshot4,
+				curText: "Dark Mode for easy night viewing",
+			},
+			{
+				curImg: Screenshot3,
+				curText: "Templates to help you get started",
+			},
 		],
 	};
+
+	componentDidMount = () => {
+		setInterval(() => {
+			this.NextImg();
+		}, 5000);
+		if (window.innerWidth < 769) {
+			this.setState({
+				curImgIndex: 0,
+				DisplayArray: [
+					{
+						curImg: MobileScreenshot1,
+						curText: "Cloud storage for all your documents",
+					},
+					{
+						curImg: MobileScreenshot2,
+						curText: "See Live Groff Preview as you type your code",
+					},
+					{
+						curImg: MobileScreenshot3,
+						curText: "See Live Groff Preview as you type your code",
+					},
+					{
+						curImg: MobileScreenshot4,
+						curText: "Dark Mode for easy night viewing",
+					},
+				],
+			});
+		}
+	};
+
 	NextImg = () => {
-		if (this.state.curImgIndex < 1) {
+		if (this.state.curImgIndex < 3) {
 			const updatedImg = this.state.curImgIndex + 1;
 			this.setState({ curImgIndex: updatedImg });
 		} else {
@@ -30,28 +74,21 @@ class screenshotPane extends React.Component {
 			const updatedImg = this.state.curImgIndex - 1;
 			this.setState({ curImgIndex: updatedImg });
 		} else {
-			this.setState({ curImgIndex: 1 });
+			this.setState({ curImgIndex: 3 });
 		}
 	};
 	render() {
 		return (
 			<div className={classes.screenshotPane}>
+				<div className={classes.prev} onClick={() => this.PrevImg()}>
+					&#10094;
+				</div>
+				<div className={classes.next} onClick={() => this.NextImg()}>
+					&#10095;
+				</div>
 				<div className={classes.MainContainer}>
-					<div
-						className={classes.prev}
-						onClick={() => this.PrevImg()}
-					>
-						&#10094;
-					</div>
-					<div
-						className={classes.next}
-						onClick={() => this.NextImg()}
-					>
-						&#10095;
-					</div>
 					<div className={classes.slideshowContainer}>
 						<div className={classes.mySlides}>
-							{/* <div className={classes.numbertext}>1 / 3</div> */}
 							<img
 								src={
 									this.state.DisplayArray[

@@ -5,17 +5,20 @@ import back from "../../assets/Back.png";
 import search from "../../assets/Search_Icon.svg";
 import Dropdown from "./DropDown/dropDown";
 import MyContext from "../../context/MyContext";
+import HelpMenu from "../../components/HelpPopup";
 
 class Navbar extends Component {
 	static contextType = MyContext;
 	state = {
 		Dropdown: false,
 		Rename: false,
+		showHelp: false
 	};
 	constructor(props) {
 		super(props);
 		this.ContextButton = React.createRef();
 		this.docName = React.createRef();
+		this.closePopup = this.closePopup.bind(this);
 	}
 	componentDidMount = () => {
 		document.addEventListener("click", this._onPageClick);
@@ -46,11 +49,25 @@ class Navbar extends Component {
 	backButtonHandler = () => {
 		this.props.history.goBack();
 	};
+	helpPopup = (e) => {
+		console.log('yelp');
+		this.setState({ showHelp: !this.state.showHelp });
+	}
+	closePopup = () =>{
+		this.setState({ showHelp: !this.state.showHelp });
+	}
 	render() {
 		const { ContextMutator } = this.context;
 
 		return (
 			<div id="nav"> 
+				{this.state.showHelp ? (
+					<div className="HelpPopup">
+						<div className="HelpBG">
+							<HelpMenu close="true" closePopup = {this.closePopup}/>
+						</div>
+					</div>) 
+				: null}
 				{!this.props.home ? (
 					<div
 						className={classes.Navbar}
@@ -88,6 +105,12 @@ class Navbar extends Component {
 						>
 							Export to pdf
 						</button>
+						<div 
+							onClick = {this.helpPopup}
+							style={{padding:10, marginRight:10}}
+						>
+							<i class="fa fa-question" aria-hidden="true"></i>
+						</div>
 						<div
 							className={classes.Settings}
 							onClick={() => {

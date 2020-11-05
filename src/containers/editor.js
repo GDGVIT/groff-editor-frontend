@@ -10,8 +10,6 @@ import MyContext from "../context/MyContext";
 import HelpMenu from "../components/HelpPopup";
 import Loader from "../assets/Loader.svg";
 
-import { useTheme } from "../context/ThemeContext";
-
 import options from "../options";
 import socketIOClient from "socket.io-client";
 
@@ -77,69 +75,57 @@ class Editor extends React.Component {
 		}
 	};
 	componentDidMount = () => {
-		console.log("why")
-	this.guest = localStorage.getItem("Guest");
-	if(this.guest !== "Yes"){
-		fetch(this.apiUrl + "preview/getFile?fileId=" + this.fileId, {
-			method: "get",
-			headers: {
-				Authorization: this.token,
-				"Content-Type": "application/json",
-			},
-		})
-			.then((data) => {
-				if (data.status === 200) {
-					return data.json();
-				} else {
-					let data = [
-						{
-							fileName: "File was not found",
-							fileData: "File was not found",
-							_id: "NAN",
-							fileId: "NAN",
-						},
-					];
-					return data;
-				}
+		console.log("why");
+		this.guest = localStorage.getItem("Guest");
+		if (this.guest !== "Yes") {
+			fetch(this.apiUrl + "preview/getFile?fileId=" + this.fileId, {
+				method: "get",
+				headers: {
+					Authorization: this.token,
+					"Content-Type": "application/json",
+				},
 			})
-			.then((data) => {
-				let newdata = data;
-				const file = newdata[0];
-				console.log("File from editor,", file);
-				this.setState({
-					Loaded: true,
-					Document: file,
-					InitData: file.fileData,
+				.then((data) => {
+					if (data.status === 200) {
+						return data.json();
+					} else {
+						let data = [
+							{
+								fileName: "File was not found",
+								fileData: "File was not found",
+								_id: "NAN",
+								fileId: "NAN",
+							},
+						];
+						return data;
+					}
+				})
+				.then((data) => {
+					let newdata = data;
+					const file = newdata[0];
+					console.log("File from editor,", file);
+					this.setState({
+						Loaded: true,
+						Document: file,
+						InitData: file.fileData,
+					});
 				});
+		} else {
+			console.log("GuestDoc");
+			let CurrentDoc = this.context.documents.find((doc) => {
+				return doc.fileId === this.fileId;
 			});
-		} else{
-			console.log("GuestDoc")
-					let file = {
-							fileName: "NewDoc",
-							fileData: "NewDoc",
-							_id: "newDoc",
-							fileId: "newDoc",
-						};
-				this.setState({
-					Loaded: true,
-					Document: file,
-					InitData: file.fileData,
-				});
-
+			let backupDoc = {
+				fileName: "not Found",
+				fileData: "The file was not found 404",
+			};
+			CurrentDoc = CurrentDoc ? CurrentDoc : backupDoc;
+			this.setState({
+				Document: CurrentDoc,
+				InitData: CurrentDoc.fileData,
+			});
 		}
 		window.addEventListener("keypress", this.showHelp);
-		// let CurrentDoc = this.context.documents.find((doc) => {
-		// 	return doc.fileId === this.fileId;
-		// });
-		// let backupDoc = {
-		// 	fileName: "not Found",
-		// 	fileData: "The file was not found 404",
-		// };
-		// CurrentDoc = CurrentDoc ? CurrentDoc : backupDoc;
-		// this.setState({
-		// 	Document: CurrentDoc,
-		// 	InitData: CurrentDoc.fileData,
-		// });
 		this.update = setInterval(() => {
 			if (this.state.Modified) {
 				console.log(JSON.stringify(this.state.Output));
@@ -175,14 +161,14 @@ class Editor extends React.Component {
 			},
 		}).then((response) => {
 			if (response.status === 200) {
-				response.blob().then((result)=> {
-				var url = URL.createObjectURL(result);
-				var a = document.createElement("a");
-				a.href = url;
-				a.download = "filename.pdf";
-				document.body.appendChild(a);
-				a.click();
-				a.remove();
+				response.blob().then((result) => {
+					var url = URL.createObjectURL(result);
+					var a = document.createElement("a");
+					a.href = url;
+					a.download = this.state.Document.fileName + ".pdf";
+					document.body.appendChild(a);
+					a.click();
+					a.remove();
 				});
 			} else {
 				console.log(response);
@@ -263,7 +249,7 @@ class Editor extends React.Component {
 							split="vertical"
 							primary="second"
 							minSize={this.state.windowWidth / 2}
-							style={{overflowX:"hidden",overflowY:"hidden"}}
+							style={{ overflowX: "hidden", overflowY: "hidden" }}
 						>
 							<div
 								style={{
@@ -280,7 +266,10 @@ class Editor extends React.Component {
 							<div
 								className="PreviewContainer"
 								ref={this.preview}
-								style={{overflowX:"hidden",overflowY:"scroll"}}
+								style={{
+									overflowX: "hidden",
+									overflowY: "scroll",
+								}}
 							>
 								{this.state.Modified ? (
 									<div className="loader">

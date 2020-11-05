@@ -118,28 +118,28 @@
 	padding-right: 30px;
 	padding-bottom: 20px;
 }
-.message{
+.message {
 	color: #ff7d4b;
 	text-align: center;
 	font-weight: 600;
 	margin-top: 15px;
 	/* display: none; */
 }
-@media screen and (max-width:600px){
-	.LoginPane{
+@media screen and (max-width: 600px) {
+	.LoginPane {
 		height: auto;
 	}
-	.DSCLogoContainer{
+	.DSCLogoContainer {
 		position: relative;
 	}
-	.DSCLogo{
+	.DSCLogo {
 		margin-top: 20px;
 	}
-	.DSCLogoContainer{
+	.DSCLogoContainer {
 		position: relative;
 		margin-top: 50px;
 	}
-	.DSCLogo{
+	.DSCLogo {
 		margin-top: 20px;
 	}
 }
@@ -179,9 +179,9 @@
 	}
 
 	@media only screen and (max-width: 1120px) {
-		.LoginPane{
+		.LoginPane {
 			width: auto;
-			height: auto;
+			height: 100vh;
 		}
 		.LogoBanner {
 			margin-top: 20px;
