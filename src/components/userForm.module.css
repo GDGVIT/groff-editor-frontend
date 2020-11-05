@@ -74,7 +74,7 @@
 }
 
 .Incorrect {
-	border-color: red;
+	border:2px solid red;
 	outline: 0;
 	border-width: 0 0 1px;
 	width: 100%;
