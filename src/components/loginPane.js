@@ -60,7 +60,7 @@ class loginPane extends Component {
 			this.Email.current.className = formStyle.Incorrect;
 		} else if (
 			this.Password.current.value === "" ||
-			this.Password.current.value.length < 6
+			this.Password.current.value.length < 8
 		) {
 			this.Password.current.className = formStyle.Incorrect;
 		} else {
@@ -142,7 +142,7 @@ class loginPane extends Component {
 				<input
 					type="password"
 					placeholder={
-						props.option ? "Password " : "Password (Min 6 Chars) "
+						props.option ? "Password " : "Password (Min 8 Chars) "
 					}
 					ref={this.Password}
 					onChange={this.ChangeHandler}
