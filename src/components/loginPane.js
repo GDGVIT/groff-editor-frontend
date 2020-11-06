@@ -43,10 +43,10 @@ class loginPane extends Component {
 	ChangeHandler(e) {
 		e.target.className = formStyle.InputField;
 	}
-	handleGuest = () => {
-		localStorage.setItem("Guest", "Yes");
-		localStorage.setItem("theme", JSON.stringify({ mode: "light" }));
-	};
+	// handleGuest = () => {
+	// 	localStorage.setItem("Guest", "Yes");
+	// 	localStorage.setItem("theme", JSON.stringify({ mode: "light" }));
+	// };
 	validateEmail(email) {
 		const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 		return re.test(email);

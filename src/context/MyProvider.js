@@ -113,7 +113,6 @@ class MyProvider extends Component {
 				},
 				body: JSON.stringify({
 					fileName: "New Document",
-					userId: this.userId,
 				}),
 			})
 				.then((data) => data.json())
@@ -152,7 +151,6 @@ class MyProvider extends Component {
 				},
 				body: JSON.stringify({
 					fileName: title,
-					userId: this.userId,
 					fileData: content,
 				}),
 			})
