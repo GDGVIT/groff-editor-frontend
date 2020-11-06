@@ -133,7 +133,7 @@ class loginPane extends Component {
 				<input
 					type="password"
 					placeholder={
-						props.option ? "Password " : "Password (Min 6 Chars) "
+						props.option ? "Password " : "Password (Min 7 Chars) "
 					}
 					ref={this.Password}
 					onChange={this.ChangeHandler}
