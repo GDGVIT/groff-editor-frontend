@@ -2,6 +2,7 @@ import React from 'react';
 import formStyle from "./userForm.module.css";
 import * as queryString from 'query-string';
 import classes from './userForm.module.css';
+import url from '../config';
 
 const stringifiedParams = queryString.stringify({
   client_id: "1077010214943-1pdf3q1jcf0r89pt1hqfkec1i93uatnf.apps.googleusercontent.com",
@@ -22,7 +23,7 @@ if (urlParams.error) {
   console.log(`An error occurred: ${urlParams.error}`);
 } else {
   console.log(`The code is: ${urlParams.code}`);
-  fetch(`http://localhost:3000/api/auth/google?code=${urlParams.code}`, { 
+  fetch(`${url}/auth/google?code=${urlParams.code}`, { 
   })
   .then(res => res.json())
   .then(data => {
