@@ -5,8 +5,6 @@ import TemplateDocuments from "../components/Documents/templateDocuments";
 import MyContext from "../context/MyContext";
 import Loader from "../assets/Loader.svg";
 
-// Optimization: Add Function under ComponentDidMount to update Context State to latest Database Values by calling A Context Child Function
-
 class Home extends Component {
 	static contextType = MyContext;
 	componentDidMount = () => {
