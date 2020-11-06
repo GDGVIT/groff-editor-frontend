@@ -76,55 +76,55 @@ class Editor extends React.Component {
 	};
 	componentDidMount = () => {
 		console.log("why");
-		this.guest = localStorage.getItem("Guest");
-		if (this.guest !== "Yes") {
-			fetch(this.apiUrl + "preview/getFile?fileId=" + this.fileId, {
-				method: "get",
-				headers: {
-					Authorization: this.token,
-					"Content-Type": "application/json",
-				},
+		// this.guest = localStorage.getItem("Guest");
+		// if (this.guest !== "Yes") {
+		fetch(this.apiUrl + "preview/getFile?fileId=" + this.fileId, {
+			method: "get",
+			headers: {
+				Authorization: this.token,
+				"Content-Type": "application/json",
+			},
+		})
+			.then((data) => {
+				if (data.status === 200) {
+					return data.json();
+				} else {
+					let data = [
+						{
+							fileName: "File was not found",
+							fileData: "File was not found",
+							_id: "NAN",
+							fileId: "NAN",
+						},
+					];
+					return data;
+				}
 			})
-				.then((data) => {
-					if (data.status === 200) {
-						return data.json();
-					} else {
-						let data = [
-							{
-								fileName: "File was not found",
-								fileData: "File was not found",
-								_id: "NAN",
-								fileId: "NAN",
-							},
-						];
-						return data;
-					}
-				})
-				.then((data) => {
-					let newdata = data;
-					const file = newdata[0];
-					console.log("File from editor,", file);
-					this.setState({
-						Loaded: true,
-						Document: file,
-						InitData: file.fileData,
-					});
+			.then((data) => {
+				let newdata = data;
+				const file = newdata[0];
+				console.log("File from editor,", file);
+				this.setState({
+					Loaded: true,
+					Document: file,
+					InitData: file.fileData,
 				});
-		} else {
-			console.log("GuestDoc");
-			let CurrentDoc = this.context.documents.find((doc) => {
-				return doc.fileId === this.fileId;
 			});
-			let backupDoc = {
-				fileName: "not Found",
-				fileData: "The file was not found 404",
-			};
-			CurrentDoc = CurrentDoc ? CurrentDoc : backupDoc;
-			this.setState({
-				Document: CurrentDoc,
-				InitData: CurrentDoc.fileData,
-			});
-		}
+		// } else {
+		// 	console.log("GuestDoc");
+		// 	let CurrentDoc = this.context.documents.find((doc) => {
+		// 		return doc.fileId === this.fileId;
+		// 	});
+		// 	let backupDoc = {
+		// 		fileName: "not Found",
+		// 		fileData: "The file was not found 404",
+		// 	};
+		// 	CurrentDoc = CurrentDoc ? CurrentDoc : backupDoc;
+		// 	this.setState({
+		// 		Document: CurrentDoc,
+		// 		InitData: CurrentDoc.fileData,
+		// 	});
+		// }
 		window.addEventListener("keypress", this.showHelp);
 		this.update = setInterval(() => {
 			if (this.state.Modified) {
