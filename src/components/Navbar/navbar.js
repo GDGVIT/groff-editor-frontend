@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import classes from "./navbar.module.css";
 import logo from "../../assets/Logo.png";
-import back from "../../assets/Back.png";
+// import back from "../../assets/Back.png";
 import search from "../../assets/Search_Icon.svg";
 import Dropdown from "./DropDown/dropDown";
 import MyContext from "../../context/MyContext";
@@ -12,7 +12,7 @@ class Navbar extends Component {
 	state = {
 		Dropdown: false,
 		Rename: false,
-		showHelp: false
+		showHelp: false,
 	};
 	constructor(props) {
 		super(props);
@@ -50,24 +50,27 @@ class Navbar extends Component {
 		this.props.history.goBack();
 	};
 	helpPopup = (e) => {
-		console.log('yelp');
+		console.log("yelp");
 		this.setState({ showHelp: !this.state.showHelp });
-	}
-	closePopup = () =>{
+	};
+	closePopup = () => {
 		this.setState({ showHelp: !this.state.showHelp });
-	}
+	};
 	render() {
 		const { ContextMutator } = this.context;
 
 		return (
-			<div id="nav"> 
+			<div id="nav">
 				{this.state.showHelp ? (
 					<div className="HelpPopup">
 						<div className="HelpBG">
-							<HelpMenu close="true" closePopup = {this.closePopup}/>
+							<HelpMenu
+								close="true"
+								closePopup={this.closePopup}
+							/>
 						</div>
-					</div>) 
-				: null}
+					</div>
+				) : null}
 				{!this.props.home ? (
 					<div
 						className={classes.Navbar}
@@ -77,7 +80,7 @@ class Navbar extends Component {
 							className={classes.BackButtonContainer}
 							onClick={() => this.props.back()}
 						>
-							<i className = "fa fa-chevron-left"></i>
+							<i className="fa fa-chevron-left"></i>
 							{/* <img
 								className={classes.BackButton}
 								src={back}
@@ -105,9 +108,9 @@ class Navbar extends Component {
 						>
 							Export to pdf
 						</button>
-						<div 
-							onClick = {this.helpPopup}
-							style={{padding:10, marginRight:10}}
+						<div
+							onClick={this.helpPopup}
+							style={{ padding: 10, marginRight: 10 }}
 						>
 							<i class="fa fa-question" aria-hidden="true"></i>
 						</div>
@@ -129,7 +132,9 @@ class Navbar extends Component {
 					</div>
 				) : (
 					<div className={classes.Navbar}>
-						<div className={classes.Heading} id="navheading">Documents</div>
+						<div className={classes.Heading} id="navheading">
+							Documents
+						</div>
 						<div className={classes.searchBox}>
 							<div className={classes.searchIcon}>
 								<img
@@ -144,7 +149,7 @@ class Navbar extends Component {
 								placeholder="Search Documents"
 								onChange={this.props.search}
 								label="Search Documents"
-								id = "navsearch"
+								id="navsearch"
 							/>
 						</div>
 						<div

@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 
 const TemplateDocument = (props) => {
 	let History = useHistory();
-	console.log("CONTENTTT", props.title);
+	// console.log("CONTENTTT", props.title);
 	return (
 		<MyContext.Consumer>
 			{(context) => {
