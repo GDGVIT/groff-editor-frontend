@@ -5,18 +5,17 @@ import TemplateDocuments from "../components/Documents/templateDocuments";
 import MyContext from "../context/MyContext";
 import Loader from "../assets/Loader.svg";
 
-// Optimization: Add Function under ComponentDidMount to update Context State to latest Database Values by calling A Context Child Function
-
 class Home extends Component {
 	static contextType = MyContext;
 	componentDidMount = () => {
+		this.context.LoadAllDocuments();
 		if (
-			!localStorage.getItem("token") &&
-			localStorage.getItem("Guest") === false
+			!localStorage.getItem("token")
+			// &&
+			// localStorage.getItem("Guest") === false
 		) {
 			this.props.history.push("/");
 		}
-		this.context.LoadAllDocuments();
 	};
 	handleLogout = () => {
 		this.context.Logout();

@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
-import { backgroundColor, textColor } from "./theme";
+import { ThemeProvider, createGlobalStyle } from "styled-components";
 import storage from "local-storage-fallback";
 const ThemeToggleContext = React.createContext();
 
@@ -80,11 +79,13 @@ export const MyThemeProvider = ({ children }) => {
   }
   #dropdownTriangle{
 	  border-bottom: ${(props) =>
-		props.theme.mode === "dark" ? "12px solid #161616" : "12px solid #fff"};
+			props.theme.mode === "dark"
+				? "12px solid #161616"
+				: "12px solid #fff"};
   }
   #dropdown>div:hover{
 	  background-color: ${(props) =>
-		props.theme.mode === "dark" ? "rgb(92,92,92)" : "rgb(241,241,241)"};
+			props.theme.mode === "dark" ? "rgb(92,92,92)" : "rgb(241,241,241)"};
   }
   select{
 	  color:black;

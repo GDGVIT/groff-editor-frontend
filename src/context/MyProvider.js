@@ -10,7 +10,7 @@ class MyProvider extends Component {
 		super(props);
 		this.token = localStorage.getItem("token");
 		this.userId = localStorage.getItem("user-id");
-		this.guest = localStorage.getItem("Guest");
+		// this.guest = localStorage.getItem("Guest");
 		// this.apiUrl = "https://groffapi.dscvit.com/";
 		this.apiUrl = options.apiUrl;
 	}
@@ -57,10 +57,11 @@ class MyProvider extends Component {
 	};
 
 	LoadAllDocuments = () => {
-		this.guest = localStorage.getItem("Guest");
-		if (this.guest === "Yes") {
-			this.setState({ Loaded: true });
-		}
+		// this.guest = localStorage.getItem("Guest");
+		// if (this.guest === "Yes") {
+		// 	this.setState({ Loaded: true });
+		// }
+		var status = 200;
 		if (!this.state.Loaded) {
 			this.token = localStorage.getItem("token");
 			this.userId = localStorage.getItem("user-id");
@@ -70,109 +71,123 @@ class MyProvider extends Component {
 					Authorization: this.token,
 				},
 			})
-				.then((data) => data.json())
 				.then((data) => {
-					const files = data.searches[0].files.filter((file) => {
-						file.time = this.ConvertDate(file.timestamps.updatedAt);
-						return file;
-					});
-					console.log("File,", data);
-					this.setState({
-						Loaded: true,
-						documents: [...files],
-					});
-					this.backup = [...files];
+					if (data.status === 200) {
+						status = 200;
+						return data.json();
+					} else {
+						status = 500;
+						localStorage.removeItem("token");
+						console.log("Loading Failed");
+						console.log(data.json);
+						window.location.reload(false);
+						return data.json();
+					}
+				})
+				.then((data) => {
+					console.log(status);
+					if (status === 200) {
+						const files = data.searches[0].files.filter((file) => {
+							file.time = this.ConvertDate(
+								file.timestamps.updatedAt
+							);
+							return file;
+						});
+						this.setState({
+							Loaded: true,
+							documents: [...files],
+						});
+						this.backup = [...files];
+					}
 				});
 		}
 	};
 	NewDocumentHandler = () => {
-		if (this.guest !== "Yes") {
-			return new Promise((resolve, reject) => {
-				fetch(this.apiUrl + "preview/createFile/", {
-					method: "PATCH",
-					headers: {
-						Authorization: this.token,
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify({
-						fileName: "New Document",
-						userId: this.userId,
-					}),
-				})
-					.then((data) => data.json())
-					.then((data) => {
-						data.created.time = this.ConvertDate(
-							data.created.timestamps.updatedAt
-						);
-						this.setState({
-							documents: [...this.state.documents, data.created],
-						});
-						resolve(data.created.fileId);
+		// if (this.guest !== "Yes") {
+		return new Promise((resolve, reject) => {
+			fetch(this.apiUrl + "preview/createFile/", {
+				method: "PATCH",
+				headers: {
+					Authorization: this.token,
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					fileName: "New Document",
+				}),
+			})
+				.then((data) => data.json())
+				.then((data) => {
+					data.created.time = this.ConvertDate(
+						data.created.timestamps.updatedAt
+					);
+					this.setState({
+						documents: [...this.state.documents, data.created],
 					});
-			});
-		} else {
-			let newDoc = {
-				fileName: "NewDocument",
-				time: "Today",
-				fileData: "hello",
-				fileId: "newDoc",
-				_id: "newDoc",
-			};
-			this.setState({
-				documents: [...this.state.documents, newDoc],
-			});
-		}
+					resolve(data.created.fileId);
+				});
+		});
+		// } else {
+		// 	let newDoc = {
+		// 		fileName: "NewDocument",
+		// 		time: "Today",
+		// 		fileData: "hello",
+		// 		fileId: "newDoc",
+		// 		_id: "newDoc",
+		// 	};
+		// 	this.setState({
+		// 		documents: [...this.state.documents, newDoc],
+		// 	});
+		// }
 	};
 	TDocumentHandler = (content, title) => {
 		console.log("TEMPLATE", content, title);
-		if (this.guest !== "Yes") {
-			return new Promise((resolve, reject) => {
-				fetch(this.apiUrl + "preview/createFile/", {
-					method: "PATCH",
-					headers: {
-						Authorization: this.token,
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify({
-						fileName: title,
-						userId: this.userId,
-						fileData: content,
-					}),
-				})
-					.then((data) => data.json())
-					.then((data) => {
-						data.created.time = this.ConvertDate(
-							data.created.timestamps.updatedAt
-						);
-						console.log(data);
-						// let tdata = {
-						//   fileData: content,
-						//   fileId: data.created.fileId,
-						//   fileName : "Title",
-						//   time: data.created.time,
-						//   timestamps: data.created.timestamps
-						// }
-						this.setState({
-							documents: [...this.state.documents, data.created],
-						});
-						resolve(data.created.fileId);
-					});
-			});
-		} else {
-			return new Promise((resolve, reject) => {
-				let newDoc = {
+		// if (this.guest !== "Yes") {
+		return new Promise((resolve, reject) => {
+			fetch(this.apiUrl + "preview/createFile/", {
+				method: "PATCH",
+				headers: {
+					Authorization: this.token,
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
 					fileName: title,
-					time: "Today",
 					fileData: content,
-					fileId: "newDoc",
-					_id: "newDoc",
-				};
-				this.setState({
-					documents: [...this.state.documents, newDoc],
+				}),
+			})
+				.then((data) => data.json())
+				.then((data) => {
+					data.created.time = this.ConvertDate(
+						data.created.timestamps.updatedAt
+					);
+					console.log(data);
+					// let tdata = {
+					//   fileData: content,
+					//   fileId: data.created.fileId,
+					//   fileName : "Title",
+					//   time: data.created.time,
+					//   timestamps: data.created.timestamps
+					// }
+					this.setState({
+						documents: [...this.state.documents, data.created],
+					});
+					resolve(data.created.fileId);
 				});
-				resolve(newDoc.fileId);
-			});
-		}
+		});
+		// } else {
+		// 	return new Promise((resolve, reject) => {
+		// 		let newDoc = {
+		// 			fileName: title,
+		// 			time: "Today",
+		// 			fileData: content,
+		// 			fileId: "newDoc",
+		// 			_id: "newDoc",
+		// 		};
+		// 		this.setState({
+		// 			documents: [...this.state.documents, newDoc],
+		// 		});
+		// 		resolve(newDoc.fileId);
+		// 	});
+		// }
 	};
 	RenameHanlder = (fileId, fileName) => {
 		fetch(this.apiUrl + "preview/rename", {
