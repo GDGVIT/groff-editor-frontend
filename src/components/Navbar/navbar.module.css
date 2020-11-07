@@ -114,6 +114,7 @@
 	border-radius: 6px;
 	-webkit-transition: 0.5s ease;
 	transition: 0.5s ease;
+	cursor: pointer;
 }
 .Settings {
 	width: 35px;
@@ -132,4 +133,5 @@
 .logo {
 	max-width: 100%;
 	max-height: 100%;
+	cursor: pointer;
 }
