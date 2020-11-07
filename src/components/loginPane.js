@@ -20,13 +20,14 @@ class loginPane extends Component {
 		this.ApiURL = options.apiUrl;
 	}
 	componentDidMount() {
+		recaptchaRef.current.execute();
 		if (localStorage.getItem("token")) {
 			this.props.props.history.push("/home");
 		}
 	}
 
 	onFinish = (values) => {
-		console.log("Received values of form: ", values);
+		// console.log("Received values of form: ", values);
 	};
 	LoginLinkHandler = () => {
 		if (!this.state.option) {
@@ -46,8 +47,8 @@ class loginPane extends Component {
 		e.target.className = formStyle.InputField;
 	}
 	onChange = (value) => {
-		console.log('CAPTCHAAA', value)
-		console.log(recaptchaRef.current.getValue())
+		// console.log('CAPTCHAAA', value)
+		localStorage.setItem('captchagg', recaptchaRef.current.getValue());
 	}
 	// handleGuest = () => {
 	// 	localStorage.setItem("Guest", "Yes");
@@ -58,10 +59,7 @@ class loginPane extends Component {
 		return re.test(email);
 	}
 	SubmitHandler = () => {
-		recaptchaRef.current.execute();
-		const recaptchaVal = recaptchaRef.current.getValue();
-		console.log('On submit recaptcha', recaptchaVal);
-		console.log(this.Email.current.value, this.Password.current.value);
+		// console.log(this.Email.current.value, this.Password.current.value);
 		if (
 			this.Email.current.value === "" ||
 			this.validateEmail(this.Email.current.value) === false
@@ -78,64 +76,70 @@ class loginPane extends Component {
 			ob["password"] = this.Password.current.value;
 			// console.log(JSON.stringify(ob));
 			if (this.state.option) {
-				console.log("LOGIN");
+				// console.log("LOGIN");
 				var BURL = this.ApiURL + "manauth/login";
+				// console.log(ob);
 			} else {
 				BURL = this.ApiURL + "manauth/signup";
+				var cap = {token: localStorage.getItem('captchagg')}
+				var ob = {...ob,...cap};
+				// console.log(ob);
 			}
 			// Call route for Manual Login and Sign Up
-			fetch(BURL, {
-				method: "POST",
-				headers: new Headers({
-					"Content-Type": "application/json",
-				}),
-				body: JSON.stringify(ob),
-			})
-				.then((res) => {
-					console.log(res);
-					// Handling status cases
-					let stat = document.getElementById("msg");
-					switch (res.status) {
-						case 401:
-							stat.innerHTML = "Please Sign Up first!";
-							break;
-						case 200:
-							stat.innerHTML = "Redirecting...";
-							break;
-						case 409:
-							stat.innerHTML = "Email already exists";
-							break;
-						default:
-							stat.innerHTML = "Try again in sometime";
-					}
-					return res.json();
+			if(localStorage.getItem('captchagg')){
+				fetch(BURL, {
+					method: "POST",
+					headers: new Headers({
+						"Content-Type": "application/json",
+					}),
+					body: JSON.stringify(ob),
 				})
-				.then((res) => {
-					console.log(res.userid);
-					if (res.userid) {
-						localStorage.setItem("user-id", res.userid);
-						localStorage.setItem(
-							"theme",
-							JSON.stringify({ mode: "light" })
-						);
-					}
-					if (res.token) {
-						localStorage.setItem("token", res.token);
-						localStorage.setItem("Guest", false);
-						localStorage.setItem(
-							"theme",
-							JSON.stringify({ mode: "light" })
-						);
-					}
-					if (
-						res.message === "User created" ||
-						res.message === "Auth successful"
-					) {
-						this.props.props.history.push("/home");
-					}
-				})
-				.catch((err) => console.log(err));
-		}
+					.then((res) => {
+						// console.log(res);
+						// Handling status cases
+						let stat = document.getElementById("msg");
+						switch (res.status) {
+							case 401:
+								stat.innerHTML = "Please Sign Up first!";
+								break;
+							case 200:
+								stat.innerHTML = "Redirecting...";
+								break;
+							case 409:
+								stat.innerHTML = "Email already exists";
+								break;
+							default:
+								stat.innerHTML = "Try again in sometime";
+						}
+						return res.json();
+					})
+					.then((res) => {
+						// console.log(res.userid);
+						if (res.userid) {
+							localStorage.setItem("user-id", res.userid);
+							localStorage.setItem(
+								"theme",
+								JSON.stringify({ mode: "light" })
+							);
+						}
+						if (res.token) {
+							localStorage.setItem("token", res.token);
+							localStorage.setItem("Guest", false);
+							localStorage.setItem(
+								"theme",
+								JSON.stringify({ mode: "light" })
+							);
+						}
+						if (
+							res.message === "User created" ||
+							res.message === "Auth successful"
+						) {
+							this.props.props.history.push("/home");
+						}
+					})
+					.catch((err) => console.log(err));
+			}
+			}
 	};
 	Form = (props) => {
 		return (
