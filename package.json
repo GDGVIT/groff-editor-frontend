@@ -10,7 +10,7 @@
 		"antd": "^4.8.0",
 		"local-storage-fallback": "^4.1.1",
 		"react": "^16.13.1",
-		"react-ace": "^9.1.1",
+		"react-ace": "^9.1.4",
 		"react-dom": "^16.13.1",
 		"react-google-recaptcha": "^2.1.0",
 		"react-pdf": "^5.0.0",
