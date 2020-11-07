@@ -17,23 +17,30 @@ const stringifiedParams = queryString.stringify({
 	prompt: "consent",
 });
 
+const callAuth = () => {
+  fetch(`${url}auth/google?code=${urlParams.code}`, {})
+  .then((res) => res.json())
+  .then((data) => {
+    localStorage.setItem("theme", JSON.stringify({ mode: "light" }));
+    localStorage.setItem("token", data.token);
+    window.history.pushState({}, document.title, "/home");
+    console.log(data);
+    window.location.reload(false);
+  });
+}
+
 const urlParams = queryString.parse(window.location.search);
 console.log(urlParams);
 
 if (urlParams.error) {
 	console.log(`An error occurred: ${urlParams.error}`);
 } else {
-	console.log(`The code is: ${urlParams.code}`);
-	fetch(`${url}/auth/google?code=${urlParams.code}`, {})
-		.then((res) => res.json())
-		.then((data) => {
-			console.log(data);
-			localStorage.setItem("token", data.token);
-			localStorage.setItem("Guest", false);
-			localStorage.setItem("theme", JSON.stringify({ mode: "light" }));
-			window.history.pushState({}, document.title, "/home");
-		});
+  console.log(`The code is: ${urlParams.code}`);
+  if(urlParams.code!=""){
+    callAuth();
+  }
 }
+
 const googleLoginUrl = `https://accounts.google.com/o/oauth2/v2/auth?${stringifiedParams}`;
 
 const oAuth = (props) => {

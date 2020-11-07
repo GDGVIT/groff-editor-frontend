@@ -77,10 +77,10 @@ class MyProvider extends Component {
 						return data.json();
 					} else {
 						status = 500;
-						localStorage.removeItem("token");
+						// localStorage.removeItem("token");
 						console.log("Loading Failed");
 						console.log(data.json);
-						window.location.reload(false);
+						// window.location.reload(false);
 						return data.json();
 					}
 				})

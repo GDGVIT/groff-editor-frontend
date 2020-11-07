@@ -6,7 +6,9 @@ import classes from "./loginPane.module.css";
 import formStyle from "./userForm.module.css";
 import DSCLogo from "../assets/DSClogo.png";
 import options from "../options";
+import ReCAPTCHA from "react-google-recaptcha";
 
+const recaptchaRef = React.createRef();
 class loginPane extends Component {
 	state = {
 		option: true,
@@ -43,6 +45,10 @@ class loginPane extends Component {
 	ChangeHandler(e) {
 		e.target.className = formStyle.InputField;
 	}
+	onChange = (value) => {
+		console.log('CAPTCHAAA', value)
+		console.log(recaptchaRef.current.getValue())
+	}
 	// handleGuest = () => {
 	// 	localStorage.setItem("Guest", "Yes");
 	// 	localStorage.setItem("theme", JSON.stringify({ mode: "light" }));
@@ -52,6 +58,9 @@ class loginPane extends Component {
 		return re.test(email);
 	}
 	SubmitHandler = () => {
+		recaptchaRef.current.execute();
+		const recaptchaVal = recaptchaRef.current.getValue();
+		console.log('On submit recaptcha', recaptchaVal);
 		console.log(this.Email.current.value, this.Password.current.value);
 		if (
 			this.Email.current.value === "" ||
@@ -150,6 +159,12 @@ class loginPane extends Component {
 					style={{ marginTop: "25px" }}
 					label="Password"
 				/>
+				   <ReCAPTCHA
+					ref={recaptchaRef}
+					size="invisible"
+					sitekey="6Ld5CeAZAAAAAOOej-jst-wTIi8ULrtPm6lPZYtC"
+					onChange={this.onChange}
+					/>
 			</div>
 		);
 	};
