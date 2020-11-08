@@ -75,7 +75,7 @@ class Editor extends React.Component {
 		}
 	};
 	componentDidMount = () => {
-		console.log("why");
+		// console.log("why");
 		// this.guest = localStorage.getItem("Guest");
 		// if (this.guest !== "Yes") {
 		fetch(this.apiUrl + "preview/getFile?fileId=" + this.fileId, {
@@ -103,7 +103,7 @@ class Editor extends React.Component {
 			.then((data) => {
 				let newdata = data;
 				const file = newdata[0];
-				console.log("File from editor,", file);
+				// console.log("File from editor,", file);
 				this.setState({
 					Loaded: true,
 					Document: file,
@@ -128,7 +128,7 @@ class Editor extends React.Component {
 		window.addEventListener("keypress", this.showHelp);
 		this.update = setInterval(() => {
 			if (this.state.Modified) {
-				console.log(JSON.stringify(this.state.Output));
+				// console.log(JSON.stringify(this.state.Output));
 				client.emit("cmd", JSON.stringify(this.state.Output));
 				this.setState({ Modified: false });
 			}
@@ -148,7 +148,7 @@ class Editor extends React.Component {
 
 	showHelp = (e) => {
 		if ((e.key === "?") & (e.target.className !== "ace_text-input")) {
-			console.log("What are you dong stepWindow");
+			// console.log("What are you dong stepWindow");
 			this.setState({ showHelp: !this.state.showHelp });
 		}
 	};
@@ -171,7 +171,7 @@ class Editor extends React.Component {
 					a.remove();
 				});
 			} else {
-				console.log(response);
+				// console.log(response);
 			}
 		});
 	};
@@ -191,8 +191,8 @@ class Editor extends React.Component {
 
 	handleRename = (e) => {
 		// e.persist();
-		console.log(e);
-		this.setState({ Document: { FileName: e.target.value } });
+		// console.log(e);
+		this.setState({ Document: { fileName: e.target.value } });
 		this.context.RenameHandler(this.fileId, e.target.value);
 		// BackendIntegration : Rename Call here
 	};
@@ -234,6 +234,7 @@ class Editor extends React.Component {
 					toPrint={this.preview}
 					filename={this.state.Document.fileName}
 					toPdf={this.pdfConvert}
+					saved = {this.state.Modified}
 				></Navbar>
 
 				<div className="DocumentContainer">

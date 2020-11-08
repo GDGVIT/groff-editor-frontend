@@ -16,9 +16,8 @@ const stringifiedParams = queryString.stringify({
 	access_type: "offline",
 	prompt: "consent",
 });
-
 const callAuth = () => {
-  fetch(`${url}auth/google?code=${urlParams.code}`, {})
+  fetch(`${url.url}auth/google?code=${urlParams.code}`, {})
   .then((res) => res.json())
   .then((data) => {
     localStorage.setItem("theme", JSON.stringify({ mode: "light" }));

@@ -18,7 +18,7 @@ class Home extends Component {
 		}
 	};
 	handleLogout = () => {
-		console.log('LOGOUTTTTTTTTTTTTT')
+		// console.log('LOGOUTTTTTTTTTTTTT')
 		this.context.Logout();
 		localStorage.removeItem("user-id");
 		localStorage.removeItem("token");
