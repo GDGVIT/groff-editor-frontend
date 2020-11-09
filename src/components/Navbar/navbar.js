@@ -110,7 +110,7 @@ class Navbar extends Component {
 						</button>
 						<div
 							onClick={this.helpPopup}
-							style={{ padding: 10, marginRight: 10 }}
+							style={{ padding: 10, marginRight: 10, cursor:"pointer" }}
 						>
 							<i class="fa fa-question" aria-hidden="true"></i>
 						</div>
