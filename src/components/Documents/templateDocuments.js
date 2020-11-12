@@ -12,9 +12,11 @@ const TemplateDocuments = () => {
 		justifyContent: "center",
 		padding: "70px 0 0 10px",
 		display: "flex",
-		flexWrap: "wrap",
+		flexGrow: "0",
+		flexShrink: "0",
 		flexDirection: "row",
 		backgroundColor: "#eee",
+		overflowX: "scroll",
 	};
 	return (
 		<div
@@ -22,6 +24,7 @@ const TemplateDocuments = () => {
 			className={classes.DocumentsContainer}
 			id="documentcontainer"
 		>
+			<NewDocument></NewDocument>
 			<NewDocument></NewDocument>
 			<TemplateDocument
 				content={single_column}

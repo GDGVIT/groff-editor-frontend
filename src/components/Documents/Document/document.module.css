@@ -31,6 +31,8 @@
 	width: 1000px;
 	height: 50px;
 	cursor: pointer;
+	flex-grow: 0;
+	flex-shrink: 0;
 }
 
 .DocumentContainer:hover {
@@ -47,6 +49,8 @@
 	width: 160px;
 	height: 220px;
 	border-radius: 15px;
+	flex-grow: 0;
+	flex-shrink: 0;
 	display: flex;
 	justify-content: center;
 	cursor: pointer;
@@ -143,17 +147,21 @@
 	.HeadingDate {
 		float: right;
 		margin-left: 0px;
-		margin-right: 277px;
+		margin-right: 100px;
 	}
 	.DocumentsContainer {
-		align-items: flex-start;
+		align-items: flex-end;
 	}
 	.DocumentContainer {
 		margin-left: 10px;
 		margin-right: 10px;
 		width: 90vw;
 	}
-	@media only screen and (max-width: 490px) {
+	.DocumentTime {
+		font-size: 15px;
+		margin-right: 50px;
+	}
+	@media only screen and (max-width: 768px) {
 		.TableHeadings {
 			font-size: 15px;
 		}
@@ -161,9 +169,6 @@
 			float: right;
 			margin-left: 0px;
 			margin-right: 100px;
-		}
-		.DocumentName {
-			font-size: 15px;
 		}
 		.DocumentTime {
 			font-size: 15px;
@@ -178,6 +183,20 @@
 		.DeleteButton {
 			width: 15px;
 		}
+		.DocumentDetails {
+			margin-top: 120px;
+			height: 60px;
+		}
+		.DocumentDetails .DocumentName {
+			font-size: 14px;
+		}
+		.DocumentContainer .DocumentName {
+			font-size: 14px;
+			max-width: 276px;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
 		/* .DocumentContainer {
 			margin: 15px;
 			width: 128px;
@@ -189,13 +208,6 @@
 			height: 60px;
 			border-radius: 0 0 15px 15px;
 		}
-		.DocumentName {
-			font-size: 16px;
-			font-weight: 600;
-			height: 2em;
-			-webkit-line-clamp: 1;
-			padding: 5px;
-		}
 		.DocumentTime {
 			position: absolute;
 			padding: 5px;
@@ -203,6 +215,10 @@
 			bottom: 0;
 			right: 0;
 		} */
+		.DocumentsContainer {
+			padding-right: 100px;
+			padding-left: 100px;
+		}
 		.NewDocumentContainer {
 			margin: 15px;
 			width: 128px;
