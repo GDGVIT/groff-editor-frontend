@@ -153,6 +153,12 @@
 		margin-right: 10px;
 		width: 90vw;
 	}
+
+@media screen and (max-width:600px) {
+	.DocumentDetails{
+		margin-top: 100px;
+	}
+}
 	@media only screen and (max-width: 490px) {
 		.TableHeadings {
 			font-size: 15px;
