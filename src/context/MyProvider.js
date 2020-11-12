@@ -113,6 +113,7 @@ class MyProvider extends Component {
 				},
 				body: JSON.stringify({
 					fileName: "New Document",
+					fileData:"This is a New File"
 				}),
 			})
 				.then((data) => data.json())

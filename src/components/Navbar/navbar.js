@@ -102,6 +102,9 @@ class Navbar extends Component {
 							/* 	this.renameHandler(e); */
 							/* }} */
 						/>
+						<div className={classes.Saved}>
+							{this.props.saved ? <p>Saving ... </p>: <p>Saved!</p>}	
+						</div>
 						<button
 							className={classes.ExportButton}
 							onClick={this.props.toPdf}
