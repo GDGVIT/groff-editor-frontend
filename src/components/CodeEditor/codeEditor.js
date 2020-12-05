@@ -25,7 +25,7 @@ class CodeEditor extends React.Component {
 		theme: "monokai",
 		FontSize: 12,
 		VImode: false,
-		FontFamily: "Lucida Console",
+		FontFamily: "FiraMono",
 	};
 	componentDidMount = () => {
 		const customMode = new CustomGroffMode();
@@ -134,17 +134,17 @@ class CodeEditor extends React.Component {
 										className="EditorDropdown"
 										style={{width:"130px"}}
 									>
-										<option value="Lucida Console">
-											Lucida Console
+										<option value="FiraMono">
+											Fira Mono
 										</option>
+										{/* <option value="Lucida Console">
+											Lucida Console
+										</option> */}
 										<option value="Courier New">
 											Courier New
 										</option>
 										<option value="IBM3270">
 											IBM 3270
-										</option>
-										<option value="FiraMono">
-											Fira Mono
 										</option>
 										<option value="Ubuntu">
 											Ubuntu Mono
