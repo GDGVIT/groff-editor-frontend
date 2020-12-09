@@ -82,7 +82,7 @@ class loginPane extends Component {
 			} else {
 				BURL = this.ApiURL + "manauth/signup";
 				var cap = {token: localStorage.getItem('captchagg')}
-				var ob = {...ob,...cap};
+				ob = {...ob,...cap};
 				// console.log(ob);
 			}
 			// Call route for Manual Login and Sign Up
