@@ -24,13 +24,13 @@ const Document = (props) => {
 					alt="Delete Button"
 				/>
 			</div>
+			<div className={classes.DocumentTime}>{props.doc.time}</div>
 			{/* <div className={classes.tooltip}> */}
 				<div className={classes.DocumentNamee}>{props.doc.fileName}</div>
 				{/* <span className={classes.tooltiptext}> */}
 				{/* 	{props.doc.fileName} */}
 				{/* </span> */}
 			{/* </div> */}
-			<div className={classes.DocumentTime}>{props.doc.time}</div>
 		</div>
 	);
 };
