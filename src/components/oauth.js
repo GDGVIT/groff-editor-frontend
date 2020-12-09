@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import firebase from 'firebase'
+import firebase from 'firebase/'
 import { StyledFirebaseAuth } from 'react-firebaseui'
 import url from "../config";
 
@@ -19,7 +19,7 @@ const config = {
 	// Popup signin flow rather than redirect flow.
 	signInFlow: 'popup',
 	// Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
-	signInSuccessUrl: '/',
+	signInSuccessUrl: '/home',
 	// We will display Google and Facebook as auth providers.
 	signInOptions: [
 	  firebase.auth.GoogleAuthProvider.PROVIDER_ID
@@ -34,7 +34,6 @@ export default function QAuth(props) {
 		}
 		else{
 			firebase.auth().onIdTokenChanged(async(user)=>{
-				console.log(user)
 				if(firebase.auth().currentUser){
 				  firebase.auth().currentUser.getIdToken(false).then(async(token) => {
 	  
@@ -50,8 +49,9 @@ export default function QAuth(props) {
 						  .then((data) => {
 							  localStorage.setItem("theme", JSON.stringify({ mode: "light" }));
 							  localStorage.setItem("token", data.token);
-							  window.history.pushState({}, document.title, "/home");
-							  console.log(data);
+							  this.props.history.push('/home')
+							//   window.history.pushState({}, document.title, "/home");
+							//   console.log(data);
 						  });
 				  })
 				} 
