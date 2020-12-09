@@ -4,7 +4,7 @@ import React, {useEffect} from "react";
 // import classes from './userForm.module.css';
 import firebase from 'firebase'
 import { StyledFirebaseAuth } from 'react-firebaseui'
-// import url from "../config";
+import url from "../config";
 
 // const stringifiedParams = queryString.stringify({
 // 	client_id:
@@ -70,18 +70,34 @@ const config = {
 export default function QAuth(props) {
 
 	useEffect(() => {
-		if(sessionStorage.getItem('token')){
-
+		if(localStorage.getItem('token')){
+			window.history.pushState({}, document.title, "/home");
 		}
-	
-		  firebase.auth().onIdTokenChanged(async(user)=>{
-		  console.log(user)
-		  if(firebase.auth().currentUser){
-			firebase.auth().currentUser.getIdToken(false).then(async(token) => {
-				// Api call
-			})
-		  } 
-		})
+		else{
+			firebase.auth().onIdTokenChanged(async(user)=>{
+				console.log(user)
+				if(firebase.auth().currentUser){
+				  firebase.auth().currentUser.getIdToken(false).then(async(token) => {
+	  
+					  // Api call
+						fetch(`${url.url}auth/google?`, {
+						  method: "POST",
+						  headers: {
+							  "Content-Type": "application/json"
+						  },
+							body:JSON.stringify({"idToken":token})
+						})
+						  .then((res) => res.json())
+						  .then((data) => {
+							  localStorage.setItem("theme", JSON.stringify({ mode: "light" }));
+							  localStorage.setItem("token", data.token);
+							  window.history.pushState({}, document.title, "/home");
+							  console.log(data);
+						  });
+				  })
+				} 
+			  })
+		}
 	
 		// eslint-disable-next-line
 	  }, [])
