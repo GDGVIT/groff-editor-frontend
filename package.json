@@ -15,7 +15,7 @@
     "react-dom": "^16.13.1",
     "react-firebaseui": "^4.1.0",
     "react-google-recaptcha": "^2.1.0",
-    "react-pdf": "^5.0.0",
+    "react-pdf": "^5.1.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
     "react-split-pane": "^0.1.91",
